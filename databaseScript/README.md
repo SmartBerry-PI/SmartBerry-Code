@@ -5,9 +5,10 @@ Este repositório contém o esquema do banco de dados utilizado no projeto **Sma
 ## 📂 Estrutura do Banco  
 
 - **Tabelas principais**:
-  - `usuario`: Cadastro dos usuarios clientes e administradores que utilizam o sistema.
-  - `sensor`: Registra os sensores instalados e suas localizações.
-  - `fruta`: coleta de dados sobre as frutas plantadas
+  - `Cliente`: Cadastro dos usuarios clientes.
+  - `Endereco`: Cadastro dos endereços referentes ao usuario cliente.
+  - `Sensor`: Registra os sensores instalados e suas localizações.
+  - `Registro`: Registra a coleta de dados levantados pelo sensor.
 
 ## 🚀 Tecnologias  
 
