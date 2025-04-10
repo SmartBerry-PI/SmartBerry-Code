@@ -1,6 +1,14 @@
 CREATE DATABASE SmartBerry;
 USE SmartBerry;
 
+CREATE TABLE cliente (
+idCliente INT PRIMARY KEY AUTO_INCREMENT,
+nome_completo VARCHAR (45) NOT NULL,
+telefone VARCHAR(11) NOT NULL,
+cpf CHAR (11) NOT NULL,
+email VARCHAR (45) NOT NULL, 
+senha VARCHAR (45) NOT NULL);
+
 CREATE TABLE endereco (
 idEndereco INT PRIMARY KEY AUTO_INCREMENT,
 cep VARCHAR(45) NOT NULL,
@@ -9,17 +17,9 @@ cidade VARCHAR(45) NOT NULL,
 bairro VARCHAR (45) NOT NULL,
 logradouro VARCHAR (45) NOT NULL,
 numero VARCHAR(45) NOT NULL,
-complemento VARCHAR(45)
+complemento VARCHAR(45),
 fkCliente INT NOT NULL,
 CONSTRAINT fkEnderecoCliente FOREIGN KEY (fkCliente) REFERENCES cliente(idCliente));
-
-CREATE TABLE cliente (
-idCliente INT PRIMARY KEY AUTO_INCREMENT,
-nome_completo VARCHAR (45) NOT NULL,
-telefone VARCHAR(11) NOT NULL,
-cpf CHAR (11) NOT NULL,
-email VARCHAR (45) NOT NULL, 
-senha VARCHAR (45) NOT NULL);
 
 CREATE TABLE sensor (
 idSensor INT PRIMARY KEY AUTO_INCREMENT,
