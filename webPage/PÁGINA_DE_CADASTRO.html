@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cadastro.smartberry</title>
+</head>
+<body>
+    <h1>FAÇA O SEU CADASTRO:</h1>
+    <br>
+    <h2>Atenção! A sua senha deve conter pelo menos 8 caracteres e o CPF deve ser inserido com todos os caracteres. <br> Exemplo: 123.456.789-00</h2>
+    <br>
+    Crie um nome de usuário: <input id="ipt_nome">
+    <br>
+    Crie uma senha: <input id="ipt_senha" type="password" placeholder="Ex: Insira 8 caracteres">
+    <br>
+    Confirme a sua senha: <input id="ipt_confirma" type="password">
+    <br>
+    Insira o seu email: <input id="ipt_email" placeholder="Ex: abc@exemplo.com">
+    <br>
+    Insira o seu cpf: <input id="ipt_cpf" placeholder="Ex: 123.456.789-76">
+    <br>
+    <button onclick="cadastro()">REALIZAR CADASTRO</button>
+    <br>
+    <div id="div"></div> 
+</body>
+</html>
+<script>
+    function cadastro() {
+        var nome = ipt_nome.value
+        var senha = ipt_senha.value
+        var confirma = ipt_confirma.value
+        var email = ipt_email.value
+        var cpf = ipt_cpf.value
+        var validacao = nome && senha.length > 8 && email.includes('@') && email.includes('.') && senha == confirma && cpf.length == 14 && email != '@' && email != '@.' && email != '.@' && email.length > 7
+        
+        if (validacao) {
+            div.innerHTML = `<span style="color: green;">Cadastro realizado com sucesso!</span>`
+            
+        } else {div.innerHTML = `<span style="color: red;">Insira dados válidos.</span>`}
+    }
+</script>
