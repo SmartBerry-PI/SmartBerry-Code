@@ -2,15 +2,15 @@
 <html>
 
 <head>
-    <title>Graphics</title>
+    <title>Grafico</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-    <h1>Graphics</h1>
+    <h1>Grafico</h1>
     <div style="display: flex;">
-        <div style="width: 50%;">
+        <div style="width: 75%;">
             <canvas id="sensorCapacitivo"></canvas>
         </div>
     </div>
@@ -19,18 +19,22 @@
         var sensorCapacitivo = new Chart(document.getElementById('sensorCapacitivo').getContext('2d'), {
             type: 'line',
             data: {
+                labels: [],
                 datasets: [{
-                    label: 'Sensor capacitivo de umidade do solo',
-                    borderColor: '#63B1BC',
-                    backgroundColor: '#ED145B'
+                  label: 'Sensor capacitivo de umidade do solo',
+                  borderColor: '#63B1BC',
+                  backgroundColor: '#63B1BC',
+                  data: []
                 }]
-            },
+              },
             options: {
                 scales: {
                     x: {
                         beginAtZero: true
                     },
                     y: {
+                        min:0,
+                        max:100,
                         title: {
                             display: true,
                             text: '(%)'
@@ -66,7 +70,7 @@
                         }
 
                         grafico.data.labels.push(tempo[endpoint]++);
-                        grafico.data.datasets[0].data.push(parseFloat(valor));
+                        grafico.data.datasets[0].data.push(parseInt(valor));
                         grafico.update();
                     });
                 })
@@ -74,8 +78,8 @@
         }
 
         setInterval(() => {
-            obterDados(sensorCapacitivo, 'capacitivo');
-        }, 1000);
+            obterDados(sensorCapacitivo, 'analogico');
+        }, 1000);           
 
     </script>
 </body>

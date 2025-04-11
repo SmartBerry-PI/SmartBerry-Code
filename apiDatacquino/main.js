@@ -22,7 +22,7 @@ const serial = async (
             user: 'api',
             password: 'Api#123.',
             database: 'SmartBerry',
-            port: 3307
+            port: 3306
         }
     ).promise();
 
@@ -50,7 +50,7 @@ const serial = async (
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
         const valores = data.split(';');
-        const sensorCapacitivo = parseFloat(valores[0]);
+        const sensorCapacitivo = parseInt(valores[0]);
 
         // armazena os valores dos sensores nos arrays correspondentes
         valoresSensorCapacitivo.push(sensorCapacitivo);
@@ -63,8 +63,8 @@ const serial = async (
                 'INSERT INTO registro (dado) VALUES (?)',
                 [sensorCapacitivo]
             );
-            console.log("valores inseridos no banco: ", sensorCapacitivo);
-
+            // console.log("valores inseridos no banco: ", sensorCapacitivo);
+            console.log(sensorCapacitivo);
         }
 
     });
