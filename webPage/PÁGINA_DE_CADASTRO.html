@@ -32,7 +32,7 @@
         var confirma = ipt_confirma.value
         var email = ipt_email.value
         var cpf = ipt_cpf.value
-        var validacao = nome && senha.length > 8 && email.includes('@') && email.includes('.') && senha == confirma && cpf.length == 14 && email != '@' && email != '@.' && email != '.@' && email.length > 7
+        var validacao = nome && senha.length >= 8 && email.includes('@') && email.includes('.') && senha == confirma && cpf.length == 14 && email != '@' && email != '@.' && email != '.@' && email.length > 7
         
         if (validacao) {
             div.innerHTML = `<span style="color: green;">Cadastro realizado com sucesso!</span>`
