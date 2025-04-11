@@ -17,15 +17,20 @@
                 <div class="inputBox">
                     <span>CPF:</span>
                     <i></i>
-                    <input type="number" id="cpf" name="cpf">
+                    <input type="number" id="cpf" name="cpf" placeholder="Ex: 123.456.789-76">
                 </div>
                 <div class="inputBox">
                     <span>E-mail:</span>
                     <i></i>
-                    <input type="email" id="email" name="email">
+                    <input type="email" id="email" name="email" placeholder="Ex: example@example.com">
                 </div>
                 <div class="inputBox">
                     <span>Senha:</span>
+                    <i></i>
+                    <input type="password" id="senha" name="senha">
+                </div>
+                <div class="inputBox">
+                    <span>Confirmar senha:</span>
                     <i></i>
                     <input type="password" id="senha" name="senha">
                 </div>
@@ -46,7 +51,22 @@
                 <div class="link">
                     <p>Já possui cadastro e deseja fazer <a href="login.html">login?</a></p>
                 </div>
-                <button type="submit">Cadastrar</button>
+                <button onclick="cadastro()">Cadastrar</button>
         </div>
 </body>
 </html>
+<script>
+    function cadastro() {
+        var nome = ipt_nome.value
+        var senha = ipt_senha.value
+        var confirma = ipt_confirma.value
+        var email = ipt_email.value
+        var cpf = ipt_cpf.value
+        var validacao = nome && senha.length >= 8 && email.includes('@') && email.includes('.') && senha == confirma && cpf.length == 14 && email != '@' && email != '@.' && email != '.@' && email.length > 7
+        
+        if (validacao) {
+            div.innerHTML = `<span style="color: green;">Cadastro realizado com sucesso!</span>`
+            
+        } else {div.innerHTML = `<span style="color: red;">Insira dados válidos.</span>`}
+    }
+</script>
