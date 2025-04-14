@@ -41,7 +41,7 @@ lugar VARCHAR(45) NOT NULL,
 dtInstalacao DATETIME);
 
 CREATE TABLE registro (
-idRegistro INT,
+idRegistro INT AUTO_INCREMENT,
 fkSensor INT DEFAULT 1,
 CONSTRAINT pkCompostaRegistro PRIMARY KEY (idRegistro, fkSensor),
 CONSTRAINT fkRegistroSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
