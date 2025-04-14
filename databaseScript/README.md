@@ -24,5 +24,13 @@ Este repositório contém o esquema do banco de dados utilizado no projeto **Sma
 
 ## 📌 Como usar  
 1. Clone este repositório  
-2. Importe o esquema do banco de dados  
+2. Execute o script de criação do banco `\dbStructure.sql`
+3. Execute o script de criação das tabelas `\dbStructure.sql`
+4. Execute o script de insert default `insertsMock.sql`
+5. Execute o script de configuração do usuário `userConfig.sql`
+6. Execute a api ou insira dados 
+  ```bash
+  npm start
+  ```
+7. Execute um dos selects prontos ou sinta-se livre para criar um 
 
