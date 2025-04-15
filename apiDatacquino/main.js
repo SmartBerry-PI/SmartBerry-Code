@@ -63,8 +63,8 @@ const serial = async (
                 'INSERT INTO registro (dado) VALUES (?)',
                 [sensorCapacitivo]
             );
-            // console.log("valores inseridos no banco: ", sensorCapacitivo);
-            console.log(sensorCapacitivo);
+            console.log("Valor inserido no banco com sucesso! ");
+            // console.log(sensorCapacitivo);
         }
 
     });
