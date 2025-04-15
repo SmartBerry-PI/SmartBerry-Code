@@ -22,7 +22,7 @@ const serial = async (
             user: 'api',
             password: 'Api#123.',
             database: 'SmartBerry',
-            port: 3306
+            port: 3307
         }
     ).promise();
 
