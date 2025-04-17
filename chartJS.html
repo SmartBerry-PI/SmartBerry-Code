@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chartJS</title>
+</head>
+<body>
+      <div>
+        <canvas id="myChart2"></canvas>
+      </div>
+</body>
+</html>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const rtx = document.getElementById('myChart2');
+  
+  new Chart(rtx, {
+    type: 'line',
+    data: {
+      labels: ['12:00', '12:30', '13:00', '13:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'],
+      datasets: [
+      {label: 'Umidade',
+        data: [80, 65, 50, 95, 92, 90, 88, 86, 82, 76, 93],
+        borderWidth: 1}
+  ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  </script>
