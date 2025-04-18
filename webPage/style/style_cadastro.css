@@ -1,5 +1,5 @@
 body{
-    background: #f8d6b1;
+    background: #e6d7c5;
 }
 
 .container {
@@ -45,7 +45,7 @@ nav{
 }
   
 .logo{
-    width: 120px;
+    width: 250px;
     height: auto;
     align-self: center;
 }
@@ -67,7 +67,7 @@ ul li a:hover{
 
 .acont{
     background: transparent;
-    border: 2px solid #fff;
+    border: 2px solid #000;
     border-radius: 25px;
     width: 100px;
     height: 40px;
@@ -89,7 +89,7 @@ ul li a:hover{
 }
   
 a{
-    color: #fff;
+    color: #000;
     text-decoration: none;
     transition: 0.3s;
 }
