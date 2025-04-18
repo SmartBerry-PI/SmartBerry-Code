@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 body{
@@ -15,9 +16,81 @@ html, body {
 
 body {
     position: relative;
-    font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
 }
 
+header{
+    background-image: url('../assets/bckg-planting.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+  
+nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 1em 2em;
+    gap: 1em;
+}
+  
+.logo{
+    width: 120px;
+    height: auto;
+    align-self: center;
+}
+  
+.links-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.links span{
+    margin-right: 1em;
+}
+  
+ul li a:hover{
+    text-decoration: underline;
+}
+
+.acont{
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-list{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 0;
+}
+
+.nav-list li{
+    letter-spacing: 2px;
+}
+  
+a{
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+  
+a:hover{
+    opacity: 0.7;
+}
 
 #wave {
     position: fixed; 
@@ -30,37 +103,84 @@ body {
     opacity: 1;
 }
 
-a{
-    color: #fff;
-    text-decoration: none;
-    transition: 0.3s;
+.acont{
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    width: 80px;
+    height: 40px;
+
 }
-  
-a:hover{
-    opacity: 0.7;
-}
-  
-.logo{
-    font-size: 24px;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-}
-  
-nav{
+
+.marketing{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
-    background: #23232e;
-    height: 8vh;
+    color: #fff;
 }
-  
-.nav-list{
-    list-style: none;
+
+.titleBgnd{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    padding: 5em;
 }
-  
-.nav-list li{
-    letter-spacing: 3px;
-    margin-left: 32px;
+
+.servicos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 3em;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: auto;
+}
+.card p{
+    display: flex;
+    width: 50%;
+    text-align: center;
+}
+.card button{
+    background: #000;
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    width: 50%;
+    height: 50px;
+}
+
+.solution{
+    display: flex;
+    justify-self: center;
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+}
+
+.horta{
+    display: flex;
+    justify-self: center;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+}
+
+.sobre{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: auto;
+}
+.sobre p{
+    display: flex;
+    width: 50%;
+    text-align: center;
 }
