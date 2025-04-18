@@ -1,3 +1,7 @@
+body{
+    background: #e6d7c5;
+}
+
 .container {
     border: 1px solid #ddd;
 }
@@ -30,3 +34,66 @@ select
     padding: 0.5rem;   
 }
 
+
+nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 1em 2em;
+    gap: 1em;
+}
+  
+.logo{
+    width: 250px;
+    height: auto;
+    align-self: center;
+}
+  
+.links-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.links span{
+    margin-right: 1em;
+}
+  
+ul li a:hover{
+    text-decoration: underline;
+}
+
+.acont{
+    background: transparent;
+    border: 2px solid #000;
+    border-radius: 25px;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-list{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 0;
+}
+
+.nav-list li{
+    letter-spacing: 2px;
+}
+  
+a{
+    color: #000;
+    text-decoration: none;
+    transition: 0.3s;
+}
+  
+a:hover{
+    opacity: 0.7;
+}
