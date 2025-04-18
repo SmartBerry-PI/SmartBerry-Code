@@ -1,0 +1,4 @@
+Carmine: #A40414
+Oyster Pink: #EBC7CA
+Fuzzy Wuzzy Brown: #C55B63
+New York Pink: #D37C84
