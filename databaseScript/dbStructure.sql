@@ -5,18 +5,20 @@ CREATE TABLE cliente (
 idCliente INT PRIMARY KEY AUTO_INCREMENT,
 nome_completo VARCHAR (45) NOT NULL,
 telefone VARCHAR(11) NOT NULL,
-cpf CHAR (11) NOT NULL,
+cnpj CHAR (14) NOT NULL,
 email VARCHAR (45) NOT NULL);
 
 CREATE TABLE endereco (
-idCliente INT PRIMARY KEY,
+idEndereco INT,
+fkCliente INT,
 CONSTRAINT fkEnderecoCliente FOREIGN KEY (idCliente) REFERENCES cliente(idCliente),
+CONSTRAINT pkCompostaEndereco PRIMARY KEY (idEndereco, idCliente),
 cep VARCHAR(45) NOT NULL,
 uf CHAR (2) NOT NULL,
 cidade VARCHAR(45) NOT NULL,
 bairro VARCHAR (45) NOT NULL,
 logradouro VARCHAR (45) NOT NULL,
-numero VARCHAR(45) NOT NULL,
+numero VARCHAR(5) NOT NULL,
 complemento VARCHAR(45));
 
 CREATE TABLE usuario (
