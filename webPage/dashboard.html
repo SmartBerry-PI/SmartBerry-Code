@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chartJS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Dashboard</title>
 </head>
 <body>
       <div>
-        <canvas id="myChart2"></canvas>
+        <canvas id="myChart"></canvas>
       </div>
 </body>
 </html>
@@ -15,12 +17,12 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <script>
-    const rtx = document.getElementById('myChart2');
+    const rtx = document.getElementById('myChart');
   
   new Chart(rtx, {
     type: 'line',
     data: {
-      labels: ['12:00', '12:30', '13:00', '13:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'],
+      labels: ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00'],
       datasets: [
       {label: 'Umidade',
         data: [80, 65, 50, 95, 92, 90, 88, 86, 82, 76, 93],
