@@ -17,5 +17,69 @@ input
 }
 body
 {
-    background-color: rgb(43, 128, 43);
+    background-color: #f8d6b1;
+}
+
+
+nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 1em 2em;
+    gap: 1em;
+}
+  
+.logo{
+    width: 120px;
+    height: auto;
+    align-self: center;
+}
+  
+.links-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.links span{
+    margin-right: 1em;
+}
+  
+ul li a:hover{
+    text-decoration: underline;
+}
+
+.acont{
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-list{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 0;
+}
+
+.nav-list li{
+    letter-spacing: 2px;
+}
+  
+a{
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+  
+a:hover{
+    opacity: 0.7;
 }
