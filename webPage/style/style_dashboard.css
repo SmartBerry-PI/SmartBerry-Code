@@ -1,0 +1,48 @@
+.main-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#alert-img {
+    width: fit-content;
+}
+
+img{
+    height: 100px;
+}
+
+.chart {
+    position: relative;
+    height: 40vh; 
+    width: 40vw;
+}
+
+.logo{
+    width: 120px;
+    height: auto;
+    align-self: center;
+}
+header{
+    padding: 1px;
+    background-color: #EBC7CA;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+
