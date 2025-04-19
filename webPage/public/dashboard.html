@@ -6,12 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <link rel="stylesheet" href="../style/style.css"> -->
   <link rel="stylesheet" href="../style/style_dashboard.css">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../assets/icon.png" type="image/x-icon">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Dashboard</title>
-  <style>
-    /* *{ border: 2px solid black; margin: 5px;} */
-  </style>
 </head>
 
 <body>
@@ -40,6 +37,8 @@
   </section>
   <hr>
   <section>
+    Estado de flora:<input type="checkbox" name="estagio1" id="estagio1">
+    Estado de frutificação:<input type="checkbox" name="estagio2" id="estagio2">
     <div class="main-container" id="second-section">
       <div class="container">
         <div>
@@ -55,31 +54,81 @@
     </div>
   </section>
 </body>
-
 </html>
-
-
 <script>
+  let flora = document.getElementById('estagio1');
+  let frutifica = document.getElementById('estagio2');
   const rtx = document.getElementById('myChart');
 
-  new Chart(rtx, {
+  const dadosBase = [80, 65, 50, 95, 92, 90, 88, 86, 82, 76];
+  const dadosRandomizados = Array.from({ length: 10 }, () => {
+    const indice = Math.floor(Math.random() * dadosBase.length);
+    return dadosBase[indice];
+  });
+
+  const labels = ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'];
+
+  const umidadeDataset = {
+    label: 'Umidade',
+    data: dadosRandomizados,
+    borderWidth: 1,
+    borderColor: 'rgba(75, 192, 192, 1)',
+    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+    fill: true,
+    tension: 0.4 
+  };
+
+  const config = {
     type: 'line',
     data: {
-      labels: ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'],
-      datasets: [
-        {
-          label: 'Umidade',
-          data: [80, 65, 50, 95, 92, 90, 88, 86, 82, 76],
-          borderWidth: 1
-        }
-      ]
+      labels: labels,
+      datasets: [umidadeDataset]
     },
     options: {
+      responsive: true,
       scales: {
         y: {
+          min: 0,
+          max: 100,
           beginAtZero: true
         }
       }
     }
-  });
+  };
+
+  const myChart = new Chart(rtx, config);
+
+  function atualizarLinhas() {
+    const datasets = [umidadeDataset];
+
+    if (frutifica.checked) {
+      datasets.push({
+        label: 'Limite Flora (90%)',
+        data: Array(labels.length).fill(90),
+        borderColor: 'red',
+        borderDash: [5, 5],
+        borderWidth: 1,
+        pointRadius: 0,
+        fill: false
+      });
+    }
+
+    if (flora.checked) {
+      datasets.push({
+        label: 'Limite Frutificação (60%)',
+        data: Array(labels.length).fill(60),
+        borderColor: 'orange',
+        borderDash: [5, 5],
+        borderWidth: 1,
+        pointRadius: 0,
+        fill: false
+      });
+    }
+
+    myChart.data.datasets = datasets;
+    myChart.update();
+  }
+
+  flora.addEventListener('change', atualizarLinhas);
+  frutifica.addEventListener('change', atualizarLinhas);
 </script>
