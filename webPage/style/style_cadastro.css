@@ -97,3 +97,36 @@ a{
 a:hover{
     opacity: 0.7;
 }
+
+#cadastro {
+    height: 52vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-basis: 100px;
+    flex-wrap: wrap;
+}
+
+#cadastro .container {
+    border: 1px solid black;
+    padding: 2px;
+    height: 52vh;
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: first baseline;
+    align-items: center;
+}
+
+.subcontainer {
+    height: 41vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: first baseline;
+    align-items: center;
+}
