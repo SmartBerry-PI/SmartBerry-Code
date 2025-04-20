@@ -1,35 +1,53 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Times New Roman', Times, serif;
-}
-
-body{
-    background: #f8d6b1;
-}
-
-
-html, body {
-    height: 100%;
+    max-width: 100%;
 }
 
 body {
+    background: #f8d6b1;
     position: relative;
 }
 
-header{
+html,
+body {
+    height: 100%;
+}
+
+#indexTop {
     background-image: url('../assets/bckg-planting.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 100vh; 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    min-height: 100vh;
 }
-  
-nav{
+
+header nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #0c4c1c;
+    height: 10vh;
+    width: 100%;
+}
+
+/* nav div{
+    border: 1px solid black;
+} */
+
+nav .mid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 10vh;
+    width: 40%;
+}
+
+
+nav {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,29 +55,31 @@ nav{
     padding: 1em 2em;
     gap: 1em;
 }
-  
-.logo{
-    width: 170px;
+
+.logo {
+    width: 190px;
     height: auto;
     align-self: center;
 }
-  
-.links-container{
-    width: 100%;
+
+.links-container {
+    height: 10vh;
+    width: 9%;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-  
-.links span{
+
+.links-container span {
     margin-right: 1em;
 }
-  
-ul li a:hover{
+
+ul li a:hover {
     text-decoration: underline;
 }
 
-.acont{
+.acont {
     background: transparent;
     border: 2px solid #fff;
     border-radius: 25px;
@@ -70,7 +90,7 @@ ul li a:hover{
     align-items: center;
 }
 
-.nav-list{
+.nav-list {
     list-style: none;
     display: flex;
     justify-content: center;
@@ -78,32 +98,32 @@ ul li a:hover{
     padding: 0;
 }
 
-.nav-list li{
+.nav-list li {
     letter-spacing: 2px;
 }
-  
-a{
+
+a {
     color: #fff;
     text-decoration: none;
     transition: 0.3s;
 }
-  
-a:hover{
+
+a:hover {
     opacity: 0.7;
 }
 
 #wave {
-    position: fixed; 
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 50%;
     z-index: -1;
-    transform: rotate(180deg); 
+    transform: rotate(180deg);
     opacity: 1;
 }
 
-.acont{
+.acont {
     background: transparent;
     border: 2px solid #fff;
     border-radius: 25px;
@@ -112,14 +132,14 @@ a:hover{
 
 }
 
-.marketing{
+.marketing {
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
 }
 
-.titleBgnd{
+.titleBgnd {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -127,7 +147,7 @@ a:hover{
     padding: 5em;
 }
 
-.servicos{
+.servicos {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -135,18 +155,20 @@ a:hover{
     font-size: 3em;
 }
 
-.card{
+.card {
     display: flex;
     flex-direction: column;
     width: 50%;
     height: auto;
 }
-.card p{
+
+.card p {
     display: flex;
     width: 50%;
     text-align: center;
 }
-.card button{
+
+.card button {
     background: #000;
     color: #fff;
     border: 1px solid transparent;
@@ -155,7 +177,7 @@ a:hover{
     height: 50px;
 }
 
-.solution{
+.solution {
     display: flex;
     justify-self: center;
     width: 210px;
@@ -163,7 +185,7 @@ a:hover{
     border-radius: 50%;
 }
 
-.horta{
+.horta {
     display: flex;
     justify-self: center;
     width: 50%;
@@ -171,7 +193,7 @@ a:hover{
     border-radius: 50%;
 }
 
-.sobre{
+.sobre {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -179,8 +201,21 @@ a:hover{
     width: 50%;
     height: auto;
 }
-.sobre p{
+
+.sobre p {
     display: flex;
     width: 50%;
     text-align: center;
+}
+
+footer {
+    height: 5vh;
+    width: 100%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0c4c1c;
+    border-top: 1px solid black;
+    margin-top: 2px;
 }
