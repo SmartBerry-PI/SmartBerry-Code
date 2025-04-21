@@ -28,7 +28,7 @@ header nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #0c4c1c;
+    background-color: transparent;
     height: 10vh;
     width: 100%;
     position: fixed;
