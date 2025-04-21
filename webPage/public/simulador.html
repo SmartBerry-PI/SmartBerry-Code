@@ -49,23 +49,23 @@
       <p><strong>Bem-vindo ao Simulador Financeiro!</strong> Visualize como o uso de sensores de umidade do solo pode impactar diretamente as finanças do seu cultivo de morangos. Insira os dados da sua propriedade para simular.</p>
 
       <div class="form-group">
-        <label for="ipt_quant_canteiros">Quantidade de canteiros utilizados nesta safra*:</label>
-        <input type="number" id="ipt_quant_canteiros" />
+        <label for="ipt_quant_canteiros">Quantidade de canteiros utilizados nesta safra:</label>
+        <input type="number" id="ipt_quant_canteiros" placeholder="Ex: 100" />
       </div>
 
       <div class="form-group">
-        <label for="ipt_quant_mudas">Quantidade de mudas de morango plantadas por canteiro*:</label>
-        <input type="number" id="ipt_quant_mudas" />
+        <label for="ipt_quant_mudas">Quantidade de mudas de morango plantadas por canteiro:</label>
+        <input type="number" id="ipt_quant_mudas" placeholder="Ex: 10"/>
       </div>
 
       <div class="form-group">
-        <label for="ipt_duracao_safra">Duração aproximada dessa safra [dias]:</label>
-        <input type="number" id="ipt_duracao_safra" />
+        <label for="ipt_duracao_safra">Duração da safra:</label>
+        <input type="number" id="ipt_duracao_safra" placeholder="Ex: 60" />
       </div>
 
       <div class="form-group">
-        <label for="ipt_preco_morango">Valor de venda do morango por quilo [R$]*:</label>
-        <input type="number" id="ipt_preco_morango" step="0.01" />
+        <label for="ipt_preco_morango">Valor de venda do morango por Kg[R$]:</label>
+        <input type="number" id="ipt_preco_morango" step="0.01" placeholder="Ex:19,90" />
       </div>
 
       <button onclick="calcularReceitaLucro()">CALCULAR FATURAMENTO E LUCRO ESTIMADOS</button>
