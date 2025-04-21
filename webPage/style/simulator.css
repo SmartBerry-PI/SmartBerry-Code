@@ -1,29 +1,16 @@
-/* overral config */
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Times New Roman', Times, serif;
-    max-width: 100%;
 }
-
-body {
+  
+body{
     background: #f8d6b1;
-    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
-
-html,
-body {
-    height: 100%;
-}
-
-section{
-    height: 100vh;
-    padding-top: 10vh;
-}
-/* overral config */
-
-/* header */
 header nav {
     display: flex;
     flex-direction: row;
@@ -109,17 +96,6 @@ a:hover {
     opacity: 0.7;
 }
 
-/* #wave {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    z-index: -1;
-    transform: rotate(180deg);
-    opacity: 1;
-} */
-
 .acont {
     background: transparent;
     border: 2px solid #fff;
@@ -128,9 +104,45 @@ a:hover {
     height: 40px;
 
 }
-/* header */
+  
+main{
+    flex: 1;
+    padding-top: 12vh;
+    padding: 2em;
+}
+  
+.simulador{
+    max-width: 800px;
+    margin: 0 auto;
+}
+  
+.simulador h1{
+    margin-bottom: 1em;
+}
+  
+.simulador p{
+    margin-bottom: 2em;
+}
+  
+.form-group{
+    margin-bottom: 1em;
+}
 
-/* footer */
+canvas#grafico {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    max-width: 100%;
+    border: 2px solid transparent;
+    transition: transform 0.3s ease;
+}
+
+canvas#grafico:hover {
+    transform: scale(1.02);
+}
+
 footer {
     height: 5vh;
     width: 100%;
@@ -142,4 +154,3 @@ footer {
     border-top: 1px solid black;
     margin-top: 2px;
 }
-/* footer */
