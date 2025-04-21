@@ -4,7 +4,6 @@
 function calcularReceitaLucro() {
     const canteiros = Number(document.getElementById("ipt_quant_canteiros").value);
     const mudasPorCanteiro = Number(document.getElementById("ipt_quant_mudas").value);
-    const diasSafra = Number(document.getElementById("ipt_duracao_safra").value);
     const precoMorango = Number(document.getElementById("ipt_preco_morango").value);
   
     if (!canteiros || !mudasPorCanteiro || !diasSafra || !precoMorango) {
@@ -27,7 +26,6 @@ function calcularReceitaLucro() {
     const texto_tela = document.getElementById("texto_tela");
     texto_tela.innerHTML = `
       <h3>📊 Resultados da simulação:</h3>
-      <p>⏰ Duração da safra: <b>${diasSafra} dias</b></p>
       <p>🌱 Canteiros: <b>${canteiros}</b> | 🌿 Mudas por canteiro: <b>${mudasPorCanteiro}</b> | Total de mudas: <b>${totalMudas}</b></p>
       <p>💰 Preço de venda por kg: <b>R$${precoMorango.toFixed(2)}</b></p>
       <p>📦 Produção estimada: <b>${producaoTotalKg.toFixed(2)} kg</b></p>
