@@ -1,3 +1,11 @@
+:root{
+    --vementa: #6FCF97;
+    --vmorango: #EB5757;
+    --apetroleo: #2F80ED;
+    --cinza: #4F4F4F;
+    --cneutro: #BDBDBD;
+    --bgcolor: #f7f3f0;
+}
 /* overral config */
 * {
     margin: 0;
@@ -8,7 +16,7 @@
 }
 
 body {
-    background: #f8d6b1;
+    background: var(--bgcolor);
     position: relative;
 }
 
@@ -27,7 +35,7 @@ header nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #0c4c1c;
+    background-color: var(--vementa);
     height: 10vh;
     width: 100%;
     position: fixed;
@@ -101,12 +109,12 @@ a:hover {
 footer {
     height: 5vh;
     width: 100%;
-    color: #fff;
+    color: var(--cinza);
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0c4c1c;
-    border-top: 1px solid black;
+    background-color: var(--vementa);
+    border-top: 1px solid var(--cneutro);
     margin-top: 2px;
 }
 /* footer */

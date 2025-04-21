@@ -1,3 +1,12 @@
+:root{
+    --vementa: #6FCF97;
+    --vmorango: #EB5757;
+    --apetroleo: #2F80ED;
+    --cinza: #4F4F4F;
+    --cneutro: #BDBDBD;
+    --bgcolor: #f7f3f0;
+}
+
 /* first section*/
 #indexTop {
     background-image: url('../assets/bckg-planting.png');
@@ -50,7 +59,7 @@
 }
 
 #sobre hr{
-    border: 1px solid black;
+    border: 1px solid var(--cinza);
 }
 .cardTitle {
     display: flex;
@@ -79,8 +88,9 @@
 }
 
 .card button {
-    background: #000;
+    background: var(--apetroleo);
     color: #fff;
+    font-size: 1.2em;
     border: 1px solid transparent;
     border-radius: 25px;
     width: 50%;
