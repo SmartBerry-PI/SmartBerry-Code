@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
-  <link rel="stylesheet" href="../style/login.css">
   <link rel="stylesheet" href="../style/style.css">
+  <link rel="stylesheet" href="../style/login.css">
   <link rel="shortcut icon" href="../assets/icon.png" type="image/x-icon">
 </head>
 
 <body>
+
   <header>
     <div class="header-content">
       <nav class="topNav">
@@ -42,30 +43,35 @@
       </nav>
     </div>
   </header>
-  <section>
+
+  <section class="login-container">
     <div class="container">
-      <h2>Login</h2>
-      <div class="inputBox">
-        <span>E-mail</span>
-        <i></i>
-        <input type="email" id="email" name="email" required>
+      <h2 class="container-title">Login</h2>
+      <div class="container-input">
+        <div class="inputBox">
+          <span>E-mail</span>
+          <i></i>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="inputBox">
+          <span>Senha</span>
+          <i></i>
+          <input type="password" id="senha" name="senha" required>
+        </div>
       </div>
-      <div class="inputBox">
-        <span>Senha</span>
-        <i></i>
-        <input type="password" id="senha" name="senha" required>
-      </div>
+      <button onclick="login()" class="login-button">Entrar</button>
       <div class="link">
-        <br><a href="index.html">Voltar</a>
+        <a href="index.html">Voltar</a>
       </div>
-      <button onclick="login()">Entrar</button>
     </div>
   </section>
+
   <footer>
     <div class="footer">
       <h4>SmartBerry @ 2025. All rights reserved.</h4>
     </div>
   </footer>
+
 </body>
 
 </html>
