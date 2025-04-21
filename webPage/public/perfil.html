@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="shortcut icon" href="../assets/icon.png" type="image/x-icon">
+    <title>SmartBerry</title>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+          <nav class="topNav">
+            <div class="left">
+              <a href="index.html"><img src="../assets/logo-b_w.png" alt="Logo da SmartBerry" class="logo"></a>
+            </div>
+            <div class="mid">
+              <ul class="nav-list">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="index.html#sobre">Sobre</a></li>
+                <li><a href="./simulador.html">Simulador</a></li>
+                <li><a href="login.html">Login</a></li>
+              </ul>
+              <button class="acont"><a href="cadastro.html">Criar conta</a></button>
+            </div>
+            <div class="links-container">
+              <div>
+                <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/twitterx--v2.png"
+                    alt="twitterX" /></a>
+              </div>
+              <div>
+                <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/facebook.png"
+                    alt="facebook" /></a>
+              </div>
+              <div>
+                <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/instagram-new--v1.png"
+                    alt="instagram" /></a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <section>
+        <div class="user">
+            <img width="48" height="48" src="https://img.icons8.com/fluency-systems-regular/48/user--v1.png" alt="user--v1"/>
+        </div>
+        <div class="conatinerDash">
+            horario de inicio da rega: <input type="text" name="" id="ipt_inicioRega"><br>
+            horario de termino da rega: <input type="text" name="" id="ipt_terminoRega"><br>    
+            <button  onclick="salvarRega()">Horario de rega</button>
+            <button><a href="./dashboard.html">Acessar dashboard</a></button>
+        </div>
+      </section>
+</body>
+</html>
+<script>
+    function salvarRega() {
+      const inicio = document.getElementById('ipt_inicioRega').value;
+      const termino = document.getElementById('ipt_terminoRega').value;
+  
+      if (inicio && termino) {
+        localStorage.setItem('inicioRega', inicio);
+        localStorage.setItem('terminoRega', termino);
+        alert("Horários salvos com sucesso!");
+      } else {
+        alert("Preencha os dois campos de horário!");
+      }
+    }
+</script>  

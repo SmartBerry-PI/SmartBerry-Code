@@ -86,3 +86,10 @@ section{
     background-color: #3066ad;
 }
   
+#horariosRega{
+    font-size: 1.1rem;
+    padding: 10px;
+    background-color: #f3f3f3;
+    border-radius: 8px;
+    margin-top: 10px;
+}  

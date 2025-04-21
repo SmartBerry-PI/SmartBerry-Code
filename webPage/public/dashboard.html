@@ -48,9 +48,12 @@
       <hr>
       <div class="container">
         <div class="figure">
-          <button onclick="horaRega()">Rega</button>
           <img src="" alt="indice-importante">
-          <div id="hora"></div>
+          <div id="horariosRega">
+            <p><strong>Horário de Rega:</strong></p>
+            <p id="inicio"></p>
+            <p id="termino"></p>
+          </div>          
         </div>  
       </div>
     </div>
@@ -102,11 +105,6 @@
   };
   
   const myChart = new Chart(rtx, config);
-  
-  function horaRega(){
-    const horaRega = new Date();
-    hora.innerHTML += `${horaRega}<br>`
-  }
 
   function atualizarLinhas() {
     const datasets = [umidadeDataset];
@@ -141,4 +139,18 @@
 
   flora.addEventListener('change', atualizarLinhas);
   frutifica.addEventListener('change', atualizarLinhas);
+  
+  window.onload = () => {
+    const inicio = localStorage.getItem('inicioRega');
+    const termino = localStorage.getItem('terminoRega');
+  
+    if (inicio && termino) {
+      document.getElementById('inicio').textContent = `Início: ${inicio}`;
+      document.getElementById('termino').textContent = `Término: ${termino}`;
+    } else {
+      document.getElementById('inicio').textContent = "Início: não definido";
+      document.getElementById('termino').textContent = "Término: não definido";
+    }
+  };
+  
 </script>

@@ -49,7 +49,7 @@ function login() {
 
     if (loginCorreto) {
         alert("Login realizado com sucesso!");
-        window.location.href = "dashboard.html";
+        window.location.href = "perfil.html";
     } else {
         tentativas++;
         alert(`Email ou senha inválidos. Tentativa ${tentativas} de 3.`);
