@@ -1,15 +1,7 @@
-/* * {
-    border: 1px solid black
-} */
-
 section {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-body {
-    background: #e6d7c5;
 }
 
 .container-main {
