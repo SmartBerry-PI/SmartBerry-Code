@@ -1,41 +1,46 @@
-body{
+body {
     background: #e6d7c5;
 }
 
 .container {
     border: 1px solid #ddd;
 }
-.inputBox
-{
-    height:5rem;
+
+.container h2{
+    text-align: center;
+    font-size: xx-large;
+}
+
+.inputBox {
+    height: 5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 }
-.selectBox
-{
-    height:5rem;
+
+.selectBox {
+    height: 5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 }
-input
-{
+
+input {
     height: 1rem;
     border-radius: 40px;
     padding: 0.5rem;
 }
-select
-{
+
+select {
     height: 1rem;
     border-radius: 40px;
-    padding: 0.5rem;   
+    padding: 0.5rem;
 }
 
 
-nav{
+nav {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,29 +48,29 @@ nav{
     padding: 1em 2em;
     gap: 1em;
 }
-  
-.logo{
+
+.logo {
     width: 250px;
     height: auto;
     align-self: center;
 }
-  
-.links-container{
+
+.links-container {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-  
-.links span{
+
+.links span {
     margin-right: 1em;
 }
-  
-ul li a:hover{
+
+ul li a:hover {
     text-decoration: underline;
 }
 
-.acont{
+.acont {
     background: transparent;
     border: 2px solid #000;
     border-radius: 25px;
@@ -76,7 +81,7 @@ ul li a:hover{
     align-items: center;
 }
 
-.nav-list{
+.nav-list {
     list-style: none;
     display: flex;
     justify-content: center;
@@ -84,17 +89,17 @@ ul li a:hover{
     padding: 0;
 }
 
-.nav-list li{
+.nav-list li {
     letter-spacing: 2px;
 }
-  
-a{
+
+a {
     color: #000;
     text-decoration: none;
     transition: 0.3s;
 }
-  
-a:hover{
+
+a:hover {
     opacity: 0.7;
 }
 

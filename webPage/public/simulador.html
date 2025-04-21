@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/login.css">
-    <link rel="stylesheet" href="../style/style.css">
-    <link rel="shortcut icon" href="../assets/icon.png" type="image/x-icon">
-    <title>Calculadora Financiera</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../style/login.css">
+  <link rel="stylesheet" href="../style/style.css">
+  <link rel="shortcut icon" href="../assets/icon.png" type="image/x-icon">
+  <title>Calculadora Financiera</title>
 </head>
-<body >
+
+<body>
   <header>
     <div class="header-content">
       <nav class="topNav">
@@ -18,71 +20,81 @@
         <div class="mid">
           <ul class="nav-list">
             <li><a href="index.html">Início</a></li>
-            <li><a href="#">Sobre</a></li>
+            <li><a href="index.html#sobre">Sobre</a></li>
             <li><a href="./simulador.html">Simulador</a></li>
             <li><a href="login.html">Login</a></li>
           </ul>
           <button class="acont"><a href="cadastro.html">Criar conta</a></button>
         </div>
-          <div class="links-container">
-            <div>
-              <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/twitterx--v2.png"
-                  alt="twitterX" /></a>
-            </div>
-            <div>
-              <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/facebook.png"
-                  alt="facebook" /></a>
-            </div>
-            <div>
-              <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/instagram-new--v1.png"
-                  alt="instagram" /></a>
-            </div>
+        <div class="links-container">
+          <div>
+            <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/twitterx--v2.png"
+                alt="twitterX" /></a>
           </div>
+          <div>
+            <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/facebook.png"
+                alt="facebook" /></a>
+          </div>
+          <div>
+            <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/instagram-new--v1.png"
+                alt="instagram" /></a>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
-    <img src="file:///C:/Users/jhoel/Projeto-pi/SmartBerry/Sprint-1/Logotipo/logo-sen-fundo-tamanho0.5x1.png" width="320">
-        <div>
-            <h1><b style="color: red">Simulador Financeiro</b></h1>
-            <h3> <b>Bem vindo ao Simulador Financeiro! Agora você pode visualizar como o uso de sensores de umidade do solo pode impactar diretamente as<br>
-                finanças do seu cultivo de morangos. Vamos te guiar em uma simulação simples, onde você pode inserir dados reais ou estimados 
-                de sua propriedade.</b></h3>
-        </div>
-        <div style="background-color: white;">
-            Informe a quantidade de canteiros utilizados nesta safra*: <br><input id="ipt_quant_canteiros" ><br><br>
-            Informe a quantidade de mudas de morango plantadas por canteiro*: <br><input id="ipt_quant_mudas"><br><br>
-            informe a duração aproximada dessa safra [dias]: <br> <input id="ipt_duracao_safra" ><br><br>
-            Informe o valor que você vende o morango por quilo [R$]*: <br><input id="ipt_preco_morango" ><br><br>
-            <div> <button onclick="calcular_receita_lucro()" >CALCULAR FATURAMENTO E LUCRO ESTIMADOS</button></div>
-        </div>
-        <div id="texto_tela"></div>
-        <footer>
-          <div class="footer">
-              <h4>SmartBerry @ 2025. All rights reserved.</h4>
-          </div>
-      </footer>
+
+  <section>
+    <img src="file:///C:/Users/jhoel/Projeto-pi/SmartBerry/Sprint-1/Logotipo/logo-sen-fundo-tamanho0.5x1.png"
+      width="320">
+    <div>
+      <h1><b style="color: red">Simulador Financeiro</b></h1>
+      <h3> <b>Bem vindo ao Simulador Financeiro! Agora você pode visualizar como o uso de sensores de umidade do solo
+          pode
+          impactar diretamente as<br>
+          finanças do seu cultivo de morangos. Vamos te guiar em uma simulação simples, onde você pode inserir dados
+          reais
+          ou estimados
+          de sua propriedade.</b></h3>
+    </div>
+    <div style="background-color: white;">
+      Informe a quantidade de canteiros utilizados nesta safra*: <br><input id="ipt_quant_canteiros"><br><br>
+      Informe a quantidade de mudas de morango plantadas por canteiro*: <br><input id="ipt_quant_mudas"><br><br>
+      informe a duração aproximada dessa safra [dias]: <br> <input id="ipt_duracao_safra"><br><br>
+      Informe o valor que você vende o morango por quilo [R$]*: <br><input id="ipt_preco_morango"><br><br>
+      <div> <button onclick="calcular_receita_lucro()">CALCULAR FATURAMENTO E LUCRO ESTIMADOS</button></div>
+    </div>
+    <div id="texto_tela"></div>
+  </section>
+
+  <footer>
+    <div class="footer">
+      <h4>SmartBerry @ 2025. All rights reserved.</h4>
+    </div>
+  </footer>
 </body>
+
 </html>
 <script>
 
-    function calcular_receita_lucro() {
-        // adicionando variaveis locais para armazenar as respostas do usuario utilizando  o number para identificarlo como numero
-        var quantidade_canteiros = Number(ipt_quant_canteiros.value);
-        var quantidade_mudas = Number(ipt_quant_mudas.value);
-        var duracao_safra = Number(ipt_duracao_safra.value);
-        var preco_morango = Number(ipt_preco_morango.value);
-        // variaveis para armazenar o resultado dos calculos a serem feitos
-        // calculo do faturamento caso as mudas nao sofresem nada ou seja o potencial total de todas as mudas plantadas
-        var valor_plantado = quantidade_mudas * 0.50 * quantidade_canteiros * preco_morango; 
-        // calculo do faturamento caso sofra de estresse hidrico na plantação inteiro tendo em conta que ele perde 30%
-        var faturamento_estresse_hidrico = valor_plantado * 0.7; 
-        // calculo do faturamento caso sofra de estresse hidrico na plantação inteiro usando o nosso sensor tendo em conta que ele perde 15%
-        var faturamento_sensor_estresse = valor_plantado * 0.85;
-        // calculo do faturamento caso sofra de encharcamento na plantação inteiro tendo em conta que ele perde 25% 
-        var faturamento_encharcamento = valor_plantado * 0.75; 
-         // calculo do faturamento caso sofra de encharmento na plantação inteiro usando o nosso sensor tendo em conta que ele perde 10%
-        var faturamento_sensor_encharcamento = valor_plantado * 0.90;
-        texto_tela.innerHTML  = `<br><br>
+  function calcular_receita_lucro() {
+    // adicionando variaveis locais para armazenar as respostas do usuario utilizando  o number para identificarlo como numero
+    var quantidade_canteiros = Number(ipt_quant_canteiros.value);
+    var quantidade_mudas = Number(ipt_quant_mudas.value);
+    var duracao_safra = Number(ipt_duracao_safra.value);
+    var preco_morango = Number(ipt_preco_morango.value);
+    // variaveis para armazenar o resultado dos calculos a serem feitos
+    // calculo do faturamento caso as mudas nao sofresem nada ou seja o potencial total de todas as mudas plantadas
+    var valor_plantado = quantidade_mudas * 0.50 * quantidade_canteiros * preco_morango;
+    // calculo do faturamento caso sofra de estresse hidrico na plantação inteiro tendo em conta que ele perde 30%
+    var faturamento_estresse_hidrico = valor_plantado * 0.7;
+    // calculo do faturamento caso sofra de estresse hidrico na plantação inteiro usando o nosso sensor tendo em conta que ele perde 15%
+    var faturamento_sensor_estresse = valor_plantado * 0.85;
+    // calculo do faturamento caso sofra de encharcamento na plantação inteiro tendo em conta que ele perde 25% 
+    var faturamento_encharcamento = valor_plantado * 0.75;
+    // calculo do faturamento caso sofra de encharmento na plantação inteiro usando o nosso sensor tendo em conta que ele perde 10%
+    var faturamento_sensor_encharcamento = valor_plantado * 0.90;
+    texto_tela.innerHTML = `<br><br>
         ⏰ Duração desta safra: ${duracao_safra} dias <br>
         🌱 Quantidade de canteiros utilizadas nesta safra: ${quantidade_canteiros}<br>
         🌿 Quantidade de mudas utilizadas no total da safra: ${quantidade_mudas}
@@ -98,7 +110,7 @@
                 esse cenario seria onde ele vai ter o menor faturamento e caso a plantação sofra do encharcamento ele terá um faturamento do 90% plantado, ou seja, o melhor cenario, 
                 então o faturamento estara entre essas duas situações, e por isso embaixo é utilizada a palavra 'até' --!>
         🔹 Estimativa de faturamento: R$${faturamento_sensor_estresse} até R$${faturamento_sensor_encharcamento}<br>
-        📈 Diferença no lucro usando o nosso sensor: + R$${faturamento_sensor_estresse - faturamento_estresse_hidrico} até R$${faturamento_sensor_encharcamento - faturamento_encharcamento } <br>
-        `; 
-        }
+        📈 Diferença no lucro usando o nosso sensor: + R$${faturamento_sensor_estresse - faturamento_estresse_hidrico} até R$${faturamento_sensor_encharcamento - faturamento_encharcamento} <br>
+        `;
+  }
 </script>
