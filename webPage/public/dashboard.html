@@ -48,7 +48,9 @@
       <hr>
       <div class="container">
         <div class="figure">
+          <button onclick="horaRega()">Rega</button>
           <img src="" alt="indice-importante">
+          <div id="hora"></div>
         </div>  
       </div>
     </div>
@@ -62,15 +64,15 @@
   let flora = document.getElementById('estagio1');
   let frutifica = document.getElementById('estagio2');
   const rtx = document.getElementById('myChart');
-
+  
   const dadosBase = [80, 65, 50, 95, 92, 90, 88, 86, 82, 76];
   const dadosRandomizados = Array.from({ length: 10 }, () => {
     const indice = Math.floor(Math.random() * dadosBase.length);
     return dadosBase[indice];
   });
-
+  
   const labels = ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'];
-
+  
   const umidadeDataset = {
     label: 'Umidade',
     data: dadosRandomizados,
@@ -80,7 +82,7 @@
     fill: true,
     tension: 0.4 
   };
-
+  
   const config = {
     type: 'line',
     data: {
@@ -98,8 +100,13 @@
       }
     }
   };
-
+  
   const myChart = new Chart(rtx, config);
+  
+  function horaRega(){
+    const horaRega = new Date();
+    hora.innerHTML += `${horaRega}<br>`
+  }
 
   function atualizarLinhas() {
     const datasets = [umidadeDataset];
