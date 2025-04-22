@@ -6,7 +6,7 @@ function calcularReceitaLucro() {
     const mudasPorCanteiro = Number(document.getElementById("ipt_quant_mudas").value);
     const precoMorango = Number(document.getElementById("ipt_preco_morango").value);
   
-    if (!canteiros || !mudasPorCanteiro || !diasSafra || !precoMorango) {
+    if (!canteiros || !mudasPorCanteiro || !precoMorango) {
       alert("Por favor, preencha todos os campos corretamente.");
       return;
     }
