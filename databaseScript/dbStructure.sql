@@ -10,7 +10,7 @@ email VARCHAR (45) NOT NULL);
 
 CREATE TABLE endereco (
 idEndereco INT,
-fkCliente INT,
+idCliente INT,
 CONSTRAINT fkEnderecoCliente FOREIGN KEY (idCliente) REFERENCES cliente(idCliente),
 CONSTRAINT pkCompostaEndereco PRIMARY KEY (idEndereco, idCliente),
 cep VARCHAR(45) NOT NULL,

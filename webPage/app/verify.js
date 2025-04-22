@@ -45,7 +45,7 @@ function login() {
 
     const loginCorreto =
         (usuarioSalvo && usuarioSalvo.email === emailLogin && usuarioSalvo.senha === senhaLogin) ||
-        (emailLogin === 'smartberry@sptech.school' && senhaLogin === 'admin@123');
+        (emailLogin === 'cliente' && senhaLogin === 'cliente123');
 
     if (loginCorreto) {
         alert("Login realizado com sucesso!");
