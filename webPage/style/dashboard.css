@@ -4,30 +4,33 @@ html, body {
     overflow: hidden;
     height: 100vh;
 }
-  
-header{
-    padding: 10px 20px;
-    background-color: #EBC7CA;
+
+header nav {
+    border: 1px solid black;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: var(--vmorango);
+    height: 10vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    padding: 0 2em;
 }
   
-.logo{
-    width: 120px;
-    height: auto;
-    align-self: center;
+section{
+    height: 45vh;
 }
 
-header nav{
-    background: #EBC7CA;
+#first-section{
+    height: 35vh;
 }
-  
+    
 .nav-voltar button{
-    padding: 10px 20px;
+    height: 5vh;
+    width: 10vh;
     font-size: 1em;
     background-color: #2F80ED;
     border: none;
@@ -79,11 +82,7 @@ h1{
     font-size: 3em;
     text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.58);
 }
-  
-section{
-    height: 50vh;
-}
-  
+
 #horariosRega{
     font-size: 1.1rem;
     padding: 10px;

@@ -10,13 +10,18 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Dashboard</title>
 </head>
+
 <body>
+
   <header>
-    <img src="../assets/logo-extensa1.png" alt="Logo da SmartBerry" class="logo">
     <nav class="nav-voltar">
-      <button><a href="./index.html">Voltar</a></button>
+      <a href="../public/index.html">
+        <img src="../assets/logo-b_w.png" alt="Logo da SmartBerry" class="logo">
+      </a>
+      <button><a href="../public/perfil.html">Voltar</a></button>
     </nav>
-  </header>   
+  </header>
+
   <section class="main-container" id="first-section">
     <div class="container">
       <div class="figure">
@@ -35,7 +40,9 @@
       </div>
     </div>
   </section>
+
   <hr>
+
   <section>
     Estado de flora:<input type="checkbox" name="estagio1" id="estagio1">
     Estado de frutificação:<input type="checkbox" name="estagio2" id="estagio2">
@@ -52,26 +59,28 @@
             <p><strong>Horário de Rega:</strong></p>
             <p id="inicio"></p>
             <p id="termino"></p>
-          </div>          
-        </div>  
+          </div>
+        </div>
       </div>
     </div>
   </section>
+  
 </body>
+
 </html>
 <script>
   let flora = document.getElementById('estagio1');
   let frutifica = document.getElementById('estagio2');
   const rtx = document.getElementById('myChart');
-  
+
   const dadosBase = [80, 65, 50, 95, 92, 90, 88, 86, 82, 76];
   const dadosRandomizados = Array.from({ length: 10 }, () => {
     const indice = Math.floor(Math.random() * dadosBase.length);
     return dadosBase[indice];
   });
-  
+
   const labels = ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'];
-  
+
   const umidadeDataset = {
     label: 'Umidade',
     data: dadosRandomizados,
@@ -79,9 +88,9 @@
     borderColor: 'rgba(75, 192, 192, 1)',
     backgroundColor: 'rgba(75, 192, 192, 0.2)',
     fill: true,
-    tension: 0.4 
+    tension: 0.4
   };
-  
+
   const config = {
     type: 'line',
     data: {
@@ -99,7 +108,7 @@
       }
     }
   };
-  
+
   const myChart = new Chart(rtx, config);
 
   function atualizarLinhas() {
@@ -139,7 +148,7 @@
   window.onload = () => {
     const inicio = localStorage.getItem('inicioRega');
     const termino = localStorage.getItem('terminoRega');
-  
+
     if (inicio && termino) {
       document.getElementById('inicio').textContent = `Início: ${inicio}`;
       document.getElementById('termino').textContent = `Término: ${termino}`;
@@ -150,9 +159,9 @@
   };
   dadosRandomizados.forEach((valor, i) => {
     if (valor > 60) {
-      document.getElementById('alertindice').innerHTML += 
+      document.getElementById('alertindice').innerHTML +=
         `Horário ${labels[i]}: ${valor}% excede o limite de umidade que o fruto necessita - risco de encharcamento<br>`;
     }
   });
-  
+
 </script>
