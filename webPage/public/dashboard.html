@@ -10,12 +10,13 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Dashboard</title>
 </head>
-
 <body>
   <header>
     <img src="../assets/logo-extensa1.png" alt="Logo da SmartBerry" class="logo">
-  </header>
-  <h1>Dashboard</h1>
+    <nav class="nav-voltar">
+      <button><a href="./index.html">Voltar</a></button>
+    </nav>
+  </header>   
   <section class="main-container" id="first-section">
     <div class="container">
       <div class="figure">
@@ -30,8 +31,7 @@
     </div>
     <hr>
     <div class="container">
-      <div class="figure" id="alert-img">
-        <img src="../assets/alert.png" alt="alert">
+      <div class="figure" id="alertindice">
       </div>
     </div>
   </section>
@@ -48,7 +48,6 @@
       <hr>
       <div class="container">
         <div class="figure">
-          <img src="" alt="indice-importante">
           <div id="horariosRega">
             <p><strong>Horário de Rega:</strong></p>
             <p id="inicio"></p>
@@ -58,9 +57,6 @@
       </div>
     </div>
   </section>
-  <div class="button-container">
-    <button><a href="./index.html">Voltar</a></button>
-  </div>
 </body>
 </html>
 <script>
@@ -139,7 +135,7 @@
 
   flora.addEventListener('change', atualizarLinhas);
   frutifica.addEventListener('change', atualizarLinhas);
-  
+
   window.onload = () => {
     const inicio = localStorage.getItem('inicioRega');
     const termino = localStorage.getItem('terminoRega');
@@ -152,5 +148,11 @@
       document.getElementById('termino').textContent = "Término: não definido";
     }
   };
+  dadosRandomizados.forEach((valor, i) => {
+    if (valor > 60) {
+      document.getElementById('alertindice').innerHTML += 
+        `Horário ${labels[i]}: ${valor}% excede o limite de umidade que o fruto necessita - risco de encharcamento<br>`;
+    }
+  });
   
 </script>

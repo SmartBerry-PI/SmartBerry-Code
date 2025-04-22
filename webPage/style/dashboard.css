@@ -1,72 +1,32 @@
-.main-container {
-    display: flex;
-    justify-content: space-evenly;
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
 }
-
-.container {
+  
+header{
+    padding: 10px 20px;
+    background-color: #EBC7CA;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#alert-img {
-    width: fit-content;
-}
-
-img{
-    height: 100px;
-}
-
-.chart {
-    position: relative;
-    height: 40vh; 
-    width: 40vw;
-}
-
+  
 .logo{
     width: 120px;
     height: auto;
     align-self: center;
 }
 
-header{
-    padding: 1px;
-    background-color: #EBC7CA;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-h1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 3em;
-    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.58);
-}
-
-section{
-    height: 50vh;
-}
-
-.button-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 30px 0;
+header nav{
+    background: #EBC7CA;
 }
   
-.button-container button{
+.nav-voltar button{
     padding: 10px 20px;
     font-size: 1em;
     background-color: #2F80ED;
@@ -77,13 +37,51 @@ section{
     transition: background-color 0.3s ease;
 }
   
-.button-container button a{
+.nav-voltar button a{
     text-decoration: none;
     color: black;
 }
   
-.button-container button:hover{
+.nav-voltar button:hover{
     background-color: #3066ad;
+}
+  
+.main-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+  
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+#alert-img {
+    width: fit-content;
+}
+  
+img{
+    height: 100px;
+}
+  
+.chart{
+    position: relative;
+    height: 40vh; 
+    width: 40vw;
+}
+  
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 3em;
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.58);
+}
+  
+section{
+    height: 50vh;
 }
   
 #horariosRega{
@@ -92,4 +90,4 @@ section{
     background-color: #f3f3f3;
     border-radius: 8px;
     margin-top: 10px;
-}  
+}
