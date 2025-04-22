@@ -1,5 +1,9 @@
-.user{
+/* .user{
     width: 50%;
     background: #EB5757;
     height: 100%;
+} */
+
+.btn-dashboard a{
+    color: black;
 }
