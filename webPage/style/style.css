@@ -1,4 +1,4 @@
-:root{
+:root {
     --vementa: #6FCF97;
     --vmorango: #EB5757;
     --apetroleo: #2F80ED;
@@ -6,6 +6,7 @@
     --cneutro: #BDBDBD;
     --bgcolor: #f7f3f0;
 }
+
 /* overral config */
 * {
     margin: 0;
@@ -25,12 +26,12 @@ body {
     height: 100%;
 }
 
-section{
+section {
     height: 100vh;
 }
 
 /* header */
-header nav {
+.topNav  {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -41,7 +42,10 @@ header nav {
     left: 0;
     z-index: 999;
     padding: 0 2em;
+    position: fixed;
+    transition: 0.4s;
 }
+
 
 nav .mid {
     display: flex;
@@ -101,6 +105,14 @@ a:hover {
     align-self: center;
 }
 
+
+.topNav.scroll {
+    background-color: rgba(0, 0, 0, 0);
+    color: black;
+    transition: 0.4s;
+    padding: 0 3em;
+}
+
 /* header */
 
 /* footer */
@@ -115,4 +127,5 @@ footer {
     border-top: 1px solid var(--cneutro);
     margin-top: 2px;
 }
+
 /* footer */
