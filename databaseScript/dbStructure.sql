@@ -36,11 +36,12 @@ numero VARCHAR(5) NOT NULL,
 complemento VARCHAR(45) UNIQUE);
 
 CREATE TABLE sensor (
-idSensor INT PRIMARY KEY AUTO_INCREMENT,
+idSensor INT AUTO_INCREMENT,
 fkEmpresa INT,
 fkEndereco INT,
 CONSTRAINT fkSensorEmpresa FOREIGN KEY sensor(fkEmpresa) REFERENCES endereco(fkEmpresa),
 CONSTRAINT fkSensorEndereco FOREIGN KEY sensor(fkEndereco) REFERENCES endereco(idEndereco),
+CONSTRAINT pkCompostaSensor PRIMARY KEY (idSensor, fkEmpresa, fkEndereco),
 nome VARCHAR(45) NOT NULL,
 modelo VARCHAR(45) NOT NULL, 
 situacao TINYINT NOT NULL,
