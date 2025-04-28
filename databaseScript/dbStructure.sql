@@ -54,5 +54,5 @@ idRegistro INT AUTO_INCREMENT,
 fkSensor INT DEFAULT 1,
 CONSTRAINT pkCompostaRegistro PRIMARY KEY (idRegistro, fkSensor),
 CONSTRAINT fkRegistroSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
-dado FLOAT NOT NULL,
+umidadeSolo FLOAT NOT NULL,
 dtColeta DATETIME DEFAULT CURRENT_TIMESTAMP);
