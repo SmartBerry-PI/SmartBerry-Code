@@ -10,7 +10,7 @@ TelefoneCelular VARCHAR(45) NOT NULL,
 cpf CHAR (11) NOT NULL,
 email VARCHAR (45) NOT NULL,
 senha VARCHAR(20) UNIQUE,
-CONSTRAINT fkEmpresa FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa));
+CONSTRAINT fkEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa));
 
 CREATE TABLE empresa (
 idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
