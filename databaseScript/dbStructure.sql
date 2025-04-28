@@ -37,8 +37,10 @@ complemento VARCHAR(45) UNIQUE);
 
 CREATE TABLE sensor (
 idSensor INT PRIMARY KEY AUTO_INCREMENT,
-fkCliente INT,
-CONSTRAINT fkSensorCliente FOREIGN KEY (fkCliente) REFERENCES cliente(idCliente),
+fkEmpresa INT,
+fkEndereco INT,
+CONSTRAINT fkSensorEmpresa FOREIGN KEY sensor(fkEmpresa) REFERENCES endereco(fkEmpresa),
+CONSTRAINT fkSensorEndereco FOREIGN KEY sensor(fkEndereco) REFERENCES endereco(idEndereco),
 nome VARCHAR(45) NOT NULL,
 modelo VARCHAR(45) NOT NULL, 
 situacao TINYINT NOT NULL,
