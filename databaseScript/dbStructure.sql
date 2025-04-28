@@ -10,6 +10,7 @@ TelefoneCelular VARCHAR(45) NOT NULL,
 cpf CHAR (11) NOT NULL,
 email VARCHAR (45) NOT NULL,
 senha VARCHAR(20) UNIQUE,
+fkEmpresa INT,
 CONSTRAINT fkEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa));
 
 CREATE TABLE empresa (
@@ -23,8 +24,8 @@ emailpContato VARCHAR (45));
 
 CREATE TABLE endereco (
 idEndereco INT,
-idCliente INT,
-CONSTRAINT fkEnderecoCliente FOREIGN KEY (idCliente) REFERENCES cliente(idCliente),
+fkEmpresa INT,
+CONSTRAINT fkEnderecoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
 CONSTRAINT pkCompostaEndereco PRIMARY KEY (idEndereco, idCliente),
 cep VARCHAR(45) NOT NULL,
 uf CHAR (2) NOT NULL,
