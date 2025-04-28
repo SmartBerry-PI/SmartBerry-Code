@@ -1,12 +1,25 @@
 CREATE DATABASE SmartBerry;
 USE SmartBerry;
 
-CREATE TABLE cliente (
-idCliente INT PRIMARY KEY AUTO_INCREMENT,
-nome_completo VARCHAR (45) NOT NULL,
-telefone VARCHAR(11) NOT NULL,
-cnpj CHAR (14) NOT NULL,
-email VARCHAR (45) NOT NULL);
+CREATE TABLE usuario (
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR (45) NOT NULL,
+sobrenome VARCHAR(45) NOT NULL,
+username VARCHAR(45) NOT NULL,
+TelefoneCelular VARCHAR(45) NOT NULL,
+cpf CHAR (11) NOT NULL,
+email VARCHAR (45) NOT NULL,
+senha VARCHAR(20) UNIQUE,
+CONSTRAINT fkEmpresa FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa));
+
+CREATE TABLE empresa (
+idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+razaoSocial VARCHAR (45) NOT NULL,
+nomeFantasia VARCHAR (45) UNIQUE,
+inscEstadual VARCHAR(45) NOT NULL,
+nomepContato VARCHAR (45) NOT NULL,
+numeropContato VARCHAR (45) NOT NULL,
+emailpContato VARCHAR (45));
 
 CREATE TABLE endereco (
 idEndereco INT,
@@ -20,16 +33,6 @@ bairro VARCHAR (45) NOT NULL,
 logradouro VARCHAR (45) NOT NULL,
 numero VARCHAR(5) NOT NULL,
 complemento VARCHAR(45));
-
-CREATE TABLE usuario (
-idUsuario INT AUTO_INCREMENT,
-fkCliente INT,
-CONSTRAINT pkCompostaUsuario PRIMARY KEY (idUsuario, fkCliente),
-CONSTRAINT fkUsuarioCliente FOREIGN KEY (fkCliente) REFERENCES cliente(idCliente),
-login VARCHAR(45) NOT NULL,
-senha VARCHAR(45) NOT NULL,
-permissao CHAR(1),
-CONSTRAINT chkPermissao CHECK (permissao IN ('A','S','U')));
 
 CREATE TABLE sensor (
 idSensor INT PRIMARY KEY AUTO_INCREMENT,
