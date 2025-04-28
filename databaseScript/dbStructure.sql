@@ -26,14 +26,14 @@ CREATE TABLE endereco (
 idEndereco INT,
 fkEmpresa INT,
 CONSTRAINT fkEnderecoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
-CONSTRAINT pkCompostaEndereco PRIMARY KEY (idEndereco, idCliente),
+CONSTRAINT pkCompostaEndereco PRIMARY KEY (idEndereco, fkEmpresa),
 cep VARCHAR(45) NOT NULL,
 uf CHAR (2) NOT NULL,
 cidade VARCHAR(45) NOT NULL,
 bairro VARCHAR (45) NOT NULL,
 logradouro VARCHAR (45) NOT NULL,
 numero VARCHAR(5) NOT NULL,
-complemento VARCHAR(45));
+complemento VARCHAR(45) UNIQUE);
 
 CREATE TABLE sensor (
 idSensor INT PRIMARY KEY AUTO_INCREMENT,
