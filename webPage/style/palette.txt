@@ -1,4 +1,148 @@
-Carmine: #A40414
-Oyster Pink: #EBC7CA
-Fuzzy Wuzzy Brown: #C55B63
-New York Pink: #D37C84
+Claro! Vamos aprender juntos, passo a passo, como funciona o gráfico "doughnut" (rosquinha) usando o que você tem no seu código. Vou explicar como se você fosse uma criança de 10 anos, então será bem simples e com exemplos práticos!
+
+🧁 O que é um gráfico "doughnut"?
+Um gráfico doughnut parece uma rosquinha colorida (como uma pizza com um buraco no meio 🍩). Ele mostra porcentagens ou partes de um todo. Por exemplo, se você quiser mostrar que um sensor de umidade está com 80% de água, o gráfico mostra 80% preenchido de cor (tipo azul) e o resto (20%) fica transparente ou de outra cor.
+
+📦 O que você precisa para fazer esse gráfico?
+Você usou o Chart.js, que é uma biblioteca que desenha gráficos no navegador.
+
+Você também usou um plugin chamado "ChartDataLabels", que serve para escrever os valores dentro do gráfico (tipo "80%").
+
+🧱 Passo a passo do gráfico doughnut
+Vamos ver como funciona usando este exemplo do seu código:
+
+1. Pegar o lugar onde o gráfico vai aparecer:
+Você tem um canvas no seu HTML com id="myChart":
+
+html
+Copiar
+Editar
+<canvas id="myChart"></canvas>
+Isso é tipo uma folha em branco, onde o gráfico será desenhado.
+
+No JavaScript, você pega essa "folha" assim:
+
+javascript
+Copiar
+Editar
+const pizza = document.getElementById('myChart');
+2. Criar os dados do gráfico:
+javascript
+Copiar
+Editar
+const dados = {
+    labels: ['Umidade'], // O que o gráfico representa
+    datasets: [{
+        data: [80, 20], // 80% é a umidade, 20% é o que falta
+        backgroundColor: ['blue', 'transparent'], // Cores
+        borderWidth: 0 // Sem borda
+    }]
+};
+Explicando como se fosse uma pizza:
+
+A pizza tem 2 fatias:
+
+Uma fatia azul que é 80% (umidade).
+
+Uma fatia invisível (transparente) que é 20% (o que falta para chegar a 100%).
+
+3. Criar o gráfico:
+javascript
+Copiar
+Editar
+const myChart = new Chart(pizza, {
+    type: 'doughnut', // Tipo rosquinha
+    data: dados, // Os dados que você preparou
+    options: {
+        aspectRatio: 2, // Largura e altura
+        circumference: 180, // Só metade da rosquinha (meia-lua)
+        rotation: -90, // Começa de baixo
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false // Tira a legenda (o quadradinho com cores)
+            },
+            datalabels: {
+                display: true, // Mostra o número dentro da rosquinha
+                color: 'black',
+                font: {
+                    size: 25,
+                    weight: 'bold'
+                },
+                formatter: (value, context) => context.dataIndex === 0 ? value + '%' : '',
+                anchor: 'start',
+                align: 'start',
+            }
+        }
+    },
+    plugins: [ChartDataLabels]
+});
+🤓 Explicação do options:
+aspectRatio: 2: Faz a rosquinha ser mais larga que alta.
+
+circumference: 180: Mostra meia rosquinha (180°).
+
+rotation: -90: Gira a rosquinha para ela começar de baixo.
+
+plugins.legend.display: false: Esconde a legenda.
+
+plugins.datalabels: Mostra os números dentro da rosquinha (ex: 80%).
+
+✅ Resumo para você conseguir fazer do zero
+Aqui vai o passo a passo completo, como se fosse uma receita:
+
+🧁 Receita para criar seu próprio gráfico rosquinha
+Inclua o Chart.js e o plugin no seu HTML:
+
+html
+Copiar
+Editar
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+Adicione um <canvas> no seu HTML:
+
+html
+Copiar
+Editar
+<canvas id="meuGrafico"></canvas>
+Crie o gráfico no JavaScript:
+
+javascript
+Copiar
+Editar
+const folha = document.getElementById('meuGrafico');
+
+const dados = {
+    labels: ['Umidade'],
+    datasets: [{
+        data: [70, 30], // Exemplo: 70% de umidade
+        backgroundColor: ['green', 'transparent'],
+        borderWidth: 0
+    }]
+};
+
+const grafico = new Chart(folha, {
+    type: 'doughnut',
+    data: dados,
+    options: {
+        aspectRatio: 2,
+        circumference: 180,
+        rotation: -90,
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            datalabels: {
+                display: true,
+                color: 'black',
+                font: { size: 25, weight: 'bold' },
+                formatter: (value, ctx) => ctx.dataIndex === 0 ? value + '%' : '',
+                anchor: 'start',
+                align: 'start',
+            }
+        }
+    },
+    plugins: [ChartDataLabels]
+});
+Se você seguir isso, você consegue criar do zero um gráfico doughnut que mostra um valor de porcentagem como se fosse uma meia pizza.

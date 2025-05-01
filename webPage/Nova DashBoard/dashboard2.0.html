@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dash.css">
+    <link rel="shortcut icon" href="assets/icon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <title>DashBoard</title>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-voltar">
+            <a href="../assets/">
+                <img src="assets/logo-b_w.png" alt="Logo da SmartBerry" class="logo">
+            </a>
+            <button><a>Voltar</a></button>
+        </nav>
+    </header>
+
+    <section class="graficos">
+        <div class="canteiros">
+            <div class="cant">
+                <br> <br> <label for="opcao">Escolha o canteiro para visualizar todos os seus sensores:</label>
+                <select id="opcao" name="opcao">
+                    <option value="nd"></option>
+                    <option value="cant1">Canteiro 1</option>
+                    <option value="cant2">Canteiro 2</option>
+                    <option value="cant3">Canteiro 3</option>
+                    <option value="cant4">Canteiro 4</option>
+                </select>
+            </div>
+
+            <div class="nav-registro">
+                <button onclick="registro()">Exibir Registros</button>
+            </div>
+        </div>
+
+        <div class="graficos-pizza" style="display: none;">
+            <div class="grafico">
+                <p>Sensor 1</p>
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="grafico">
+                <p>Sensor 2</p>
+                <canvas id="myChartS2"></canvas>
+            </div>
+            <div class="grafico">
+                <p>Sensor 3</p>
+                <canvas id="myChartS3"></canvas>
+            </div>
+        </div>
+
+        <br> <br>
+        <hr>
+        <div id="section2">
+            <div class="left-section">
+                <div class="checkboxes">
+                    Estado de flora: <input type="checkbox" name="estagio1" id="estagio1">
+                    Estado de frutificação: <input type="checkbox" name="estagio2" id="estagio2">
+                </div>
+                <div class="main-container">
+                    <canvas id="myChart1" class="chart"></canvas>
+                </div>
+            </div>
+
+
+            <div class="main-container1">
+                <canvas id="myChart2" class="chart"></canvas>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
+<script>
+    const COLORS = ['red', 'yellow', 'green'];
+
+
+
+
+    function aleumidade(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function index(umidade) {
+        if (umidade < 60) {
+            return 0;
+        } else if (umidade < 80) {
+            return 1;
+        } else {
+            return 2;
+        } {
+
+        }
+    }
+
+    const umidadev = 80;
+
+    const pizza = document.getElementById('myChart');
+
+
+    const dados = {
+        labels: ['Umidade'],
+        datasets: [{
+            data: [80, 20],
+            backgroundColor: ['blue', 'transparent'],
+            borderWidth: 0
+        }]
+    };
+
+
+
+    const myChart = new Chart(pizza, {
+        type: 'doughnut',
+        data: dados,
+        options: {
+            aspectRatio: 2,
+            circumference: 180,
+            rotation: -90,
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                datalabels: {
+                    display: true,
+                    color: 'black',
+                    font: {
+                        size: 25,
+                        weight: 'bold'
+                    },
+                    formatter: (value, context) => context.dataIndex === 0 ? value + '%' : '',
+                    anchor: 'start',
+                    align: 'start',
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+
+    const pizza1 = document.getElementById('myChartS2');
+
+    const myChartS2 = new Chart(pizza1, {
+        type: 'doughnut',
+        data: {
+            labels: ['Umidade'],
+            datasets: [{
+                data: [40, 60],
+                backgroundColor: ['red', 'transparent'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            aspectRatio: 2,
+            circumference: 180,
+            rotation: -90,
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                datalabels: {
+                    display: true,
+                    color: 'black',
+                    font: {
+                        size: 25,
+                        weight: 'bold'
+                    },
+                    formatter: (value, context) => context.dataIndex === 0 ? value + '%' : '',
+                    anchor: 'start',
+                    align: 'start',
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+
+    const pizza2 = document.getElementById('myChartS3');
+
+    const myChartS3 = new Chart(pizza2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Umidade'],
+            datasets: [{
+                data: [65, 35],
+                backgroundColor: ['yellow', 'transparent'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            aspectRatio: 2,
+            circumference: 180,
+            rotation: -90,
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                datalabels: {
+                    display: true,
+                    color: 'black',
+                    font: {
+                        size: 25,
+                        weight: 'bold'
+                    },
+                    formatter: (value, context) => context.dataIndex === 0 ? value + '%' : '',
+                    anchor: 'start',
+                    align: 'start',
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+
+    document.getElementById('opcao').addEventListener('change', function () {
+        const canteiro = this.value;
+        const graficos = document.querySelector('.graficos-pizza');
+
+        if (canteiro !== 'nd') {
+            graficos.style.display = 'flex';
+        } else {
+            graficos.style.display = 'none';
+        }
+    });
+
+    let flora = document.getElementById('estagio1');
+    let frutifica = document.getElementById('estagio2');
+    const rtx = document.getElementById('myChart1');
+
+    const dadosBase = [80, 65, 50, 95, 92, 90, 88, 86, 82, 76];
+    const dadosRandomizados = Array.from({ length: 10 }, () => {
+        const indice = Math.floor(Math.random() * dadosBase.length);
+        return dadosBase[indice];
+    });
+
+    const labels = ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'];
+
+    const umidadeDataset = {
+        label: 'Umidade',
+        data: dadosRandomizados,
+        borderWidth: 1,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        fill: true,
+        tension: 0.4
+    };
+
+    const config = {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [umidadeDataset]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    const myChart1 = new Chart(rtx, config);
+
+    function atualizarLinhas() {
+        const datasets = [umidadeDataset];
+
+        if (frutifica.checked) {
+            datasets.push({
+                label: 'Limite Flora (90%)',
+                data: Array(labels.length).fill(90),
+                borderColor: 'red',
+                borderDash: [5, 5],
+                borderWidth: 1,
+                pointRadius: 0,
+                fill: false
+            });
+        }
+
+        if (flora.checked) {
+            datasets.push({
+                label: 'Limite Frutificação (60%)',
+                data: Array(labels.length).fill(60),
+                borderColor: 'orange',
+                borderDash: [5, 5],
+                borderWidth: 1,
+                pointRadius: 0,
+                fill: false
+            });
+        }
+
+        myChart1.data.datasets = datasets;
+        myChart1.update();
+    }
+
+    const barra = document.getElementById('myChart2');
+    const myChart2 = new Chart(barra, {
+        type: 'bar',
+        data: {
+            labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'],
+            datasets: [{
+                label: 'Canteiro 1',
+                data: [100, 80, 20, 50],
+                backgroundColor: ['blue', 'red', 'blue', 'red']
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                }
+            }
+        }
+    });
+</script>
