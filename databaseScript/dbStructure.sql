@@ -68,7 +68,9 @@ dtInstalacao DATETIME);
 CREATE TABLE registro (
 idRegistro INT AUTO_INCREMENT,
 fkSensor INT DEFAULT 1,
-CONSTRAINT pkCompostaRegistro PRIMARY KEY (idRegistro, fkSensor),
+fkEmpresa INT,
+CONSTRAINT pkCompostaRegistro PRIMARY KEY (idRegistro, fkSensor, fkEmpresa),
 CONSTRAINT fkRegistroSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
+CONSTRAINT fkRegistroEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
 umidadeSolo FLOAT NOT NULL,
 dtColeta DATETIME DEFAULT CURRENT_TIMESTAMP);
