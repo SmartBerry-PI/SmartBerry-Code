@@ -1,4 +1,8 @@
-Carmine: #A40414
- Oyster Pink: #EBC7CA
- Fuzzy Wuzzy Brown: #C55B63
- New York Pink: #D37C84
+    Carmine: #A40414
+    Oyster Pink: #EBC7CA
+    Fuzzy Wuzzy Brown: #C55B63
+    New York Pink: #D37C84
+    Verde Menta: #6FCF97;
+    Vermelho morango: #EB5757;
+    Azul petroleo: #2F80ED;
+    Background : #f7f3f0;

@@ -35,7 +35,7 @@ section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: var(--vmorango);
+    background-color: transparent;
     height: 10vh;
     width: 100%;
     top: 0;
@@ -56,14 +56,6 @@ nav .mid {
     width: 40%;
 }
 
-.links-container {
-    height: 10vh;
-    width: 9%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
 
 .nav-list {
     list-style: none;
@@ -105,12 +97,27 @@ a:hover {
     align-self: center;
 }
 
+#logoTexto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--vmorango);
+    font-size: 2.5em;
+}
+
 
 .topNav.scroll {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: var(--vmorango);
     color: black;
-    transition: 0.4s;
+    transition: 0.8s;
     padding: 0 3em;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.topNav.scroll #logoTexto{
+    color: var(--bgcolor);
 }
 
 /* header */

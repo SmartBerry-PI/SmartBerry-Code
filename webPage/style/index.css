@@ -9,7 +9,7 @@
 
 /* first section*/
 #indexTop {
-    background-image: url('../assets/bckg-planting.png');
+    background-image: url('../assets/back.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -45,40 +45,50 @@
 /* first section*/
 
 /* sobre section */
-#sobre {
-    height: 100vh;
-    display: flex;
-}
 
-#sobre .container {
-    width: 50%;
+.container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    padding: 2em;
+    gap: 2em;
 }
 
-#sobre hr{
-    border: 1px solid var(--cinza);
-}
 .cardTitle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-align: center;
     font-size: 3em;
-    height: 20%;
     width: 100%;
+}
+
+.containerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 0.5em;
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 80%;
+    margin-left: 8em;
+    width: 50%;
+}
+
+.card p {
+    text-align: center;
+    font-size: large;
     width: 100%;
 }
+
+.imgcard {
+    width: 48%;
+}
+
+.cardImg {
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+}
+
 
 .card p {
     display: flex;
