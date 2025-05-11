@@ -11,67 +11,87 @@
 </head>
 
 <body>
-    <header>
+    
+  <header>
         <div class="header-content">
             <nav class="topNav">
                 <div class="left">
-                    <a href="index.html"><img src="../assets/logo-b_w.png" alt="Logo da SmartBerry"
-                            class="logo"></a>
+                <!-- <a href="index.html"><img src="../assets/logo-extensa4.png" alt="Logo da SmartBerry" class="logo"></a> -->
+                <h2 id="logoTexto">SmartBerry</h2>
                 </div>
-                <div class="mid">
-                    <ul class="nav-list">
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="index.html#sobre">Sobre</a></li>
-                        <li><a href="./simulador.html">Simulador</a></li>
-                        <li><a href="login.html">Login</a></li>
-                    </ul>
-                    <button class="acont"><a href="cadastro.html">Criar conta</a></button>
-                </div>
-                <div class="links-container">
-                    <div>
-                        <a href="#"><img width="30" height="30"
-                                src="https://img.icons8.com/ios/50/FFFFFF/twitterx--v2.png" alt="twitterX" /></a>
-                    </div>
-                    <div>
-                        <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/facebook.png"
-                                alt="facebook" /></a>
-                    </div>
-                    <div>
-                        <a href="#"><img width="30" height="30"
-                                src="https://img.icons8.com/ios/50/FFFFFF/instagram-new--v1.png" alt="instagram" /></a>
+                    <div class="mid">
+                        <ul class="nav-list">
+                            <li><a href="index.html">Início</a></li>
+                            <li><a href="index.html#sobre">Sobre</a></li>
+                            <li><a href="./simulador.html">Simulador</a></li>
+                            <li><a href="login.html">Login</a></li>
+                        </ul>
+                        <button class="acont"><a href="cadastro.html">Criar conta</a></button>
                     </div>
                 </div>
             </nav>
         </div>
-    </header>
+  </header>
 
     <section>
-        <div class="container-main">
+        <div class="container">
+            <div>
             <h2 class="container-title">Cadastro de Usuário</h2>
+            </div>
+            <div class="subcontainer">
+                <div class="inputBox">
+                    <span>Nome:</span>
+                    <i></i>
+                    <input type="text" id="ipt_nome" name="ipt_nome">
+                </div>
+                <div class="inputBox">
+                    <span>Sobrenome:</span>
+                    <i></i>
+                    <input type="text" id="ipt_sobrenome" name="ipt_sobrenome">
+                </div>
+                <div class="inputBox">
+                    <span>Email:</span>
+                    <i></i>
+                    <input type="text" id="ipt_email" name="ipt_email">
+                </div>
+                <div class="inputBox">
+                    <span>Senha:</span>
+                    <i></i>
+                    <input type="text" id="ipt_senha" name="ipt_senha">
+                </div>
+                <div class="inputBox">
+                    <span>Confirmar senha:</span>
+                    <i></i>
+                    <input type="text" id="ipt_confirmar" name="ipt_confirmar">
+                </div>
+                <div class="inputBox">
+                    <span>CPF:</span>
+                    <i></i>
+                    <input type="text" id="ipt_cpf" name="ipt_cpf">
+                </div>                    
+                <div class="inputBox">
+                    <span>Telefone:</span>
+                    <i></i>
+                    <input type="text" id="ipt_telefone" name="ipt_telefone">
+                </div>                    
+                <div class="inputBox">
+                    <span>Nome de usuário:</span>
+                    <i></i>
+                    <input type="text" id="ipt_username" name="ipt_username">
+                </div>           
+                <div id="verify"></div>
+            </div>
+                <button onclick="cadastro()" class="login-button">Cadastrar</button>
+                <div class="link">
+                    <p>Já possui cadastro e deseja fazer <a href="login.html">login</a>?</p>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="container-main">
             <div id="cadastro">
                 <div class="container">
                     <h3>Dados Pessoais</h3>
                     <div class="subcontainer">
-                        <div class="inputBox">
-                            <span>Nome Completo:</span>
-                            <i></i>
-                            <input type="text" id="nome_completo" name="nome_completo">
-                        </div>
-                        <div class="inputBox">
-                            <span>Telefone:</span>
-                            <i></i>
-                            <input type="number" id="telefone" name="telefone">
-                        </div>
-                        <div class="inputBox">
-                            <span>CNPJ:</span>
-                            <i></i>
-                            <input type="number" id="cnpj" name="cnpj" placeholder="Ex: 00.000 000-0000-00">
-                        </div>
-                        <div class="inputBox">
-                            <span>E-mail:</span>
-                            <i></i>
-                            <input type="email" id="email" name="email" placeholder="Ex: example@example.com">
-                        </div>
                     </div>
                 </div>
                 <div class="container">
@@ -144,13 +164,8 @@
                 </div>
             </div>
     
-            <div id="verify"></div>
             <br><br>
-            <button onclick="cadastro()" class="login-button">Cadastrar</button>
-            <div class="link">
-                <p>Já possui cadastro e deseja fazer <a href="login.html">login</a>?</p>
-            </div>
-        </div>
+        </div> -->
     </section>
 
     <footer>

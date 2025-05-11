@@ -8,11 +8,13 @@
   <link rel="shortcut icon" href="../assets/icon.png" type="image/x-icon">
 </head>
 <body>
+
   <header>
     <div class="header-content">
       <nav class="topNav">
         <div class="left">
-          <a href="index.html"><img src="../assets/logo-b_w.png" alt="Logo da SmartBerry" class="logo"></a>
+          <!-- <a href="index.html"><img src="../assets/logo-extensa4.png" alt="Logo da SmartBerry" class="logo"></a> -->
+          <h2 id="logoTexto">SmartBerry</h2>
         </div>
         <div class="mid">
           <ul class="nav-list">
@@ -23,21 +25,8 @@
           </ul>
           <button class="acont"><a href="cadastro.html">Criar conta</a></button>
         </div>
-        <div class="links-container">
-          <div>
-            <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/twitterx--v2.png"
-                alt="twitterX" /></a>
-          </div>
-          <div>
-            <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/facebook.png"
-                alt="facebook" /></a>
-          </div>
-          <div>
-            <a href="#"><img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/instagram-new--v1.png"
-                alt="instagram" /></a>
-          </div>
-        </div>
-      </nav>
+    </div>
+    </nav>
     </div>
   </header>
 
@@ -46,27 +35,28 @@
       <h2 class="container-title">Login</h2>
       <div class="container-input">
         <div class="inputBox">
-          <span>Usuário</span>
-          <i></i>
+          <label for="email">Usuário:</label>
           <input type="email" id="email" name="email" required>
         </div>
         <div class="inputBox">
-          <span>Senha</span>
-          <i></i>
+          <label for="senha">Senha:</label>
           <input type="password" id="senha" name="senha" required>
         </div>
+        <p><a href="#">Esqueci minha senha</a></p>
       </div>
       <button onclick="login()" class="login-button">Entrar</button>
       <div class="link">
-        <a href="index.html">Voltar</a>
+        Ainda não possui uma conta? <a href="cadastro.html">Cadastrar</a>
       </div>
     </div>
   </section>
+
   <footer>
     <div class="footer">
       <h5>SmartBerry @ 2025. All rights reserved.</h5>
     </div>
   </footer>
+
 </body>
 </html>
 <script src="../app/verify.js"></script>
