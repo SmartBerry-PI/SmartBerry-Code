@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/dash.css">
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/dash.css">
     <link rel="shortcut icon" href="../assets/icon.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
     <title>DashBoard</title>
 </head>
 
@@ -23,24 +26,8 @@
     </header>
 
     <section class="graficos">
-        <div class="canteiros">
-            <div class="cant">
-                <br> <br> <label for="opcao">Escolha o canteiro para visualizar todos os seus sensores:</label>
-                <select id="opcao" name="opcao">
-                    <option value="nd"></option>
-                    <option value="cant1">Canteiro 1</option>
-                    <option value="cant2">Canteiro 2</option>
-                    <option value="cant3">Canteiro 3</option>
-                    <option value="cant4">Canteiro 4</option>
-                </select>
-            </div>
 
-            <div class="nav-registro">
-                <button onclick="registro()">Exibir Registros</button>
-            </div>
-        </div>
-
-        <div class="graficos-pizza" style="display: none;">
+        <div class="graficos-pizza">
             <div class="grafico">
                 <p>PERCENTUAL DE ESTABILIDADE HÍDRICA</p>
                 <canvas id="myChart"></canvas>
@@ -55,18 +42,25 @@
             </div>
         </div>
 
-        <br> <br>
+
+
+
         <hr>
-        <div id="section2">
+
+        <div id="section2" class="graficos-hr">
             <div class="left-section">
+                <div class="main-container">
+                    <canvas id="myChart1" class="chart"></canvas>
+                </div>
                 <div class="checkboxes">
                     Estado de flora: <input type="checkbox" name="estagio1" id="estagio1">
                     Estado de frutificação: <input type="checkbox" name="estagio2" id="estagio2">
                 </div>
-                <div class="main-container">
-                    <canvas id="myChart1" class="chart"></canvas>
-                </div>
             </div>
+
+
+
+
 
 
             <div class="main-container1">
@@ -83,9 +77,7 @@
 
 
 
-    function aleumidade(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+
 
     function index(umidade) {
         if (umidade < 60) {
@@ -220,17 +212,6 @@
         plugins: [ChartDataLabels]
     });
 
-    document.getElementById('opcao').addEventListener('change', function () {
-        const canteiro = this.value;
-        const graficos = document.querySelector('.graficos-pizza');
-
-        if (canteiro !== 'nd') {
-            graficos.style.display = 'flex';
-        } else {
-            graficos.style.display = 'none';
-        }
-    });
-
     let flora = document.getElementById('estagio1');
     let frutifica = document.getElementById('estagio2');
     const rtx = document.getElementById('myChart1');
@@ -266,6 +247,19 @@
                     min: 0,
                     max: 100,
                     beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Histórico de umidade x hora (Canteiro 1 - 10/06/2025)',
+                    font: {
+                        size: 15
+                    },
+                    padding: {
+                        top: 20,
+                        bottom: 30
+                    }
                 }
             }
         }
@@ -304,24 +298,63 @@
         myChart1.update();
     }
 
+    flora.addEventListener('change', atualizarLinhas);
+    frutifica.addEventListener('change', atualizarLinhas);
+
     const barra = document.getElementById('myChart2');
     const myChart2 = new Chart(barra, {
         type: 'bar',
         data: {
-            labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'],
+            labels: ['Sensor 1', 'Sensor 2', 'Sensor 3'],
             datasets: [{
-                label: 'Canteiro 1',
-                data: [100, 80, 20, 50],
-                backgroundColor: ['blue', 'red', 'blue', 'red']
+                label: 'Umidade',
+                data: [62, 64, 65,],
+                backgroundColor: ['#44b3e1', '#44b3e1', '#44b3e1']
             }]
         },
         options: {
             maintainAspectRatio: false,
+            responsive: true,
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function (value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            },
             plugins: {
                 legend: {
                     position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    text: 'Última Leitura - Canteiro 1 (10/06/2025 11:40:00 PM)',
+                    font: {
+                        size: 15
+                    },
+                    padding: {
+                        top: 20,
+                        bottom: 30
+                    }
+                },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'end',
+                    formatter: (value) => `${value}%`,
+                    color: '#44b3e1',
+                    font: {
+                        weight: 'bold',
+                        size: 20
+                    }
+
                 }
             }
-        }
+        },
+        plugins: [ChartDataLabels]
     });
 </script>

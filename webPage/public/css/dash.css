@@ -12,88 +12,95 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    height: 100vh;
+    height: auto;
 }
 
 header nav {
-    border: 1px solid black;
+    border: 0.1vh solid black;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: var(--varmor);
     height: 10vh;
-    width: 100%;
+    width: 100vw;
     top: 0;
     left: 0;
     z-index: 999;
-    padding: 0 2em;
+    padding: 0 4vw;
 }
 
 
 .nav-voltar button {
     height: 5vh;
-    width: 10vh;
-    font-size: 1em;
+    width: 10vw;
+    font-size: 1.2rem;
     background-color: #2F80ED;
     border: none;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 1vh;
+    box-shadow: 0.5vw 0.5vh 1vw rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-right: 70px;
-}
-
-.nav-registro {
-    border: none;
-    display: flex;
-    justify-content: flex-start;
-    margin-left: 1350px;
-
-
-}
-
-.nav-registro button {
-    height: 5vh;
-    width: 10vh;
-    font-size: 1em;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    background-color: greenyellow;
-
-
+    margin-right: 4vw;
 }
 
 .graficos-pizza {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 2rem;
-    margin-top: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4vw;
+    width: 100%;
+    padding: 4vh 0 2vh 0;
 }
 
 .grafico {
-    width: 175px;
-    height: 175px;
-    margin-top: -60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 30vh;
+    width: 15vw;
+
+
+
 }
+
+.grafico p {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 1vh;
+    background-color: white;
+    padding: 1vh 2vw;
+    border-radius: 1vh;
+    box-shadow: 0.3vw 0.3vw 1vw rgba(0, 0, 0, 0.2);
+    width: max-content;
+    max-width: 90%;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7vh;
+}
+
+
 
 .grafico canvas {
     width: 100%;
-    height: 100%;
+    height: 20vh;
 }
 
 #myChart1 {
-    width: 250px;
-    height: 250px;
+    width: 30vw;
+    height: 30vh;
 
 
 }
 
 .main-container {
-    width: 70%;
+    width: 40vw;
+    height: 35vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,36 +115,29 @@ header nav {
 }
 
 .main-container1 {
-    width: 50%;
+    width: 35vw;
+    height: 39vh;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-left: -70px;
-    margin-top: 55px;
+    justify-content: center;
+    align-items: center;
 }
 
 .chart {
-    position: relative;
-    height: 300px;
+    height: 100%;
     width: 100%;
 }
 
-img {
-    height: 70px;
-}
 
-.canteiros {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 20px;
+
+img {
+    height: 7vh;
 }
 
 #section2 {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 1vw;
     width: 100%;
 }
 
@@ -145,13 +145,16 @@ img {
     width: 50%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+
 }
 
 .checkboxes {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    gap: 2vw;
     align-items: center;
+    margin-top: 1vh;
+    font-weight: bold;
 }
