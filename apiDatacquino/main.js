@@ -51,17 +51,44 @@ const serial = async (
         console.log(data);
         const valores = data.split(';');
         const sensorCapacitivo = parseInt(valores[0]);
+        let valorSensor1;
+        let valorSensor2;
+        let valorSensor3;
+
+        valorSensor1 = sensorCapacitivo;
+
+        // aleatoriza a atribuição de valor nos sensores mockados
+        let modifier1 = Math.random();
+        modifier1 > 2/3 ?
+            valorSensor2 = (sensorCapacitivo + (parseInt(Math.random().toFixed()) + 1)) :
+        modifier1 > 1/3?
+            valorSensor2 = (sensorCapacitivo - (parseInt(Math.random().toFixed()) + 1)) :
+            valorSensor2 = sensorCapacitivo
+        ;
+
+        let modifier2 = Math.random();
+        modifier2 > 2/3 ?
+            valorSensor3 = (sensorCapacitivo + (parseInt(Math.random().toFixed()) + 1)) :
+        modifier2 > 1/3?
+            valorSensor3 = (sensorCapacitivo - (parseInt(Math.random().toFixed()) + 1)) :
+            valorSensor3 = sensorCapacitivo
+        ;
+
 
         // armazena os valores dos sensores nos arrays correspondentes
-        valoresSensorCapacitivo.push(sensorCapacitivo);
+        valoresSensorCapacitivo.push({
+            sensor1: valorSensor1,
+            sensor2: valorSensor2,
+            sensor3: valorSensor3
+        });
 
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
 
-            // este insert irá inserir os dados na tabela "medida"
+            // este insert irá inserir os dados na tabela
             await poolBancoDados.execute(
-                'INSERT INTO registro (fkSensor, fkEmpresa, umidadeSolo) VALUES (1000, 1000, ?)',
-                [sensorCapacitivo]
+                'INSERT INTO registro (fkSensor, fkEmpresa, umidadeSolo) VALUES (1000, 1000, ?), (1001, 1000, ?), (1002,1000, ?);',
+                [valorSensor1, valorSensor2, valorSensor3]
             );
             console.log("Valor inserido no banco com sucesso! ");
             // console.log(sensorCapacitivo);
