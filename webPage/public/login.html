@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="../css/login.css">
   <link rel="shortcut icon" href="../assets/icon.png" type="image/x-icon">
 </head>
+
 <body>
 
   <header>
@@ -35,12 +37,12 @@
       <h2 class="container-title">Login</h2>
       <div class="container-input">
         <div class="inputBox">
-          <label for="email">Usuário:</label>
-          <input type="email" id="email" name="email" required>
+          <label for="ipt_usuario">Usuário/email:</label>
+          <input type="usuario" id="ipt_usuario" name="usuario" required>
         </div>
         <div class="inputBox">
-          <label for="senha">Senha:</label>
-          <input type="password" id="senha" name="senha" required>
+          <label for="ipt_senha">Senha:</label>
+          <input type="password" id="ipt_senha" name="senha" required>
         </div>
         <p><a href="#">Esqueci minha senha</a></p>
       </div>
@@ -58,5 +60,84 @@
   </footer>
 
 </body>
+
 </html>
 <script src="../app/verify.js"></script>
+<script>
+  function login() {
+    // aguardar();
+
+    var usuarioVar = ipt_usuario.value;
+    var senhaVar = ipt_senha.value;
+
+    // if (usuarioVar == "" || senhaVar == "") {
+    //   cardErro.style.display = "block"
+    //   mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+    //   // finalizarAguardar();
+    //   return false;
+    // }
+    // else {
+    //   setInterval(sumirMensagem, 5000)
+    // }
+
+    console.log("FORM LOGIN: ", usuarioVar);
+    console.log("FORM SENHA: ", senhaVar);
+
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        usuarioServer: usuarioVar,
+        senhaServer: senhaVar
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+          sessionStorage.ID_USUARIO = json.id;
+          sessionStorage.NOME_USUARIO = json.nome;
+          sessionStorage.SOBRENOME_USUARIO = json.sobrenome;
+          sessionStorage.USERNAME_USUARIO = json.usarname;
+          sessionStorage.SENHA_USUARIO = json.senha;
+          sessionStorage.TELEFONECELULAR_USUARIO = json.telefonecelular;
+          sessionStorage.CPF_USUARIO = json.cpf;
+          sessionStorage.EMAIL_USUARIO = json.email;
+
+          alert("Login realizado com sucesso!")
+
+          setTimeout(function () {
+            window.location = "./perfil.html";
+          }, 1000); // apenas para exibir o loading
+
+        });
+
+      } else {
+
+        console.log("Houve um erro ao tentar realizar o login!");
+
+        resposta.text().then(texto => {
+          console.error(texto);
+          // finalizarAguardar(texto);
+        });
+      }
+
+    }).catch(function (erro) {
+      console.log(erro);
+    })
+
+    return false;
+  }
+
+  // function sumirMensagem() {
+  //   cardErro.style.display = "none"
+  // }
+
+</script>
