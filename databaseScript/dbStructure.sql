@@ -60,30 +60,33 @@ fkEmpresa INT,
 dtCriacao DATE NOT NULL,
 descricao VARCHAR (80),
 PRIMARY KEY (idCanteiro,fkEmpresa),
-FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa));
+
+CONSTRAINT fkCanteiroEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa));
 
 CREATE TABLE sensor (
     idSensor INT AUTO_INCREMENT,
     fkEmpresa INT,
+    fkCanteiro INT,
     canteiro VARCHAR(45) NOT NULL,
     statusAtivacao TINYINT NOT NULL,
     dtInstalacao DATETIME NOT NULL,
     
-
+	CONSTRAINT fkSensorCanteiro FOREIGN KEY sensor(fkCanteiro) REFERENCES canteiro(idCanteiro),
     CONSTRAINT fkSensorEmpresa FOREIGN KEY sensor(fkEmpresa) REFERENCES empresa(idEmpresa),
     CONSTRAINT pkCompostaSensor PRIMARY KEY (idSensor, fkEmpresa),
     CONSTRAINT ckStatus CHECK (statusAtivacao in (0,1))
 );
 
-
 CREATE TABLE registro (
     idRegistro INT AUTO_INCREMENT,
     fkSensor INT,
     fkEmpresa INT,
+    fkCanteiro INT,
     umidadeSolo FLOAT NOT NULL,
     dtColeta DATETIME DEFAULT CURRENT_TIMESTAMP,
     
     CONSTRAINT pkCompostaRegistro PRIMARY KEY (idRegistro, fkSensor, fkEmpresa),
+    CONSTRAINT fkRegistroCanteiro FOREIGN KEY (fkCanteiro) REFERENCES sensor(fkCanteiro),
     CONSTRAINT fkRegistroSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
     CONSTRAINT fkRegistroEmpresa FOREIGN KEY (fkEmpresa) REFERENCES sensor(fkEmpresa)
 ) AUTO_INCREMENT = 100;
@@ -95,10 +98,9 @@ fkSensor INT,
 fkCanteiro INT, 
 fkEmpresa INT,
 dtAlerta DATETIME NOT NULL,
-PRIMARY KEY (idAlerta, fkRegistro, fkSensor, fkCanteiro, fkEmpresa),
-FOREIGN KEY (fkRegistro) REFERENCES registro(idRegistro),
-FOREIGN KEY (fkSensor) REFERENCES registro(fkSensor),
-FOREIGN KEY (fkCanteiro) REFERENCES registro(fkCanteiro),
-FOREIGN KEY (fkEmpresa) REFERENCES registro(fkEmpresa));
 
- 
+CONSTRAINT pkCompostaAlerta PRIMARY KEY (idAlerta, fkRegistro, fkSensor, fkCanteiro, fkEmpresa),
+CONSTRAINT fkAlertaRegistro FOREIGN KEY (fkRegistro) REFERENCES registro(idRegistro),
+CONSTRAINT fkAlertaSensor FOREIGN KEY (fkSensor) REFERENCES registro(fkSensor),
+CONSTRAINT fkAlertaCanteiro FOREIGN KEY (fkCanteiro) REFERENCES registro(fkCanteiro),
+CONSTRAINT fkAlertaEmpresa FOREIGN KEY (fkEmpresa) REFERENCES registro(fkEmpresa));
