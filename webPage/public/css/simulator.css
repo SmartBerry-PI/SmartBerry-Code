@@ -35,3 +35,11 @@ canvas#grafico {
 canvas#grafico:hover {
     transform: scale(1.02);
 }
+
+.topNav{
+    background: var(--vmorango);
+}
+
+.topNav #logoTexto{
+    color: var(--bgcolor);
+}

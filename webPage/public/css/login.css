@@ -61,3 +61,11 @@ body{
     color: blue;
     font-size: large;
 }
+
+.topNav{
+    background: var(--vmorango);
+}
+
+.topNav #logoTexto{
+    color: var(--bgcolor);
+}
