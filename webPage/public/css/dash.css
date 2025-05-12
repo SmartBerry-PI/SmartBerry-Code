@@ -6,7 +6,6 @@
     --NewYorkPink: #D37C84;
 }
 
-
 html,
 body {
     margin: 0;
@@ -29,8 +28,9 @@ header nav {
     z-index: 999;
     padding: 0 4vw;
 }
-
-
+.nav-voltar{
+    height: 100%;
+}
 .nav-voltar button {
     height: 5vh;
     width: 10vw;
@@ -60,9 +60,6 @@ header nav {
     justify-content: flex-start;
     height: 30vh;
     width: 15vw;
-
-
-
 }
 
 .grafico p {
@@ -84,8 +81,6 @@ header nav {
     height: 7vh;
 }
 
-
-
 .grafico canvas {
     width: 100%;
     height: 20vh;
@@ -94,8 +89,6 @@ header nav {
 #myChart1 {
     width: 30vw;
     height: 30vh;
-
-
 }
 
 .main-container {
@@ -104,8 +97,6 @@ header nav {
     display: flex;
     justify-content: center;
     align-items: center;
-
-
 }
 
 .container1 {
