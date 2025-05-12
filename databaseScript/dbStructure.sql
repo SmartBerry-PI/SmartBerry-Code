@@ -54,17 +54,27 @@ CREATE TABLE permissoes (
     CONSTRAINT chkBinEntry check(GerarUser in (0, 1) AND DeleteUser in (0, 1) AND AcessarDashboard in (0, 1) AND AlterarPermissoes in (0, 1))
 );
 
+CREATE TABLE canteiro (
+idCanteiro INT,
+fkEmpresa INT,
+dtCriacao DATE NOT NULL,
+descricao VARCHAR (80),
+PRIMARY KEY (idCanteiro,fkEmpresa),
+FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa));
+
 CREATE TABLE sensor (
     idSensor INT AUTO_INCREMENT,
     fkEmpresa INT,
     canteiro VARCHAR(45) NOT NULL,
     statusAtivacao TINYINT NOT NULL,
     dtInstalacao DATETIME NOT NULL,
+    
 
     CONSTRAINT fkSensorEmpresa FOREIGN KEY sensor(fkEmpresa) REFERENCES empresa(idEmpresa),
     CONSTRAINT pkCompostaSensor PRIMARY KEY (idSensor, fkEmpresa),
     CONSTRAINT ckStatus CHECK (statusAtivacao in (0,1))
 );
+
 
 CREATE TABLE registro (
     idRegistro INT AUTO_INCREMENT,
@@ -77,3 +87,18 @@ CREATE TABLE registro (
     CONSTRAINT fkRegistroSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
     CONSTRAINT fkRegistroEmpresa FOREIGN KEY (fkEmpresa) REFERENCES sensor(fkEmpresa)
 ) AUTO_INCREMENT = 100;
+
+CREATE TABLE alerta (
+idAlerta INT AUTO_INCREMENT,
+fkRegistro INT, 
+fkSensor INT, 
+fkCanteiro INT, 
+fkEmpresa INT,
+dtAlerta DATETIME NOT NULL,
+PRIMARY KEY (idAlerta, fkRegistro, fkSensor, fkCanteiro, fkEmpresa),
+FOREIGN KEY (fkRegistro) REFERENCES registro(idRegistro),
+FOREIGN KEY (fkSensor) REFERENCES registro(fkSensor),
+FOREIGN KEY (fkCanteiro) REFERENCES registro(fkCanteiro),
+FOREIGN KEY (fkEmpresa) REFERENCES registro(fkEmpresa));
+
+ 
