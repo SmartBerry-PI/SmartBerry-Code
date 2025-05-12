@@ -120,8 +120,6 @@ header nav {
     width: 100%;
 }
 
-
-
 img {
     height: 7vh;
 }
@@ -140,7 +138,6 @@ img {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-
 }
 
 .checkboxes {
