@@ -28,9 +28,11 @@ header nav {
     z-index: 999;
     padding: 0 4vw;
 }
+
 .nav-voltar{
     height: 100%;
 }
+
 .nav-voltar button {
     height: 5vh;
     width: 10vw;
@@ -78,7 +80,7 @@ header nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 7vh;
+    height: auto;
 }
 
 .grafico canvas {
