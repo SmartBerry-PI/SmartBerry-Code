@@ -48,7 +48,7 @@ const serial = async (
 
     // processa os dados recebidos do Arduino
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
-        console.log(data);
+        console.log('Valor captado: ', data);
         const valores = data.split(';');
         const sensorCapacitivo = parseInt(valores[0]);
         let valorSensor1;
@@ -90,7 +90,7 @@ const serial = async (
                 'INSERT INTO registro (fkSensor, fkEmpresa, umidadeSolo) VALUES (1000, 1000, ?), (1001, 1000, ?), (1002,1000, ?);',
                 [valorSensor1, valorSensor2, valorSensor3]
             );
-            console.log("Valor inserido no banco com sucesso! ");
+            console.log("Valor inserido no banco com sucesso! ", valoresSensorCapacitivo);
             // console.log(sensorCapacitivo);
         }
 
