@@ -29,31 +29,59 @@
       </nav>
     </div>
   </header>
-  <section>
-    <div class="user">
-      <img width="48" height="48" src="https://img.icons8.com/fluency-systems-regular/48/user--v1.png" alt="user--v1" />
-    </div>
-    <div class="conatinerDash">
-      horario de inicio da rega: <input type="text" name="" id="ipt_inicioRega"><br>
-      horario de termino da rega: <input type="text" name="" id="ipt_terminoRega"><br>
-      <button onclick="salvarRega()">Horario de rega</button>
-      <button class="btn-dashboard"><a href="./dashboard.html">Acessar dashboard</a></button>
-    </div>
-  </section>
-</body>
+  <br><br><br><br><br><br><br>
+    <main class="cards">
+      <br><br><br><br><br><br><br><br><br>
+    <section class="perfil">
+      <div class="perfil-box">
+        <div class="user-info">
+          <img width="48" height="48" src="https://img.icons8.com/fluency-systems-regular/48/user--v1.png"
+            alt="user--v1" />
+          <h2>Olá, Usuário!</h2>
+          <p>Última rega registrada: X dias atrás</p>
+        </div>
+          <a href="./dashboard.html" class="btn-dash">Acessar DashBoard</a>
+      </div>
+    </section>
 
-</html>
-<script>
-  function salvarRega() {
-    const inicio = document.getElementById('ipt_inicioRega').value;
-    const termino = document.getElementById('ipt_terminoRega').value;
+    <section class="rega">
+      <div class="rega-box">
+        <h3>Registrar nova rega</h3>
+        <p>Quanto tempo você regou hoje?</p>
+        <div class="card">
+        </div>
+        <div class="botoes-rega">
+          <button onclick="registrarRega('5')">5 min</button>
+          <button onclick="registrarRega('10')">10 min</button>
+          <button onclick="registrarRega('15')">15 min</button>
+          <button onclick="mostrarOutro()">Outro</button>
+        </div>
+        <div class="input-outro" style="display: none;">
+          <input type="number" id="tempoOutro" placeholder="Digite o tempo (min)" />
+          <button onclick="registrarOutro()">Confirmar</button>
+        </div>
+        <p id="statusRega" style="margin-top: 1rem;"></p>
+      </div>
+    </section>
+  </main>
 
-    if (inicio && termino) {
-      localStorage.setItem('inicioRega', inicio);
-      localStorage.setItem('terminoRega', termino);
-      alert("Horários salvos com sucesso!");
-    } else {
-      alert("Preencha os dois campos de horário!");
+  <script>
+    function registrarRega(tempo) {
+      document.getElementById("statusRega").textContent = `✅ Rega registrada: ${tempo} minutos`;
+      document.querySelector(".botoes-rega").style.display = "none";
+      document.querySelector(".input-outro").style.display = "none";
     }
-  }
-</script>
+
+    function mostrarOutro() {
+      document.querySelector(".input-outro").style.display = "block";
+    }
+
+    function registrarOutro() {
+      const tempoOutro = document.getElementById("tempoOutro").value;
+      if (tempoOutro) {
+        registrarRega(tempoOutro);
+      } else {
+        alert("Por favor, informe o tempo.");
+      }
+    }
+  </script>
