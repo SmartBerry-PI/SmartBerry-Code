@@ -26,7 +26,11 @@
     </header>
 
     <section class="graficos">
-
+        <select name="SelecaoCanteiros" id="canteiros">
+            <option value="1">Canteiro 1</option>
+            <option value="2">Canteiro 2</option>
+            <option value="3">Canteiro 3</option>
+        </select>
         <div class="graficos-pizza">
             <div class="grafico">
                 <p>PERCENTUAL DE ESTABILIDADE HÍDRICA</p>
@@ -215,6 +219,11 @@
         tension: 0.4
     };
 
+    const canteiroSelecionado = document.getElementById('canteiros');
+    const textSelecionado = canteiroSelecionado.options[canteiroSelecionado.selectedIndex].text;
+    const dia = new Date();
+    const formatDia = dia.toLocaleDateString('pt-BR')
+
     const config = {
         type: 'line',
         data: {
@@ -233,7 +242,7 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'Histórico de umidade x hora (Canteiro 1 - 10/06/2025)',
+                    text: 'Histórico de umidade x hora (Canteiro '+ textSelecionado +' - '+ formatDia +' )',
                     font: {
                         size: 15
                     },
@@ -247,6 +256,14 @@
     };
 
     const myChart1 = new Chart(rtx, config);
+
+    canteiroSelecionado.addEventListener('change', function(){
+        const newText = this.options[this.selectedIndex].text;
+        myChart1.options.plugins.title.text = 'Histórico de umidade x hora ('+ newText + ' - 10/06/2025)';
+        myChart2.options.plugins.title.text = 'Última Leitura - '+ newText+ '(10/06/2025 11:40:00 PM)';
+        myChart1.update();
+        myChart2.update();
+    })
 
     function atualizarLinhas() {
         const datasets = [umidadeDataset];
