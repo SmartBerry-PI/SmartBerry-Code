@@ -149,3 +149,10 @@ img {
     margin-top: 1vh;
     font-weight: bold;
 }
+
+#logoTexto{
+    color: #fff;
+}
+a:hover{
+    text-decoration: none;
+}

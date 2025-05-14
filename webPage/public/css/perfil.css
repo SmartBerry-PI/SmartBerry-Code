@@ -140,3 +140,7 @@ section {
 .btn-dash:hover {
     background-color: #a31414;
 }
+
+a:hover{
+    text-decoration: none;
+}
