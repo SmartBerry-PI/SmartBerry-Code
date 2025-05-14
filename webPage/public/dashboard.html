@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
@@ -14,14 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
     <title>DashBoard</title>
 </head>
-
 <body>
     <header>
         <nav class="nav-voltar">
-            <a href="./index.html">
-                <img src="./assets/logo-b_w.png" alt="Logo da SmartBerry" class="logo">
-            </a>
-            <button><a href="./perfil.html">Voltar</a></button>
+            <a href="./index.html"><img src="./assets/logo-b_w.png" alt="Logo da SmartBerry" class="logo"></a>
+            <button><a href="../public/perfil.html">Voltar</a></button>
         </nav>
     </header>
 
@@ -64,7 +59,6 @@
         </div>
     </section>
 </body>
-
 </html>
 <script>
     const COLORS = ['red', 'yellow', 'green'];
@@ -242,7 +236,7 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'Histórico de umidade x hora (Canteiro '+ textSelecionado +' - '+ formatDia +' )',
+                    text: 'Histórico de umidade x hora (Canteiro ' + textSelecionado + ' - ' + formatDia + ' )',
                     font: {
                         size: 15
                     },
@@ -257,10 +251,10 @@
 
     const myChart1 = new Chart(rtx, config);
 
-    canteiroSelecionado.addEventListener('change', function(){
+    canteiroSelecionado.addEventListener('change', function () {
         const newText = this.options[this.selectedIndex].text;
-        myChart1.options.plugins.title.text = 'Histórico de umidade x hora ('+ newText + ' - 10/06/2025)';
-        myChart2.options.plugins.title.text = 'Última Leitura - '+ newText+ '(10/06/2025 11:40:00 PM)';
+        myChart1.options.plugins.title.text = 'Histórico de umidade x hora (' + newText + ' - 10/06/2025)';
+        myChart2.options.plugins.title.text = 'Última Leitura - ' + newText + '(10/06/2025 11:40:00 PM)';
         myChart1.update();
         myChart2.update();
     })

@@ -1,3 +1,4 @@
+@import url(./style.css);
 :root {
     --varmor: #334785;
     --Carmine: #A40414;
@@ -20,7 +21,7 @@ header nav {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--varmor);
+    background-color: var(--vmorango);
     height: 10vh;
     width: 100vw;
     top: 0;
