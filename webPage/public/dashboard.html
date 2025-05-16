@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
@@ -14,19 +12,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
     <title>DashBoard</title>
 </head>
-
 <body>
     <header>
         <nav class="nav-voltar">
-            <a href="./index.html">
-                <img src="./assets/logo-b_w.png" alt="Logo da SmartBerry" class="logo">
-            </a>
-            <button><a href="./perfil.html">Voltar</a></button>
+            <a href="./index.html"><h2 id="logoTexto">SmartBerry</h2></a>
+            <button><a href="../public/perfil.html">Voltar</a></button>
         </nav>
     </header>
 
     <section class="graficos">
-
+        <select name="SelecaoCanteiros" id="canteiros">
+            <option value="1">Canteiro 1</option>
+            <option value="2">Canteiro 2</option>
+            <option value="3">Canteiro 3</option>
+        </select>
         <div class="graficos-pizza">
             <div class="grafico">
                 <p>PERCENTUAL DE ESTABILIDADE HÍDRICA</p>
@@ -60,7 +59,6 @@
         </div>
     </section>
 </body>
-
 </html>
 <script>
     const COLORS = ['red', 'yellow', 'green'];
@@ -215,6 +213,11 @@
         tension: 0.4
     };
 
+    const canteiroSelecionado = document.getElementById('canteiros');
+    const textSelecionado = canteiroSelecionado.options[canteiroSelecionado.selectedIndex].text;
+    const dia = new Date();
+    const formatDia = dia.toLocaleDateString('pt-BR')
+
     const config = {
         type: 'line',
         data: {
@@ -233,7 +236,7 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'Histórico de umidade x hora (Canteiro 1 - 10/06/2025)',
+                    text: 'Histórico de umidade x hora (Canteiro ' + textSelecionado + ' - ' + formatDia + ' )',
                     font: {
                         size: 15
                     },
@@ -247,6 +250,14 @@
     };
 
     const myChart1 = new Chart(rtx, config);
+
+    canteiroSelecionado.addEventListener('change', function () {
+        const newText = this.options[this.selectedIndex].text;
+        myChart1.options.plugins.title.text = 'Histórico de umidade x hora (' + newText + ' - 10/06/2025)';
+        myChart2.options.plugins.title.text = 'Última Leitura - ' + newText + '(10/06/2025 11:40:00 PM)';
+        myChart1.update();
+        myChart2.update();
+    })
 
     function atualizarLinhas() {
         const datasets = [umidadeDataset];

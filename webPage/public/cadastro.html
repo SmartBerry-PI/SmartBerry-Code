@@ -50,19 +50,14 @@
                     <input type="text" id="ipt_sobrenome" name="ipt_sobrenome">
                 </div>
                 <div class="inputBox">
+                    <span>Nome de usuário:</span>
+                    <i></i>
+                    <input type="text" id="ipt_username" name="ipt_username">
+                </div>           
+                <div class="inputBox">
                     <span>Email:</span>
                     <i></i>
                     <input type="text" id="ipt_email" name="ipt_email">
-                </div>
-                <div class="inputBox">
-                    <span>Senha:</span>
-                    <i></i>
-                    <input type="text" id="ipt_senha" name="ipt_senha">
-                </div>
-                <div class="inputBox">
-                    <span>Confirmar senha:</span>
-                    <i></i>
-                    <input type="text" id="ipt_confirmar" name="ipt_confirmar">
                 </div>
                 <div class="inputBox">
                     <span>CPF:</span>
@@ -75,13 +70,18 @@
                     <input type="text" id="ipt_telefone" name="ipt_telefone">
                 </div>                    
                 <div class="inputBox">
-                    <span>Nome de usuário:</span>
+                    <span>Senha:</span>
                     <i></i>
-                    <input type="text" id="ipt_username" name="ipt_username">
-                </div>           
-                <div id="verify"></div>
+                    <input type="text" id="ipt_senha" name="ipt_senha">
+                </div>
+                <div class="inputBox">
+                    <span>Confirmar senha:</span>
+                    <i></i>
+                    <input type="text" id="ipt_confirmar" name="ipt_confirmar">
+                </div>
+                <div id="verify_msg" style="color: red"></div>
             </div>
-                <button onclick="cadastrar()" class="login-button">Cadastrar</button>
+                <button onclick="cadastrar()" class="login-button" id="button-cadastro">Cadastrar</button>
                 <div class="link">
                     <p>Já possui cadastro e deseja fazer <a href="./login.html">login</a>?</p>
                 </div>
@@ -176,91 +176,95 @@
 </body>
 
 </html>
-<script src="./app/verify.js"></script>
+<script src="./js/verify.js"></script>
 
 <script>
+    function aviso() {
+        alert('Preencha todos os campos corretamente antes de continuar!')
+    };
 
-  function cadastrar() {
-    // aguardar();
 
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
-    var nomeVar = ipt_nome.value;
-    var sobrenomeVar = ipt_sobrenome.value;
-    var emailVar = ipt_email.value;
-    var senhaVar = ipt_senha.value;
-    var confirmarSenhaVar = ipt_confirmar.value;
-    var cpfVar = ipt_cpf.value;
-    var telefoneVar = ipt_telefone.value;
-    var usernameVar = ipt_username.value;
+    function cadastrar() {
+        // aguardar();
 
-    // Verificando se há algum campo em branco
-    // if (
-    //   nomeVar == "" ||
-    //   sobrenomeVar == "" ||
-    //   emailVar == "" ||
-    //   senhaVar == "" ||
-    //   confirmarSenhaVar == "" ||
-    //   cpfVar == "" ||
-    //   telefoneVar == "" ||
-    //   usernameVar == ""
-    // ) {
-    //   cardErro.style.display = "block";
-    //   mensagem_erro.innerHTML =
-    //     "(Mensagem de erro para todos os campos em branco)";
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = ipt_nome.value;
+        var sobrenomeVar = ipt_sobrenome.value;
+        var emailVar = ipt_email.value;
+        var senhaVar = ipt_senha.value;
+        var confirmarSenhaVar = ipt_confirmar.value;
+        var cpfVar = ipt_cpf.value;
+        var telefoneVar = ipt_telefone.value;
+        var usernameVar = ipt_username.value;
 
-    //   finalizarAguardar();
-    //   return false;
-    // } else {
-    //   setInterval(sumirMensagem, 5000);
-    // }
-
-    // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        sobrenomeServer: sobrenomeVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar,
-        cpfServer: cpfVar,
-        telefoneServer: telefoneVar,
-        usernameServer: usernameVar
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
+        // Verificando se há algum campo em branco
+        // if (
+        //   nomeVar == "" ||
+        //   sobrenomeVar == "" ||
+        //   emailVar == "" ||
+        //   senhaVar == "" ||
+        //   confirmarSenhaVar == "" ||
+        //   cpfVar == "" ||
+        //   telefoneVar == "" ||
+        //   usernameVar == ""
+        // ) {
         //   cardErro.style.display = "block";
-
         //   mensagem_erro.innerHTML =
-        //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+        //     "(Mensagem de erro para todos os campos em branco)";
 
-        //   setTimeout(() => {
-        //     window.location = "login.html";
-        //   }, "2000");
-
-        //   limparFormulario();
         //   finalizarAguardar();
-        alert('Cadastro realizado com sucesso')
+        //   return false;
+        // } else {
+        //   setInterval(sumirMensagem, 5000);
+        // }
 
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        // finalizarAguardar();
-      });
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            nomeServer: nomeVar,
+            sobrenomeServer: sobrenomeVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar,
+            cpfServer: cpfVar,
+            telefoneServer: telefoneVar,
+            usernameServer: usernameVar
+        }),
+        })
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
 
-    return false;
-  }
+            if (resposta.ok) {
+            //   cardErro.style.display = "block";
+
+            //   mensagem_erro.innerHTML =
+            //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+            //   setTimeout(() => {
+            //     window.location = "login.html";
+            //   }, "2000");
+
+            //   limparFormulario();
+            //   finalizarAguardar();
+            alert('Cadastro realizado com sucesso')
+
+            } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
+    }
 
 //   function sumirMensagem() {
 //     cardErro.style.display = "none";
