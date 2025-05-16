@@ -22,66 +22,26 @@
             <li><a href="./index.html">Início</a></li>
             <li><a href="./index.html#sobre">Sobre</a></li>
             <li><a href="./simulador.html">Simulador</a></li>
-            <li><a href="./login.html">Login</a></li>
           </ul>
-          <button class="acont"><a href="./cadastro.html">Criar conta</a></button>
         </div>
       </nav>
     </div>
   </header>
-  <br><br><br><br><br><br><br>
-    <main class="cards">
-      <br><br><br><br><br><br><br><br><br>
-    <section class="perfil">
-      <div class="perfil-box">
-        <div class="user-info">
-          <img width="48" height="48" src="https://img.icons8.com/fluency-systems-regular/48/user--v1.png"
-            alt="user--v1" />
-          <h2>Olá, Usuário!</h2>
-          <p>Última rega registrada: X dias atrás</p>
-        </div>
-          <a href="./dashboard.html" class="btn-dash">Acessar DashBoard</a>
-      </div>
-    </section>
 
-    <section class="rega">
-      <div class="rega-box">
-        <h3>Registrar nova rega</h3>
-        <p>Quanto tempo você regou hoje?</p>
-        <div class="card">
-        </div>
-        <div class="botoes-rega">
-          <button onclick="registrarRega('5')">5 min</button>
-          <button onclick="registrarRega('10')">10 min</button>
-          <button onclick="registrarRega('15')">15 min</button>
-          <button onclick="mostrarOutro()">Outro</button>
-        </div>
-        <div class="input-outro" style="display: none;">
-          <input type="number" id="tempoOutro" placeholder="Digite o tempo (min)" />
-          <button onclick="registrarOutro()">Confirmar</button>
-        </div>
-        <p id="statusRega" style="margin-top: 1rem;"></p>
-      </div>
-    </section>
-  </main>
+
+  <div class="menu">
+    <div class="foto">
+      <img src="https://img.icons8.com/fluency-systems-regular/48/user--v1.png" alt="user--v1" />
+    </div>
+    <h2>Olá, Usuário!</h2>
+    <nav>
+      <ul>
+        <li><a href="./dashboard.html" class="btn-menu">DashBoard</a></li>
+        <li><a href="" class="btn-rega">Rega</a></li>
+        <li><a href="./index.html" class="btn-sair">Sair</a></li>
+      </ul>
+    </nav>
+  </div>
 
   <script>
-    function registrarRega(tempo) {
-      document.getElementById("statusRega").textContent = `✅ Rega registrada: ${tempo} minutos`;
-      document.querySelector(".botoes-rega").style.display = "none";
-      document.querySelector(".input-outro").style.display = "none";
-    }
-
-    function mostrarOutro() {
-      document.querySelector(".input-outro").style.display = "block";
-    }
-
-    function registrarOutro() {
-      const tempoOutro = document.getElementById("tempoOutro").value;
-      if (tempoOutro) {
-        registrarRega(tempoOutro);
-      } else {
-        alert("Por favor, informe o tempo.");
-      }
-    }
   </script>

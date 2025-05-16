@@ -67,7 +67,6 @@ CREATE TABLE sensor (
     idSensor INT AUTO_INCREMENT,
     fkEmpresa INT,
     fkCanteiro INT,
-    canteiro VARCHAR(45) NOT NULL,
     statusAtivacao TINYINT NOT NULL,
     dtInstalacao DATETIME NOT NULL,
     

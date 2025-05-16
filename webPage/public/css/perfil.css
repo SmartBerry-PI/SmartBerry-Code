@@ -13,130 +13,74 @@ body {
     color: var(--bgcolor);
 }
 
+.menu {
+    position: fixed;
+    left: 0;
+    top: 80px;
+    width: 20vw;
+    height: 100vh;
+    background-color: green;
+    padding: 2rem 1rem;
+    box-shadow: 3px 0 8px rgba(0, 0, 0, 0.1);
+    color: white;
+}
 
-.btn-dashboard a {
+.menu h2 {
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.menu nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu nav ul li {
+    margin-bottom: 3rem;
+}
+
+.menu a {
+    display: block;
+    padding: 0.8rem 1rem;
+    border-radius: 30px;
+    font-weight: bold;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.btn-menu,
+.btn-rega {
     color: black;
-}
-
-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 30%;
-    padding: 5rem;
-    margin-top: 20px;
-}
-
-/* Seção de perfil */
-.perfil {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4rem;
-    background: #771c1c;
-    border-radius: 25px;
-    height: auto;
-}
-
-.perfil-box {
-    background: white;
-    border-radius: 8px;
-    padding: 2rem;
-    width: 100%;
-    max-width: 500px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.user-info h2 {
-    margin: 0.5rem 0;
-    color: var(--vmorango);
-}
-
-/* Seção de rega */
-.rega {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4rem;
     background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.rega-box {
-    background: #f2f2f2;
-    border-radius: 8px;
-    padding: 2rem;
-    width: 80%;
-    max-width: 500px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
+
+
+.btn-sair {
+    color: #000cad;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.botoes-rega button {
-    background-color: var(--vmorango);
-    color: white;
-    border: none;
-    padding: 0.6rem 1rem;
-    margin: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s;
+.btn-menu:hover,
+.btn-rega:hover,
+.btn-sair:hover {
+    opacity: 0.85;
 }
 
-.botoes-rega button:hover {
-    background-color: #a31414;
-}
-
-.input-outro input {
-    padding: 0.5rem;
-    margin-right: 0.5rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.input-outro button {
-    background-color: #555;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-}
-
-.cards {
+.foto {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    gap: 2rem;
-    padding: 4rem;
-    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 2rem;
+    height: 100px;
 }
 
-.perfil,
-.rega {
-    max-width: none;
-    width: 100%;
-    flex: 1;
-}
+.foto img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
 
-.perfil-box,
-.rega-box {
-    width: 100%;
-    max-width: 400px;
-}
-
-.btn-dash {
-    display: inline-block;
-    text-decoration: none;
-    color: #fff;
-    background-color: var(--vmorango);
-    padding: 0.6rem 1rem;
-    margin: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s;
-    border: none;
-}
-
-.btn-dash:hover {
-    background-color: #a31414;
 }

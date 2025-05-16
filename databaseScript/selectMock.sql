@@ -1,9 +1,9 @@
-SELECT * FROM cliente AS c 
-	JOIN usuario AS u 
-		ON u.fkCliente=c.idCliente
-    JOIN endereco AS e 
-		ON e.idCliente=c.idCliente
-    JOIN sensor AS s 
+SELECT * FROM usuario AS u
+	JOIN permissoes AS p
+		ON u.idusuario =p.fkusuario
+    JOIN empresa AS e 
+		ON p.fkempresa=e.idEmpresa
+    LEFT JOIN endereco AS ende ON ende.idEmpresa 
 		ON s.fkCliente=c.idCliente; -- Select Completo
         
 SELECT 
@@ -44,8 +44,18 @@ SELECT r.dado AS 'UMIDADE (%)', r.dtColeta AS 'Data e hora', concat(s.nome,' - '
 ORDER BY r.dtColeta DESC; -- Select dados inseridos
 
 SELECT 
-	s.nome AS 'Sensor',
+	s.idSensor AS 'Sensor',
     CASE WHEN (r.dado>80 OR r.dado<70) THEN 'Alerta' ELSE '' END AS 'Alerta',
     r.dtColeta AS 'Horário'
 FROM
     registro AS r JOIN sensor AS s ON r.fkSensor=s.idSensor; -- Select Alerta
+    
+SELECT 
+	s.idSensor AS 'Sensor',
+	CASE WHEN s.statusAtivacao = 1 THEN 'Ativo' ELSE 'Inativo' END AS StatusSensor,
+	s.dtInstalacao AS DataInstalação,
+    e.nomeFantasia AS Empresa,
+    c.descricao AS Canteiro
+	FROM sensor AS s
+	JOIN empresa AS e ON s.fkEmpresa = e.idEmpresa
+	JOIN canteiro AS c ON s.fkCanteiro = c.idCanteiro AND s.fkEmpresa = c.fkEmpresa;
