@@ -23,16 +23,25 @@ function buscarPorId(req, res) {
 }
 
 function cadastrar(req, res) {
-  var cnpj = req.body.cnpj;
-  var razaoSocial = req.body.razaoSocial;
+  var razaosocial = req.body.razaosocialServer;
+  var nomefantasia = req.body.nomefantasiaServer;
+  var inscestadual = req.body.inscestadualServer;
+  var cnpj = req.body.cnpjServer;
+  var cep = req.body.cepServer;
+  var uf = req.body.ufServer;
+  var cidade = req.body.cidadeServer;
+  var bairro = req.body.bairroServer;
+  var logradouro = req.body.logradouroServer;
+  var numero = req.body.numeroServer;
+  var complemento = req.body.complementoServer;
 
-  empresaModel.buscarPorCnpj(cnpj).then((resultado) => {
+  empresaModel.buscarDuplicidade(cnpj, inscestadual,razaosocial).then((resultado) => {
     if (resultado.length > 0) {
       res
         .status(401)
-        .json({ mensagem: `a empresa com o cnpj ${cnpj} já existe` });
+        .json({ mensagem: `a empresa já existe` });
     } else {
-      empresaModel.cadastrar(razaoSocial, cnpj).then((resultado) => {
+      empresaModel.cadastrar(razaosocial, nomefantasia, inscestadual, cnpj, cep, uf, cidade, bairro, logradouro, numero, complemento).then((resultado) => {
         res.status(201).json(resultado);
       });
     }

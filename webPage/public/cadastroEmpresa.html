@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="shortcut icon" href="./assets/icon.png" type="image/x-icon">
+    <title>SmartBerry</title>
+</head>
+
+<body>
+    
+  <header>
+        <div class="header-content">
+            <nav class="topNav">
+                <div class="left">
+                <!-- <a href="index.html"><img src="../assets/logo-extensa4.png" alt="Logo da SmartBerry" class="logo"></a> -->
+                <h2 id="logoTexto">SmartBerry</h2>
+                </div>
+                    <div class="mid">
+                        <ul class="nav-list">
+                            <li><a href="./index.html">Início</a></li>
+                            <li><a href="./index.html#sobre">Sobre</a></li>
+                            <li><a href="./simulador.html">Simulador</a></li>
+                            <li><a href="./login.html">Login</a></li>
+                        </ul>
+                        <button class="acont"><a href="./cadastro.html">Criar conta</a></button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+  </header>
+
+    <section>
+        <div class="container">
+            <div>
+            <h2 class="container-title">Cadastro de Empresa</h2>
+            </div>
+            <div class="subcontainer cadastro-etapa1">
+                <div class="inputBox">
+                    <span>Razão Social:</span>
+                    <i></i>
+                    <input type="text" id="ipt_razaosocial" name="ipt_razaosocial">
+                </div>
+                <div class="inputBox">
+                    <span>Nome Fantasia:</span>
+                    <i></i>
+                    <input type="text" id="ipt_nomefantasia" name="ipt_nomefantasia">
+                </div>
+                <div class="inputBox">
+                    <span>Inscrição Estadual:</span>
+                    <i></i>
+                    <input type="text" id="ipt_inscestadual" name="ipt_inscestadual">
+                </div>           
+                <div class="inputBox">
+                    <span>CNPJ:</span>
+                    <i></i>
+                    <input type="text" id="ipt_cnpj" name="ipt_cnpj">
+                </div>
+                <div id="verify_msg" style="color: red"></div>
+            </div>
+            <div class="subcontainer cadastro-etapa2">
+                <div class="inputBox">
+                    <span>CEP:</span>
+                    <i></i>
+                    <input type="text" id="ipt_cep" name="ipt_cep">
+                </div>                    
+                <div class="inputBox">
+                    <span>Unidade Federal:</span>
+                    <i></i>
+                    <input type="text" id="ipt_uf" name="ipt_uf">
+                </div>                    
+                <div class="inputBox">
+                    <span>Cidade:</span>
+                    <i></i>
+                    <input type="text" id="ipt_cidade" name="ipt_cidade">
+                </div>
+                <div class="inputBox">
+                    <span>Bairro:</span>
+                    <i></i>
+                    <input type="text" id="ipt_bairro" name="ipt_bairro">
+                </div>
+                <div class="inputBox">
+                    <span>Logradouro:</span>
+                    <i></i>
+                    <input type="text" id="ipt_logradouro" name="ipt_logradouro">
+                </div>
+                <div class="inputBox">
+                    <span>Número:</span>
+                    <i></i>
+                    <input type="text" id="ipt_numero" name="ipt_numero">
+                </div>
+                <div class="inputBox">
+                    <span>Complemento:</span>
+                    <i></i>
+                    <input type="text" id="ipt_complemento" name="ipt_complemento">
+                </div>
+                <div id="verify_msg" style="color: red"></div>
+            </div>
+                <button onclick="seguirEtapa()" class="login-button" id="button-cadastro">Próximo</button>
+                <br>
+                <button onclick="voltarEtapa()" id="button-voltarEtapa">Voltar</button>
+            </div>
+        </div>
+        <!-- <div class="container-main">
+            <div id="cadastro">
+                <div class="container">
+                    <h3>Dados Pessoais</h3>
+                    <div class="subcontainer">
+                    </div>
+                </div>
+                <div class="container">
+                    <h3>Endereço</h3>
+                    <div class="subcontainer">
+                        <div class="inputBox">
+                            <span>CEP:</span>
+                            <i></i>
+                            <input type="number" id="cep" name="cep">
+                        </div>
+                        <div class="inputBox">
+                            <span>Cidade:</span>
+                            <i></i>
+                            <input type="text" id="cidade" name="cidade">
+                        </div>
+                        <div class="inputBox">
+                            <span>Bairro:</span>
+                            <i></i>
+                            <input type="text" id="bairro" name="bairro">
+                        </div>
+                        <div class="inputBox">
+                            <span>Logradouro:</span>
+                            <i></i>
+                            <input type="text" id="logradouro" name="logradouro">
+                        </div>
+                        <div class="inputBox">
+                            <span>Complemento:</span>
+                            <i></i>
+                            <input type="text" id="complemento" name="complemento">
+                        </div>
+                        <div class="inputBox">
+                            <span>Número:</span>
+                            <i></i>
+                            <input type="number" id="numero" name="numero">
+                        </div>
+                        <div class="selectBox">
+                            <span>Estado:</span>
+                            <i></i>
+                            <select name="estado" id="Estado">
+                                <option value="Espírito Santo">ES</option>
+                                <option value="Minas Gerais">MG</option>
+                                <option value="Paraná">PR</option>
+                                <option value="Rio de Janeiro">RJ</option>
+                                <option value="Rio Grande do Sul">RS</option>
+                                <option value="São Paulo">SP</option>
+                                <option value="Santa Catarina">SC</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <h3>Informações de login</h3>
+                    <div class="subcontainer">
+                        <div class="inputBox">
+                            <span>Nome de Usuário:</span>
+                            <i></i>
+                            <input type="text" id="login" name="login" placeholder="user_nome123">
+                        </div>
+                        <div class="inputBox">
+                            <span>Senha:</span>
+                            <i></i>
+                            <input type="password" id="senha" name="senha">
+                        </div>
+                        <div class="inputBox">
+                            <span>Confirmar senha:</span>
+                            <i></i>
+                            <input type="password" id="senhaconf" name="senhaconf">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <br><br>
+        </div> -->
+    </section>
+
+    <footer>
+        <div class="footer">
+            <h5>SmartBerry @ 2025. All rights reserved.</h5>
+        </div>
+    </footer>
+</body>
+
+</html>
+<!-- <script src="./js/verify.js"></script> -->
+
+<script>
+    function aviso() {
+        alert('Preencha todos os campos corretamente antes de continuar!')
+    };
+
+
+    function cadastrar() {
+        // aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var razaosocialVar = ipt_razaosocial.value;
+        var nomefantasiaVar = ipt_nomefantasia.value;
+        var inscestadualVar = ipt_inscestadual.value;
+        var cnpjVar = ipt_cnpj.value;
+        var cepVar = ipt_cep.value;
+        var ufVar = ipt_uf.value;
+        var cidadeVar = ipt_cidade.value;
+        var bairroVar = ipt_bairro.value;
+        var logradouroVar = ipt_logradouro.value;
+        var numeroVar = ipt_numero.value;
+        var complementoVar = ipt_complemento.value;
+
+        // Verificando se há algum campo em branco
+        // if (
+        //   nomeVar == "" ||
+        //   sobrenomeVar == "" ||
+        //   emailVar == "" ||
+        //   senhaVar == "" ||
+        //   confirmarSenhaVar == "" ||
+        //   cpfVar == "" ||
+        //   telefoneVar == "" ||
+        //   usernameVar == ""
+        // ) {
+        //   cardErro.style.display = "block";
+        //   mensagem_erro.innerHTML =
+        //     "(Mensagem de erro para todos os campos em branco)";
+
+        //   finalizarAguardar();
+        //   return false;
+        // } else {
+        //   setInterval(sumirMensagem, 5000);
+        // }
+
+        // Enviando o valor da nova input
+        fetch("/empresas/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            razaosocialServer: razaosocialVar,
+            nomefantasiaServer: nomefantasiaVar,
+            inscestadualServer: inscestadualVar,
+            cnpjServer: cnpjVar,
+            cepServer: cepVar,
+            ufServer: ufVar,
+            cidadeServer: cidadeVar,
+            bairroServer: bairroVar,
+            logradouroServer: logradouroVar,
+            numeroServer: numeroVar,
+            complementoServer: complementoVar
+        }),
+        })
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+            //   cardErro.style.display = "block";
+
+            //   mensagem_erro.innerHTML =
+            //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+            //   setTimeout(() => {
+            //     window.location = "login.html";
+            //   }, "2000");
+
+            //   limparFormulario();
+            //   finalizarAguardar();
+            alert('Cadastro realizado com sucesso')
+
+            } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
+    }
+
+//   function sumirMensagem() {
+//     cardErro.style.display = "none";
+//   }
+const etapa1 = document.querySelector('.cadastro-etapa1');
+const etapa2 = document.querySelector('.cadastro-etapa2');
+const buttonCadastro = document.getElementById('button-cadastro');
+const buttonVoltar = document.getElementById('button-voltarEtapa');
+    function seguirEtapa() {     
+        etapa1.style.display = "none";
+        etapa2.style.display = "flex";
+
+        buttonCadastro.innerHTML = "Cadastrar";
+        buttonCadastro.setAttribute("onclick", "aviso()");
+        buttonVoltar.style.display = 'block' ;
+    };
+    function voltarEtapa() {        
+        etapa1.style.display = "flex";
+        etapa2.style.display = "none";
+
+        buttonCadastro.innerHTML = "Próximo";
+        buttonCadastro.setAttribute("onclick", "seguirEtapa()");
+        buttonVoltar.style.display = 'none'
+    }
+</script>

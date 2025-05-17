@@ -12,16 +12,16 @@ function listar() {
   return database.executar(instrucaoSql);
 }
 
-function buscarPorCnpj(cnpj) {
-  var instrucaoSql = `SELECT * FROM empresa WHERE cnpj = '${cnpj}'`;
+function buscarDuplicidade(cnpj, inscestadual, razaosocial) {
+  var instrucaoSql = `SELECT * FROM empresa WHERE CNPJ = '${cnpj}' OR inscEstadual = '${inscestadual} OR razaoSocial = '${razaosocial}`;
 
   return database.executar(instrucaoSql);
 }
 
-function cadastrar(razaoSocial, cnpj) {
+function cadastrar(razaosocial, nomefantasia, inscestadual, cnpj, cep, uf, cidade, bairro, logradouro, numero, complemento) {
   var instrucaoSql = `INSERT INTO empresa (razao_social, cnpj) VALUES ('${razaoSocial}', '${cnpj}')`;
 
   return database.executar(instrucaoSql);
 }
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar };
+module.exports = { buscarDuplicidade, buscarPorId, cadastrar, listar };

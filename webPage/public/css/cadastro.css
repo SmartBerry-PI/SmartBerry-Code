@@ -65,6 +65,11 @@ input {
     height: 1rem;
     border-radius: 40px;
     padding: 0.5rem;
+    border: 1px solid black;
+}
+
+input:focus  {
+    outline: none;
 }
 
 select {
@@ -132,4 +137,12 @@ select {
 
 .topNav #logoTexto{
     color: var(--bgcolor);
+}
+
+.cadastro-etapa2{
+    display: none;
+}
+
+#button-voltarEtapa{
+    display: none;
 }
