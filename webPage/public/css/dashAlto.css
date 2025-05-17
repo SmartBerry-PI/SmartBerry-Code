@@ -1,0 +1,120 @@
+@import url(./style.css);
+
+:root {
+    --varmor: #334785;
+    --Carmine: #A40414;
+    --OysterPink: #EBC7CA;
+    --FuzzyWuzzyBrown: #C55B63;
+    --NewYorkPink: #D37C84;
+    --cntBom: #1cd36e;
+    --cntRuim: #d31c1c;
+    --texto: #fff;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--vmorango);
+    height: 10vh;
+    padding: 0 4vw;
+}
+
+.nav-voltar button {
+    height: 5vh;
+    width: 10vw;
+    font-size: 1.2rem;
+    background-color: #2F80ED;
+    border: none;
+    border-radius: 1vh;
+    box-shadow: 0.5vw 0.5vh 1vw rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 4vw;
+}
+
+#logoTexto {
+    color: #fff;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.layout-horizontal {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.canteiros {
+    width: 40vw;
+    height: 40vh;
+    background-color: var(--OysterPink);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    align-content: center;
+    margin-left: 5%;
+    margin-top: 5%;
+    border-radius: 15px;
+}
+
+.canteiro {
+    width: 80px;
+    height: 80px;
+    background-color: var(--cntRuim);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.canteiro.bom {
+    background-color: var(--cntBom);
+}
+
+.menu-lateral {
+    width: 50vw;
+    height: 100vh;
+    background-color: var(--varmor);
+    padding: 20px;
+    box-sizing: border-box;
+    border-left: 2px solid #ccc;
+}
+
+.menu-lateral h2 {
+    margin-top: 0;
+}
+
+.menu-lateral ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.menu-lateral li {
+    margin-bottom: 10px;
+}
+
+.menu-lateral a {
+    text-decoration: none;
+    color: var(--texto);
+}
+
+.menu-lateral a:hover {
+    text-decoration: underline;
+}

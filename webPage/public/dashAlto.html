@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashAlto.css">
+    <link rel="shortcut icon" href="./assets/icon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <title>DashBoard</title>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-voltar">
+            <a href="./index.html">
+                <h2 id="logoTexto">SmartBerry</h2>
+            </a>
+            <button><a href="../public/perfil.html">Voltar</a></button>
+        </nav>
+    </header>
+
+<body>
+  <div class="layout-horizontal">
+      <aside class="menu-lateral">
+      <h2>Menu Lateral</h2><br>
+      <ul>
+        <li><a href="#">Visão geral</a></li>
+        <li><a href="#">Histórico</a></li>
+        <li><a href="#">Alertas</a></li>
+      </ul>
+    </aside>
+    <section class="canteiros">
+     <div class="canteiro" id="canteiro-1"><a href="./dashboard.html"><span>Canteiro 1</span></a></div>
+      <div class="canteiro" id="canteiro-2"><a href="./dashboard.html"><span>Canteiro 2</span></a></div>
+      <div class="canteiro" id="canteiro-3"><a href="./dashboard.html"><span>Canteiro 3</span></a></div>
+      <div class="canteiro" id="canteiro-4"><a href="./dashboard.html"><span>Canteiro 4</span></a></div>
+      <div class="canteiro" id="canteiro-5"><a href="./dashboard.html"><span>Canteiro 5</span></a></div>
+      <div class="canteiro" id="canteiro-6"><a href="./dashboard.html"><span>Canteiro 6</span></a></div>
+      <div class="canteiro" id="canteiro-7"><a href="./dashboard.html"><span>Canteiro 7</span></a></div>
+      <div class="canteiro" id="canteiro-8"><a href="./dashboard.html"><span>Canteiro 8</span></a></div>
+    </section>
+  </div>
+</body>
+</html>
+<script>
+    const statusDosCanteiros = [
+        { id: 1, status: "bom" },
+        { id: 2, status: "ruim" },
+        { id: 3, status: "bom" },
+        { id: 4, status: "bom" },
+        { id: 5, status: "ruim" },
+        { id: 6, status: "bom" },
+        { id: 7, status: "ruim" },
+        { id: 8, status: "bom" },
+    ];
+
+    function atualizarCanteiros(statusArray) {
+        statusArray.forEach(canteiro => {
+            const divCanteiro = document.getElementById(`canteiro-${canteiro.id}`);
+            if (divCanteiro) {
+                if (canteiro.status === "bom") {
+                    divCanteiro.classList.add("bom");
+                } else {
+                    divCanteiro.classList.remove("bom");
+                }
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        atualizarCanteiros(statusDosCanteiros);
+    });
+
+</script>
