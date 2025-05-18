@@ -34,59 +34,78 @@
   </header>
 
     <section>
+        <section class="cadastro-container">
         <div class="container">
-            <div>
-            <h2 class="container-title">Cadastro de Usuário</h2>
+            <div class="container-title">
+                <span class="title-main">Cadastra-se</span>
             </div>
-            <div class="subcontainer">
-                <div class="inputBox">
-                    <span>Nome:</span>
-                    <i></i>
-                    <input type="text" id="ipt_nome" name="ipt_nome">
+            <div class="box-cardlog">
+                <div class="cardlog">
+                    <div class="container-input">
+                        <div class="container-input-flex">
+                            <label for="">Nome:</label>
+                            <input type="text" id="ipt_nome" name="ipt_nome">
+                        </div>
+                        <div id="" class="error-text"></div>
+                    </div>
+                    <div class="container-input">
+                        <div class="container-input-flex">
+                            <label for="">Sobrenome:</label>
+                            <input type="text" id="ipt_sobrenome" name="ipt_sobrenome">
+                        </div>
+                        <div id="" class="error-text"></div>
+                    </div>
+                    <div class="container-input">
+                        <div class="container-input-flex">
+                            <label for="">Nome de Usuário:</label>
+                            <input type="text" id="ipt_username" name="ipt_username">
+                        </div>
+                        <div id="" class="error-text"></div>
+                    </div>
+                    <div class="container-input">
+                        <div class="container-input-flex">
+                            <label for="">Email:</label>
+                            <input type="text" id="ipt_email" name="ipt_email">
+                        </div>
+                        <div id="" class="error-text"></div>
+                    </div>
                 </div>
-                <div class="inputBox">
-                    <span>Sobrenome:</span>
-                    <i></i>
-                    <input type="text" id="ipt_sobrenome" name="ipt_sobrenome">
+                <div class="cardlog">
+                    <div class="container-input">
+                        <div class="container-input-flex">
+                            <label for="">CPF:</label>
+                            <input type="text" id="ipt_cpf" name="ipt_cpf">
+                        </div>
+                        <div id="" class="error-text"></div>
+                    </div>
+                    <div class="container-input">
+                        <div class="container-input-flex">
+                            <label for="">Telefone:</label>
+                            <input type="text" id="ipt_telefone" name="ipt_telefone">
+                        </div>
+                        <div id="" class="error-text"></div>
+                    </div>
+                    <div class="container-input">
+                        <div class="container-input-flex">
+                            <label for="">Senha:</label>
+                            <input type="text" id="ipt_senha" name="ipt_senha">
+                        </div>
+                        <div id="" class="error-text"></div>
+                    </div>
+                    <div class="container-input">
+                        <div class="container-input-flex">
+                            <label for="">Confirmar Senha:</label>
+                            <input type="text" id="ipt_confirmar" name="ipt_confirmar">
+                        </div>
+                        <div id="" class="error-text"></div>
+                    </div>
                 </div>
-                <div class="inputBox">
-                    <span>Nome de usuário:</span>
-                    <i></i>
-                    <input type="text" id="ipt_username" name="ipt_username">
-                </div>           
-                <div class="inputBox">
-                    <span>Email:</span>
-                    <i></i>
-                    <input type="text" id="ipt_email" name="ipt_email">
-                </div>
-                <div class="inputBox">
-                    <span>CPF:</span>
-                    <i></i>
-                    <input type="text" id="ipt_cpf" name="ipt_cpf">
-                </div>                    
-                <div class="inputBox">
-                    <span>Telefone:</span>
-                    <i></i>
-                    <input type="text" id="ipt_telefone" name="ipt_telefone">
-                </div>                    
-                <div class="inputBox">
-                    <span>Senha:</span>
-                    <i></i>
-                    <input type="text" id="ipt_senha" name="ipt_senha">
-                </div>
-                <div class="inputBox">
-                    <span>Confirmar senha:</span>
-                    <i></i>
-                    <input type="text" id="ipt_confirmar" name="ipt_confirmar">
-                </div>
-                <div id="verify_msg" style="color: red"></div>
             </div>
+            <div class="button-container">
                 <button onclick="aviso()" class="login-button" id="button-cadastro">Cadastrar</button>
-                <div class="link">
-                    <p>Já possui cadastro e deseja fazer <a href="./login.html">login</a>?</p>
-                </div>
             </div>
         </div>
+    </section>
         <!-- <div class="container-main">
             <div id="cadastro">
                 <div class="container">
