@@ -19,14 +19,11 @@ CREATE TABLE empresa (
     nomeFantasia VARCHAR (45),
     inscEstadual VARCHAR(45) NOT NULL,
     CNPJ char(11) NOT NULL,
-    nomepContato VARCHAR (45),
-    numeropContato VARCHAR (45),
-    emailpContato VARCHAR (45),
     codigoAtivacao VARCHAR (45)
 );
 
 CREATE TABLE endereco (
-    idEndereco INT,
+    idEndereco INT AUTO_INCREMENT,
     fkEmpresa INT,
     cep CHAR(8) NOT NULL,
     uf CHAR (2) NOT NULL,
