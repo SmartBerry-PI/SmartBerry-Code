@@ -13,15 +13,28 @@ function listar() {
 }
 
 function buscarDuplicidade(cnpj, inscestadual, razaosocial) {
-  var instrucaoSql = `SELECT * FROM empresa WHERE CNPJ = '${cnpj}' OR inscEstadual = '${inscestadual} OR razaoSocial = '${razaosocial}`;
+  var instrucaoSql = `SELECT * FROM empresa WHERE CNPJ = '${cnpj}' OR inscEstadual = '${inscestadual}' OR razaoSocial = '${razaosocial}'`;
 
   return database.executar(instrucaoSql);
 }
 
-function cadastrar(razaosocial, nomefantasia, inscestadual, cnpj, cep, uf, cidade, bairro, logradouro, numero, complemento) {
-  var instrucaoSql = `INSERT INTO empresa (razao_social, cnpj) VALUES ('${razaoSocial}', '${cnpj}')`;
+function cadastrarEmpresa(razaosocial, nomefantasia, inscestadual, cnpj, codigo_ativacao) {
+  var instrucaoSql = `INSERT INTO empresa VALUES 
+(default, '${razaosocial}', '${nomefantasia}', '${inscestadual}', '${cnpj}', '${codigo_ativacao}')`;
 
   return database.executar(instrucaoSql);
 }
 
-module.exports = { buscarDuplicidade, buscarPorId, cadastrar, listar };
+function cadastrarEndereco(fkEmpresa, cep, uf, cidade, bairro,  logradouro, numero, complemento) {
+  var instrucaoSql = `INSERT INTO endereco VALUES (default, '${fkEmpresa}', '${cep}', '${uf}', '${cidade}', '${bairro}', '${logradouro}', '${numero}', '${complemento}')`;
+
+  return database.executar(instrucaoSql);
+}
+
+function buscarFkEmpresa(cnpj) {
+  var instrucaoSql = `SELECT idEmpresa FROM empresa WHERE CNPJ = '${cnpj}' AND idEmpresa > 0`;
+
+  return database.executar(instrucaoSql);
+}
+
+module.exports = { buscarDuplicidade, buscarPorId, cadastrarEmpresa, cadastrarEndereco, buscarFkEmpresa, listar };

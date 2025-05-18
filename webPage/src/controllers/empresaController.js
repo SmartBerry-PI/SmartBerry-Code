@@ -34,6 +34,7 @@ function cadastrar(req, res) {
   var logradouro = req.body.logradouroServer;
   var numero = req.body.numeroServer;
   var complemento = req.body.complementoServer;
+  var codigo_ativacao = Number((Math.random()*65536).toFixed()).toString(16);
 
   empresaModel.buscarDuplicidade(cnpj, inscestadual,razaosocial).then((resultado) => {
     if (resultado.length > 0) {
@@ -41,12 +42,18 @@ function cadastrar(req, res) {
         .status(401)
         .json({ mensagem: `a empresa já existe` });
     } else {
-      empresaModel.cadastrar(razaosocial, nomefantasia, inscestadual, cnpj, cep, uf, cidade, bairro, logradouro, numero, complemento).then((resultado) => {
-        res.status(201).json(resultado);
-      });
+      empresaModel.cadastrarEmpresa(razaosocial, nomefantasia, inscestadual, cnpj, codigo_ativacao).then(() => {
+        empresaModel.buscarFkEmpresa(cnpj).then((resposta) => {
+          var fkEmpresa = resposta[0].idEmpresa;
+          empresaModel.cadastrarEndereco(fkEmpresa, cep, uf, cidade, bairro,  logradouro, numero, complemento).then((resultado) => {
+            res.status(201).json(resultado);
+          })
+      })
+      })
     }
   });
 }
+
 
 module.exports = {
   buscarPorCnpj,
