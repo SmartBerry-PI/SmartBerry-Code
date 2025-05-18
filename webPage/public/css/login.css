@@ -7,7 +7,132 @@ body{
     justify-content: center;
     align-items: center;
 }
+.login-container
+{
+    width: 100%;
+    height: 90vh;
+    margin-top: 10vh;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container-box
+{
+    height: 80%;
+    width: 90%;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+}
+.box-login
+{
+    height: 100%;
+    width: 40%;
+    border-radius: 20px;
+    background-color: lightgrey;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.box-img
+{
+    height: 100%;
+    width: 40%;
+    border-radius: 20px;
+    background-image: url(https://www.negreira.com.br/wp-content/plugins/phastpress/phast.php/c2VydmljZT1pbWFnZXMmc3JjPWh0dHBzJTNBJTJGJTJGd3d3Lm5lZ3Jla/XJhLmNvbS5iciUyRndwLWNvbnRlbnQlMkZ1cGxvYWRzJTJGMjAyMiUyRjEwJTJGcHJvZHVjYW8tZGUtbW9yYW5nb3MtZGljYXMtcGFyYS1vLXN1Y2Vzc28tZGEtcHJvZHVjYW8tZGUtbXVkYXMtY3B0XzAzNWMwMjNkMF8xNjc4NS5qcGcmY2FjaGVNYXJrZXI9MTY2NDc5OTYyMC0xOTM0MjMmdG9rZW49ZGVkODEzZjQ1MzI3YTcyOQ.q.jpg);
+
+
+}
+.container-title
+{
+    width: 100%;
+    height: 20%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-input
+{
+    width: 100%;
+    height: 25%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container-input-flex
+{
+    width: auto;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.box-url
+{
+    height: 10%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.box-button
+{
+    height: 20%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+input
+{
+    height: 6vh;
+    width: 25vw;
+    border: 0;
+    border-radius: 30px;
+    font-size: 2vh;
+    padding-left: 1vw;
+}
+a
+{
+    text-decoration: none;
+    font-size: 2.5vh;
+}
+.title-login
+{
+    font-size: 6vh;
+    font-weight: bold;
+}
+label
+{
+    font-size: 3vh;
+    font-weight: bold;
+}
+.login-button
+{
+    height: 40%;
+    width: 25%;
+    border-radius: 20px;
+    border: 0px;
+
+    font-size: 2.5vh;
+    font-weight: bold;
+    font-family: sans-serif;
+}
 .container {
     display: flex;
     flex-direction: column;
@@ -25,13 +150,6 @@ body{
     color: black;
     font-size: xx-large;
     font-weight: 900;
-}
-
-.login-button {
-    height: 40px;
-    width: 130px;
-    font-size: large;
-    border-radius: 20px;
 }
 
 .login-button:hover{

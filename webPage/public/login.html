@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="./css/login.css">
   <link rel="shortcut icon" href="./assets/icon.png" type="image/x-icon">
 </head>
+
 <body>
   <header>
     <div class="header-content">
@@ -29,22 +31,33 @@
     </div>
   </header>
   <section class="login-container">
-    <div class="container">
-      <h2 class="container-title">Login</h2>
-      <div class="container-input">
-        <div class="inputBox">
-          <label for="ipt_usuario">Usuário/email:</label>
+    <div class="container-box">
+      <div class="box-login">
+        <div class="container-title">
+          <span class="title-login">Login</span>
+        </div>
+        <div class="container-input">
+          <div class="container-input-flex">
+            <label for="usuario">Usuário:</label>
           <input type="usuario" id="ipt_usuario" name="usuario" required>
+          </div>
+          
         </div>
-        <div class="inputBox">
-          <label for="ipt_senha">Senha:</label>
-          <input type="password" id="ipt_senha" name="senha" required>
+        <div class="container-input">
+          <div class="container-input-flex">
+            <label for="">Senha:</label>
+            <input type="password" id="ipt_senha" name="senha" required>
+          </div>
         </div>
-        <p><a href="#">Esqueci minha senha</a></p>
+        <div class="box-url">
+          <a href="" class="link">Esqueci minha senha</a>
+          <a href="cadastro.html" class="link">Não tenho um cadastro. Cadastrar</a>
+        </div>
+        <div class="box-button">
+          <button onclick="login()" class="login-button">Entrar</button>
+        </div>
       </div>
-      <button onclick="login()" class="login-button">Entrar</button>
-      <div class="link">
-        Ainda não possui uma conta? <a href="./cadastro.html">Cadastrar</a>
+      <div class="box-img">
       </div>
     </div>
   </section>
@@ -54,6 +67,7 @@
     </div>
   </footer>
 </body>
+
 </html>
 <script src="../app/verify.js"></script>
 <script>
