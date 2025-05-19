@@ -2,6 +2,8 @@
 
 body {
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .topNav {
@@ -83,4 +85,79 @@ body {
     height: 80px;
     object-fit: cover;
 
+}
+
+.centro {
+    margin-left: 20vw;
+    min-height: calc(100vh - 80px);
+    padding-top: 80px;
+    background-image: url('../assets/morango.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    position: relative;
+    z-index: 1;
+
+}
+
+.bemvindo,
+.registro {
+    text-align: center;
+}
+
+.bemvindo {
+    margin-bottom: 2rem;
+}
+
+.bemvindo p,
+.registro p {
+    background-color: #e94d4d;
+    color: #000;
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding: 1rem;
+    border-radius: 15px;
+    max-width: 600px;
+    margin-bottom: 1.5rem;
+}
+
+#registrar {
+    padding: 0.8rem;
+    margin-top: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+.btn-registro {
+    display: inline-block;
+    margin-top: 1rem;
+    background-color: #e94d4d;
+    color: white;
+    font-weight: bold;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-registro:hover {
+    background-color: #d93b3b;
+}
+
+.conteudo {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 80%;
+    width: 100%;
+    max-width: 600px;
 }

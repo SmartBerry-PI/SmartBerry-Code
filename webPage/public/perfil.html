@@ -15,7 +15,9 @@
     <div class="header-content">
       <nav class="topNav">
         <div class="left">
-            <a href="./index.html"><h2 id="logoTexto">SmartBerry</h2></a>
+          <a href="./index.html">
+            <h2 id="logoTexto">SmartBerry</h2>
+          </a>
         </div>
         <div class="mid">
           <ul class="nav-list">
@@ -27,6 +29,8 @@
       </nav>
     </div>
   </header>
+
+
 
 
   <div class="menu">
@@ -43,5 +47,28 @@
     </nav>
   </div>
 
+  <main class="centro">
+    <div class="conteudo">
+      <section class="bemvindo">
+        <p>Bem-vindo, Usuário! <br>
+          Estamos Felizes por você se juntar á SmartBerry</p>
+      </section>
+
+      <section class="registro">
+        <p>Registre seus canteiros e quantos sensores você possui em cada canteiro </p>
+        <input id="registrar" placeholder="Digite Aqui">
+        <button onclick="cadastrar()" class="btn-registro">Registre Aqui!</button>
+      </section>
+    </div>
+  </main>
+
   <script>
+    function cadastrar() {
+      if (registrar.value == ``) {
+        alert(`Preencha o campo corretamente`);
+      } else {
+        alert(`Canteiros e sensores registrados com sucesso!`);
+        registrar.value = ``;
+      }
+    }
   </script>
