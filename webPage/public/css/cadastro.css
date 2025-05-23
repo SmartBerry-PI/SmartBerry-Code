@@ -142,6 +142,7 @@ label
 
 
 input:focus  {
+    border: 1px solid black;
     outline: none;
 }
 
@@ -221,4 +222,9 @@ select {
 
 #button-voltarEtapa{
     display: none;
+}
+.error-text{
+    color: red;
+    font-size: 12px;
+    text-align: center;
 }

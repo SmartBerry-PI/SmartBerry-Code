@@ -1,6 +1,3 @@
-let tentativas = 0; 
-
-
 const nomeInput = document.getElementById("ipt_nome");
 const sobrenomeInput = document.getElementById("ipt_sobrenome");
 const usernameInput = document.getElementById("ipt_username");
@@ -9,8 +6,17 @@ const cpfInput = document.getElementById("ipt_cpf");
 const telefoneInput = document.getElementById("ipt_telefone");
 const senhaInput = document.getElementById("ipt_senha");
 const confirmarSenhaInput = document.getElementById("ipt_confirmar");
+
 const buttonCadastrar = document.getElementById("button-cadastro");
-const resposta = document.getElementById("verify_msg");
+
+const respostaNome = document.getElementById("nome_errorText");
+const respostaSobrenome = document.getElementById("sobrenome_errorText");
+const respostaUsername = document.getElementById("username_errorText");
+const respostaEmail = document.getElementById("email_errorText");
+const respostaCpf = document.getElementById("cpf_errorText");
+const respostaTelefone = document.getElementById("telefone_errorText");
+const respostaSenha = document.getElementById("senha_errorText");
+const respostaConfirmarSenha = document.getElementById("confirmarSenha_errorText");
 
 let verifyNome;
 let verifySobrenome;
@@ -26,7 +32,7 @@ nomeInput.addEventListener("input",
         const nome = nomeInput.value;
         verifyNome = ((nome != '') && (nome.length <= 45) && (nome.length >= 4) && !(/[^(a-z0-9)\s]/iu.test(nome)))
         colorInputBorder(ipt_nome, nome, verifyNome);
-        exibirMensagemErro(0, nome);
+        exibirMensagemErro(0, nome, respostaNome);
     }
 );
 sobrenomeInput.addEventListener("input", 
@@ -34,23 +40,23 @@ sobrenomeInput.addEventListener("input",
         const sobrenome = sobrenomeInput.value;
         verifySobrenome = ((sobrenome != '') && (sobrenome.length <= 45) && (sobrenome.length >= 4) && !(/[^(a-z0-9)\s]/iu.test(sobrenome)))
         colorInputBorder(sobrenomeInput, sobrenome, verifySobrenome);
-        exibirMensagemErro(1, sobrenome);
+        exibirMensagemErro(1, sobrenome, respostaSobrenome);
     }
 );
 usernameInput.addEventListener("input", 
     function () {
         const username = usernameInput.value
-        verifyUsername = ((username != '') && (username.length <= 45) && (username.length >= 5) && !(/[^(a-z0-9)(_\-.)]/u.test(username)));
+        verifyUsername = ((username != '') && (username.length <= 45) && (username.length >= 5) && !(/[^(a-z0-9)(_\-.)]/iu.test(username)));
         colorInputBorder(usernameInput, username, verifyUsername);
-        exibirMensagemErro(2, username);
+        exibirMensagemErro(2, username, respostaUsername);
     }
 );
 emailInput.addEventListener("input", 
     function () {
         const email = emailInput.value
-        verifyEmail = ((email != '') && (email.length <= 45) && !(/[^(a-z0-9)(@_\-.)]/iu.test(email)) && email.includes('.com') && email.includes('@'))
+        verifyEmail = ((email != '') && (email.length <= 45) && !(/[^(a-z0-9)(@_\-.)]/iu.test(email)) && email.includes('.') && email.includes('@'))
         colorInputBorder(emailInput, email, verifyEmail);
-        exibirMensagemErro(3, email);
+        exibirMensagemErro(3, email, respostaEmail);
     }
 );
 cpfInput.addEventListener("input", 
@@ -58,15 +64,15 @@ cpfInput.addEventListener("input",
         const cpf = cpfInput.value
         verifyCpf = ((cpf != '') && (cpf.length == 11) && !(/[^(0-9)]/iu.test(cpf)))
         colorInputBorder(cpfInput, cpf, verifyCpf);
-        exibirMensagemErro(4, cpf);
+        exibirMensagemErro(4, cpf, respostaCpf);
     }
 );
 telefoneInput.addEventListener("input", 
     function () {
         const telefone = telefoneInput.value
-        verifyTelefone = ((telefone != '') && (telefone.length <= 45) && !(/[^(0-9)(/(/)-.)]/u.test(telefone)))
+        verifyTelefone = ((telefone != '') && (telefone.length>=8) &&(telefone.length <= 45) && !(/[^(0-9)(/(/)-.)]/u.test(telefone)))
         colorInputBorder(telefoneInput, telefone, verifyTelefone);
-        exibirMensagemErro(5, telefone);
+        exibirMensagemErro(5, telefone, respostaTelefone);
     }
 );
 senhaInput.addEventListener("input", 
@@ -74,7 +80,7 @@ senhaInput.addEventListener("input",
         const senha = senhaInput.value
         verifySenha = ((senha != '') && (senha.length <= 20) && (senha.length >= 8))
         colorInputBorder(senhaInput, senha, verifySenha);
-        exibirMensagemErro(6, senha);
+        exibirMensagemErro(6, senha, respostaSenha);
     }
 );
 confirmarSenhaInput.addEventListener("input", 
@@ -83,7 +89,7 @@ confirmarSenhaInput.addEventListener("input",
         const senha = senhaInput.value
         verifyConfirma = (confirma == senha)
         colorInputBorder(confirmarSenhaInput, confirma, verifyConfirma);
-        exibirMensagemErro(7, confirma);
+        exibirMensagemErro(7, confirma, respostaConfirmarSenha);
     }
 );
 
@@ -106,65 +112,29 @@ function mudarButton() {
     }
 }
 
-function exibirMensagemErro(listIndex, value) {    
+function exibirMensagemErro(listIndex, value, tagResposta) {    
     const listErrorMsg = {
         verify: [verifyNome, verifySobrenome, verifyUsername, verifyEmail, verifyCpf, verifyTelefone, verifySenha, verifyConfirma],
         mensagem: [
             "O nome deve ter entre 4 e 45 caracteres alfanuméricos",
             "O sobrenome deve ter entre 4 e 45 caracteres alfanuméricos",
-            "Seu apelido deve ter entre 5 e 45 caracteres alfanuméricos minúsculos, nenhum espaço e pode incluir (_-.)",
-            "O email deve ter entre 4 e 45 caracteres alfanuméricos, @ e (.com)",
+            "Seu apelido deve ter entre 5 e 45 caracteres alfanuméricos, nenhum espaço e pode incluir (_-.)",
+            "O email deve ter entre 4 e 45 caracteres alfanuméricos, @ e (.)",
             "Seu cpf deve ter exatamente 11 números",
-            "Seu telefone deve ter até 45 números e pode incluir caracteres de separação",
+            "Seu telefone deve ter entre 8 e 14 caracteres e pode incluir caracteres de separação",
             "A senha deve ter no mínimo 8 e no máximo 20 caracteres",
             "Senhas não correspondem"
         ]
     };
 
-    resposta.innerHTML = '';
-
-    for (let i = 0; i <= listIndex; i++) {
-        if (!listErrorMsg.verify[i] && value != '') {
-            resposta.innerHTML = listErrorMsg.mensagem[i];
-        };
+    tagResposta.innerHTML = '';
+    if (!listErrorMsg.verify[listIndex] && value != '') {
+        tagResposta.innerHTML = listErrorMsg.mensagem[listIndex];
     };
 }
-// const nome = document.getElementById('nome').value.trim();
-// const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
-// const email = document.getElementById('email').value.trim();
-// const senha = document.getElementById('senha').value;
-// const confirma = document.getElementById('senhaconf').value;
-// const estado = document.getElementById('Estado').value;
 
-// const validacao =
-//     nome !== '' &&
-//     senha.length >= 8 &&
-//     email.includes('@') &&
-//     email.includes('.') &&
-//     senha === confirma &&
-//     cpf.length === 11 &&
-//     !email.startsWith('@') &&
-//     !email.endsWith('@') &&
-//     email.length > 7;
 
-// if (validacao) {
-//     const usuario = {
-//         nome,
-//         cpf,
-//         email,
-//         senha,
-//         estado
-//     };
-
-//     localStorage.setItem('usuario', JSON.stringify(usuario));
-
-//     document.getElementById('verify').innerHTML =
-//         `<span style="color: green;">Cadastro realizado com sucesso!</span>`;
-// } else {
-//     document.getElementById('verify').innerHTML =
-//         `<span style="color: red;">Insira dados válidos.</span>`;
-// }
-
+let tentativas = 0; 
 
 function login() {
     const emailLogin = document.getElementById('email').value.trim();
