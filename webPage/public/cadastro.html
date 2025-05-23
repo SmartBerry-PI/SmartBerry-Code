@@ -63,12 +63,11 @@
                             </div>
                             <div id="cpf_errorText" class="error-text"></div>
                         </div>
-
                         <div class="container-input">
                             <div class="container-input-flex">
                                 <label for="">Telefone</label>
                                 <input type="text" id="ipt_telefone" name="ipt_telefone" maxlength="15"
-                                    oninput="mascaraTelefone(this)" placeholder="(00) 0000-0000">
+                                    oninput="mascaraTel(this)" placeholder="(00) 0000-0000">
                             </div>
                             <div id="telefone_errorText" class="error-text"></div>
                         </div>
@@ -91,14 +90,14 @@
                         <div class="container-input">
                             <div class="container-input-flex">
                                 <label for="">Senha</label>
-                                <input type="password" id="ipt_senha" name="ipt_senha">
+                                <input type="password" id="ipt_senha" name="ipt_senha" maxlength="20">
                             </div>
                             <div id="senha_errorText" class="error-text"></div>
                         </div>
                         <div class="container-input">
                             <div class="container-input-flex">
                                 <label for="">Confirmar Senha</label>
-                                <input type="password" id="ipt_confirmar" name="ipt_confirmar">
+                                <input type="password" id="ipt_confirmar" name="ipt_confirmar" maxlength="20">
                             </div>
                             <div id="confirmarSenha_errorText" class="error-text"></div>
                         </div>
@@ -122,19 +121,27 @@
 <script src="./js/verify.js"></script>
 
 <script>
-    // function mascaraCPF(input) {
-    //     input.value = input.value
-    //         .replace(/\D/g, '')
-    //         .replace(/(\d{3})(\d)/, '$1.$2')
-    //         .replace(/(\d{3})(\d)/, '$1.$2')
-    //         .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    // }
-    // function mascaraTel(input) {
-    //     input.value = input.value
-    //         .replace(/\D/g, '')
-    //         .replace(/^(\d{2})(\d)/g, '($1)$2')
-    //         .replace(/^(\d{4})(\d)/g, '$1-$2')
-    // }
+    function mascaraCPF(input) {
+        const originalLength = input.value.length;
+        input.value = input.value
+            .replace(/\D/g, '')
+            .replace(/(\d{3})(\d)/, '$1.$2')
+            .replace(/(\d{3})(\d)/, '$1.$2')
+            .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+        if (originalLength !== input.value.length) {
+            const event = new Event('input');
+            input.dispatchEvent(event);
+        }
+    }
+
+    function mascaraTel(input) {
+        input.value = input.value
+            .replace(/\D/g, '')
+            .replace(/^(\d{2})(\d)/g, '($1)$2')
+            .replace(/^(\d{4})(\d)/g, '$1-$2')
+    }
+
     function aviso() {
         var nome = ipt_nome.value.trim();
         var sobrenome = ipt_sobrenome.value.trim();
@@ -184,7 +191,7 @@
         //     return false;
         // }
 
-        // cadastrar();
+        cadastrar();
         // return true;
     }
 
