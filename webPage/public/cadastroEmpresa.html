@@ -11,32 +11,29 @@
 </head>
 
 <body>
-    
-  <header>
+
+    <header>
         <div class="header-content">
             <nav class="topNav">
                 <div class="left">
-                <!-- <a href="index.html"><img src="../assets/logo-extensa4.png" alt="Logo da SmartBerry" class="logo"></a> -->
-                <h2 id="logoTexto">SmartBerry</h2>
+                    <!-- <a href="index.html"><img src="../assets/logo-extensa4.png" alt="Logo da SmartBerry" class="logo"></a> -->
+                    <h2 id="logoTexto">SmartBerry</h2>
                 </div>
-                    <div class="mid">
-                        <ul class="nav-list">
-                            <li><a href="./index.html">Início</a></li>
-                            <li><a href="./index.html#sobre">Sobre</a></li>
-                            <li><a href="./simulador.html">Simulador</a></li>
-                            <li><a href="./login.html">Login</a></li>
-                        </ul>
-                        <button class="acont"><a href="./cadastro.html">Criar conta</a></button>
-                    </div>
+                <div class="mid">
+                    <ul class="nav-list">
+                        <li><a href="./index.html">Início</a></li>
+                        <li><a href="./login.html">Login</a></li>
+                    </ul>
                 </div>
-            </nav>
         </div>
-  </header>
+        </nav>
+        </div>
+    </header>
 
     <section>
         <div class="container">
             <div>
-            <h2 class="container-title">Cadastro de Empresa</h2>
+                <h2 class="container-title">Cadastro de Empresa</h2>
             </div>
             <div class="subcontainer cadastro-etapa1">
                 <div class="inputBox">
@@ -53,7 +50,7 @@
                     <span>Inscrição Estadual:</span>
                     <i></i>
                     <input type="text" id="ipt_inscestadual" name="ipt_inscestadual">
-                </div>           
+                </div>
                 <div class="inputBox">
                     <span>CNPJ:</span>
                     <i></i>
@@ -65,12 +62,12 @@
                     <span>CEP:</span>
                     <i></i>
                     <input type="text" id="ipt_cep" name="ipt_cep">
-                </div>                    
+                </div>
                 <div class="inputBox">
                     <span>Unidade Federal:</span>
                     <i></i>
                     <input type="text" id="ipt_uf" name="ipt_uf">
-                </div>                    
+                </div>
                 <div class="inputBox">
                     <span>Cidade:</span>
                     <i></i>
@@ -97,10 +94,9 @@
                     <input type="text" id="ipt_complemento" name="ipt_complemento">
                 </div>
             </div>
-                <button onclick="seguirEtapa()" class="login-button" id="button-cadastro">Próximo</button>
-                <br>
-                <button onclick="voltarEtapa()" id="button-voltarEtapa">Voltar</button>
-            </div>
+            <button onclick="seguirEtapa()" class="login-button" id="button-cadastro">Próximo</button>
+            <br>
+            <button onclick="voltarEtapa()" id="button-voltarEtapa">Voltar</button>
         </div>
     </section>
 
@@ -160,72 +156,72 @@
 
         // Enviando o valor da nova input
         fetch("/empresas/cadastrar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
-            razaosocialServer: razaosocialVar,
-            nomefantasiaServer: nomefantasiaVar,
-            inscestadualServer: inscestadualVar,
-            cnpjServer: cnpjVar,
-            cepServer: cepVar,
-            ufServer: ufVar,
-            cidadeServer: cidadeVar,
-            bairroServer: bairroVar,
-            logradouroServer: logradouroVar,
-            numeroServer: numeroVar,
-            complementoServer: complementoVar
-        }),
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                razaosocialServer: razaosocialVar,
+                nomefantasiaServer: nomefantasiaVar,
+                inscestadualServer: inscestadualVar,
+                cnpjServer: cnpjVar,
+                cepServer: cepVar,
+                ufServer: ufVar,
+                cidadeServer: cidadeVar,
+                bairroServer: bairroVar,
+                logradouroServer: logradouroVar,
+                numeroServer: numeroVar,
+                complementoServer: complementoVar
+            }),
         })
-        .then(function (resposta) {
-            console.log("resposta: ", resposta);
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
 
-            if (resposta.ok) {
-            //   cardErro.style.display = "block";
+                if (resposta.ok) {
+                    //   cardErro.style.display = "block";
 
-            //   mensagem_erro.innerHTML =
-            //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                    //   mensagem_erro.innerHTML =
+                    //     "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
-            //   setTimeout(() => {
-            //     window.location = "login.html";
-            //   }, "2000");
+                    //   setTimeout(() => {
+                    //     window.location = "login.html";
+                    //   }, "2000");
 
-            //   limparFormulario();
-            //   finalizarAguardar();
-            alert('Cadastro realizado com sucesso')
+                    //   limparFormulario();
+                    //   finalizarAguardar();
+                    alert('Cadastro realizado com sucesso')
 
-            } else {
-            throw "Houve um erro ao tentar realizar o cadastro!";
-            alert('Erro no cadastro')
-            }
-        })
-        .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            // finalizarAguardar();
-        });
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                    alert('Erro no cadastro')
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                // finalizarAguardar();
+            });
 
         return false;
     }
 
-//   function sumirMensagem() {
-//     cardErro.style.display = "none";
-//   }
-const etapa1 = document.querySelector('.cadastro-etapa1');
-const etapa2 = document.querySelector('.cadastro-etapa2');
-const buttonCadastro = document.getElementById('button-cadastro');
-const buttonVoltar = document.getElementById('button-voltarEtapa');
-    function seguirEtapa() {     
+    //   function sumirMensagem() {
+    //     cardErro.style.display = "none";
+    //   }
+    const etapa1 = document.querySelector('.cadastro-etapa1');
+    const etapa2 = document.querySelector('.cadastro-etapa2');
+    const buttonCadastro = document.getElementById('button-cadastro');
+    const buttonVoltar = document.getElementById('button-voltarEtapa');
+    function seguirEtapa() {
         etapa1.style.display = "none";
         etapa2.style.display = "flex";
 
         buttonCadastro.innerHTML = "Cadastrar";
         buttonCadastro.setAttribute("onclick", "aviso()");
-        buttonVoltar.style.display = 'block' ;
+        buttonVoltar.style.display = 'block';
     };
-    function voltarEtapa() {        
+    function voltarEtapa() {
         etapa1.style.display = "flex";
         etapa2.style.display = "none";
 

@@ -1,230 +1,257 @@
 @import url(./style.css);
-
-body{
-    overflow: hidden;
+body {
+    background-color: var(--bgcolor);
+    margin: 0;
+    padding: 0;
+    color: #333;
 }
 
-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container-main {
+.header-content {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    background: var(--vementa);
-    border-radius: 30px;
-    border: 1px solid black;
-    text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 }
-.cadastro-container
-{
+
+.topNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--vmorango);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#logoTexto {
+    color: var(--bgcolor);
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list a {
+    color: var(--bgcolor);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-list a:hover {
+    color: var(--apetroleo);
+}
+
+.cadastro-container {
     width: 100%;
-    height: 90vh;
-    margin-top: 10vh;
-
+    min-height: 100vh;
+    padding-top: 80px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.container
-{
-    width: 70%;
-    height: 80vh;
-    background-color: lightgrey;
-    border-radius: 30px;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-.container-title
-{
-    width: 100%;
-    height: 15%;
-    font-size: 8vh;
-    font-weight: bold;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.box-cardlog
-{
-    height: 70%;
-    width: 100%;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10%;
-}
-.cardlog
-{
-    width: 45%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-.container-input
-{
-    height: 25%;
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.container-input-flex
-{
-    width: auto;
-    height: auto;
-
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    background-color: var(--bgcolor);
 }
-.button-container
-{
-    height: 15%;
-    width: 100%;
 
+.container {
+    width: 90%;
+    max-width: 1200px;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.container-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.title-main {
+    font-size: 2.5rem;
+    color: var(--apetroleo);
+    margin-bottom: 1rem;
+}
+
+.toggle-cadastro {
     display: flex;
     justify-content: center;
-    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
-input
-{
-    height: 5vh;
-    width: 25vw;
-    border: 0;
+
+.toggle-cadastro button {
+    padding: 0.75rem 1.5rem;
+    border: none;
     border-radius: 30px;
-    font-size: 2vh;
-    padding-left: 1vw;
-    background-color: rgb(230, 230, 230);
-}
-label
-{
-    font-size: 3vh;
+    background: #e0e0e0;
+    color: #333;
     font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
 }
-.container h2 {
-    text-align: center;
-    font-size: xx-large;
+
+.toggle-cadastro button.active {
+    background: var(--vmorango);
+    color: white;
+}
+
+.toggle-cadastro button:focus {
+    outline: 2px solid var(--apetroleo);
+}
+
+.form-cadastro {
+    display: none;
+    width: 100%;
+}
+
+.form-cadastro.active {
+    display: block;
+}
+
+.box-cardlog {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.cardlog {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.container-input {
+    width: 100%;
+}
+
+.container-input label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--apetroleo);
+}
+
+.container-input input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.3s;
+}
+
+.container-input input:focus {
+    border-color: var(--vmorango);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.2);
+}
+
+.error-text {
+    color: #d32f2f;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    min-height: 1.2rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.login-button,
+.btn-cadastrar {
+    padding: 0.8rem 2.5rem;
+    background: var(--vmorango);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-button:hover,
+.btn-cadastrar:hover {
+    background: var(--apetroleo);
+}
+
+.etapas-empresa {
+    width: 100%;
+}
+
+.etapa {
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.etapa.active {
+    display: flex;
 }
 
 .inputBox {
-    height: 5rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-.selectBox {
-    height: 5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-
-input:focus  {
-    border: 1px solid black;
-    outline: none;
-}
-
-select {
-    height: 1rem;
-    border-radius: 40px;
-    padding: 0.5rem;
-}
-
-#cadastro {
-    height: 52vh;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    flex-basis: 100px;
-    flex-wrap: wrap;
 }
 
-#cadastro .container {
-    border: 1px solid black;
-    padding: 2px;
-    height: 52vh;
-    width: 33%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: first baseline;
-    align-items: center;
+.inputBox label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--apetroleo);
 }
 
-.subcontainer {
-    height: 41vh;
+.inputBox input {
     width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.etapa-buttons {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: first baseline;
-    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
 }
 
-.login-button {
-    height: 75%;
-    width: 20%;
-    font-size: 4.5vh;
-    font-weight: bold;
-    font-family: sans-serif;
-    border-radius: 20px;
-    border: 0px;
+.btn-proximo,
+.btn-voltar {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
-.login-button:hover {
-    background-color: var(--apetroleo)
-}
-
-.link a {
-    color: black;
-}
-
-.link a:hover {
-    color: blue;
-    font-size: large;
-}
-
-.topNav{
+.btn-proximo {
     background: var(--vmorango);
+    color: white;
 }
 
-.topNav #logoTexto{
-    color: var(--bgcolor);
+.btn-voltar {
+    background: #e0e0e0;
+    color: #333;
 }
 
-.cadastro-etapa2{
-    display: none;
+.btn-proximo:hover {
+    background: var(--apetroleo);
 }
 
-#button-voltarEtapa{
-    display: none;
-}
-.error-text{
-    color: red;
-    font-size: 12px;
-    text-align: center;
+.btn-voltar:hover {
+    background: #bdbdbd;
 }
