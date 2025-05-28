@@ -19,7 +19,7 @@ CREATE TABLE empresa (
     nomeFantasia VARCHAR (45),
     inscEstadual VARCHAR(45) NOT NULL,
     CNPJ char(11) NOT NULL,
-    codigoAtivacao TINYINT NULL
+    codigoAcesso VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE endereco (
