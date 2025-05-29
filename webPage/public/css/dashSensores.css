@@ -121,6 +121,14 @@ a:hover {
 .topNav.scroll #logoTexto{
     color: var(--bgcolor);
 }
+.barra-vertical
+{
+    height: 8vh;
+    border-radius: 20px;
+    border: 0.1vw solid white ;
+}
+/* Fim da Nav Bar */
+/* Animação do menu vertical*/
 .botao-vertical
 {
     display: flex;
@@ -149,9 +157,66 @@ a:hover {
 .left
 {
     display: flex;
+    align-items: center;
     gap: 2vw;
 }
-/* Fim da Nav Bar */
+.menu-vertical
+{
+    height: 90%;
+    width: 30%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5vh;
+    background-color: var(--bgcolor);
+    padding: 10vh 2vw;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in;
+}
+.elements-menu.open-menu .menu-vertical
+{
+    transform: translateX(0%);
+}
+.menu-shadow
+{
+    height: 90%;
+    width: 70%;
+    background-color: #00000000;
+    transition: background-color 0.4s ease-in;
+}
+.elements-menu.open-menu .menu-shadow
+{
+    background-color: #00000050;
+}
+.elements-menu
+{
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    margin-top: 10vh;
+    z-index: 50;
+    position: fixed;    
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease-in, visibility 0s linear 0s;
+    pointer-events: auto;
+}
+.elements-menu.open-menu 
+{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease-in, visibility 0s linear 0s;
+    pointer-events: auto;
+}
+.subtitle-nav
+{
+    color: #fff;
+    font-size: 2vw;
+    font-weight: bolder;
+}
+/* Fim da animação nav Bar */
 .dashboard-screen
 {
     width: 100%;
@@ -304,56 +369,6 @@ a:hover {
     font-size: 1.5vw;
     font-weight: bold;
 }
-.menu-vertical
-{
-    height: 90%;
-    width: 30%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 5vh;
-    background-color: var(--bgcolor);
-    padding: 10vh 2vw;
-    transform: translateX(-100%);
-    transition: transform 0.4s ease-in;
-}
-.elements-menu.open-menu .menu-vertical
-{
-    transform: translateX(0%);
-}
-.menu-shadow
-{
-    height: 90%;
-    width: 70%;
-    background-color: #00000000;
-    transition: background-color 0.4s ease-in;
-}
-.elements-menu.open-menu .menu-shadow
-{
-    background-color: #00000050;
-}
-.elements-menu
-{
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    margin-top: 10vh;
-    z-index: 50;
-    position: fixed;    
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease-in, visibility 0s linear 0s;
-    pointer-events: auto;
-}
-.elements-menu.open-menu 
-{
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.4s ease-in, visibility 0s linear 0s;
-    pointer-events: auto;
-}
 .icon-Perfil
 {
     height: 30%;
@@ -400,4 +415,142 @@ a:hover {
 .button-sair:hover
 {
     color: #fff;
+}
+/* Config Dash Alto */
+.legenda-Alto
+{
+    width: 100%;
+    height: 6vh;
+    padding: 0px 5%;
+    display: flex;
+    align-items: flex-end;
+}
+.legenda-esquerda
+{
+    width: 30%;
+    height: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 1.25vw;
+    font-weight: bold;
+}
+.legenda-direita
+{
+    font-size: 1vw;
+    font-weight: bold;
+    height: 100%;
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.box-red
+{
+    background-color: #FF5555;
+    height: 4vh;
+    width: 4vh;
+    margin-right: 0.5vw;
+}
+.box-yellow
+{
+    background-color: #FFF155;
+    height: 4vh;
+    width: 4vh;
+    margin-right: 0.5vw;
+}
+.box-green
+{
+    background-color: #5DFF55;
+    height: 4vh;
+    width: 4vh;
+    margin-right: 0.5vw;
+}
+.legenda-letra
+{
+    height: 4vh;
+    width: auto;
+    margin-right: 0.5vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-content
+{
+    height: 80vh;
+    width: 90%;
+    background-color: #ffd8844d;
+    padding: 5%;
+
+    display: flex;
+    justify-content: space-between;
+}
+.canteiro-box
+{
+    width: calc(90%/8);
+    height: 100%;
+    background-color: var(--vementa);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.title-canteiro
+{
+    width: 100%;
+    height: 15%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+    text-align: center;
+    font-weight: bold;
+}
+.sensores-box
+{
+    height: 85%;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.sensor-box
+{
+    background-color: #fff;
+    width: 80%;
+    height: 20%;
+    cursor: pointer;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.name-sensor
+{
+    font-size: 1vw;
+    font-weight: bold;
+}
+.data-sensor
+{
+    font-size: 1.5vw;
+    font-weight: bolder;
+}
+.alert-ok
+{
+    background-color: #5DFF55;
+}
+.alert-alerta
+{
+    background-color: #FF5555;
+}
+.alert-atencao
+{
+    background-color: #FFF155;
 }

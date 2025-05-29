@@ -4,77 +4,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/dashAlto.css">
     <link rel="shortcut icon" href="./assets/icon.png" type="image/x-icon">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <title>DashBoard</title>
+    <link rel="stylesheet" href="./css/dashSensores.css">
+    <title>SmartBerry</title>
 </head>
 
 <body>
-    <header>
-        <nav class="nav-voltar">
-            <a href="./index.html">
-                <h2 id="logoTexto">SmartBerry</h2>
-            </a>
-            <button><a href="../public/perfil.html">Voltar</a></button>
-        </nav>
-    </header>
-
-<body>
-  <div class="layout-horizontal">
-      <aside class="menu-lateral">
-      <h2>Menu Lateral</h2><br>
-      <ul>
-        <li><a href="#">Visão geral</a></li>
-        <li><a href="#">Histórico</a></li>
-        <li><a href="#">Alertas</a></li>
-      </ul>
-    </aside>
-    <section class="canteiros">
-     <div class="canteiro" id="canteiro-1"><a href="./dashboard.html"><span>Canteiro 1</span></a></div>
-      <div class="canteiro" id="canteiro-2"><a href="./dashboard.html"><span>Canteiro 2</span></a></div>
-      <div class="canteiro" id="canteiro-3"><a href="./dashboard.html"><span>Canteiro 3</span></a></div>
-      <div class="canteiro" id="canteiro-4"><a href="./dashboard.html"><span>Canteiro 4</span></a></div>
-      <div class="canteiro" id="canteiro-5"><a href="./dashboard.html"><span>Canteiro 5</span></a></div>
-      <div class="canteiro" id="canteiro-6"><a href="./dashboard.html"><span>Canteiro 6</span></a></div>
-      <div class="canteiro" id="canteiro-7"><a href="./dashboard.html"><span>Canteiro 7</span></a></div>
-      <div class="canteiro" id="canteiro-8"><a href="./dashboard.html"><span>Canteiro 8</span></a></div>
+    <section id="indexTop">
+        <header>
+            <div class="header-content">
+                <nav class="topNav">
+                    <div class="left">
+                        <div class="botao-vertical">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                        <h2 id="logoTexto">SmartBerry</h2>
+                        <div class="barra-vertical"></div>
+                        <h3 class="subtitle-nav">Visão geral da plantação</h3>
+                    </div>
+            </div>
+            </nav>
+            </div>
+        </header>
     </section>
-  </div>
+    <section class="dashboard-screen">
+        <div class="elements-menu">
+            <div class="menu-vertical">
+                <img src="./assets/perfil-icon.png" alt="icon-Perfil" class="icon-Perfil">
+                <span class="title-welcome">Bem-Vindo Usuário</span>
+                <ul class="menu-list">
+                    <li class="option-menu"><u>Histórico de Alertas</u></li>
+                    <li class="option-menu"><u>Alterar Senha</u></li>
+                </ul>
+                <button class="button-sair">Sair da Conta</button>
+            </div>
+            <div class="menu-shadow"></div>
+        </div>
+        <div class="content-dashboard">
+            <div class="legenda-Alto">
+                <div class="legenda-esquerda">
+                    <span>Medição de Umidade de Solo(%) Em tempo Real</span>
+                </div>
+                <div class="legenda-direita">
+                    <div class="box-red"></div>
+                    <span class="legenda-letra">Umidade do solo em Alerta</span>
+                    <div class="box-yellow"></div>
+                    <span class="legenda-letra">Umidade do solo em Atenção</span>
+                    <div class="box-green"></div>
+                    <span class="legenda-letra">Umidade do solo normal</span>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="canteiro-box">
+                    <div class="title-canteiro">Canteiro 1</div>
+                    <div class="sensores-box">
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 1</div>
+                            <div class="data-sensor" id="sensor1">72%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 2</div>
+                            <div class="data-sensor" id="sensor2">73%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 3</div>
+                            <div class="data-sensor" id="sensor3">72%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="canteiro-box">
+                    <div class="title-canteiro">Canteiro 2</div>
+                    <div class="sensores-box">
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 4</div>
+                            <div class="data-sensor" id="sensor4">65%</div>
+                        </div>
+                        <div class="sensor-box" id="sensor5">
+                            <div class="name-sensor">Sensor 5</div>
+                            <div class="data-sensor" id="sensor5">75%</div>
+                        </div>
+                        <div class="sensor-box" id="sensor6">
+                            <div class="name-sensor">Sensor 6</div>
+                            <div class="data-sensor" id="sensor6">76%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="canteiro-box">
+                    <div class="title-canteiro">Canteiro 3</div>
+                    <div class="sensores-box">
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 7</div>
+                            <div class="data-sensor" id="sensor7">50%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 8</div>
+                            <div class="data-sensor" id="sensor8">54%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 9</div>
+                            <div class="data-sensor" id="sensor9">52%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="canteiro-box">
+                    <div class="title-canteiro">Canteiro 4</div>
+                    <div class="sensores-box">
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 10</div>
+                            <div class="data-sensor" id="sensor10">78%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 11</div>
+                            <div class="data-sensor" id="sensor11">77%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 12</div>
+                            <div class="data-sensor" id="sensor12">76%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="canteiro-box">
+                    <div class="title-canteiro">Canteiro 5</div>
+                    <div class="sensores-box">
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 13</div>
+                            <div class="data-sensor" id="sensor13">74%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 14</div>
+                            <div class="data-sensor" id="sensor14">76%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 15</div>
+                            <div class="data-sensor" id="sensor15">76%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="canteiro-box">
+                    <div class="title-canteiro">Canteiro 6</div>
+                    <div class="sensores-box">
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 16</div>
+                            <div class="data-sensor" id="sensor16">72%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 17</div>
+                            <div class="data-sensor" id="sensor17">73%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 18</div>
+                            <div class="data-sensor" id="sensor18">72%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="canteiro-box">
+                    <div class="title-canteiro">Canteiro 7</div>
+                    <div class="sensores-box">
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 19</div>
+                            <div class="data-sensor" id="sensor19">85%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 20</div>
+                            <div class="data-sensor" id="sensor20">88%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 21</div>
+                            <div class="data-sensor" id="sensor21">92%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="canteiro-box">
+                    <div class="title-canteiro">Canteiro 8</div>
+                    <div class="sensores-box">
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 22</div>
+                            <div class="data-sensor" id="sensor22">30%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 23</div>
+                            <div class="data-sensor" id="sensor23">35%</div>
+                        </div>
+                        <div class="sensor-box">
+                            <div class="name-sensor">Sensor 24</div>
+                            <div class="data-sensor" id="sensor24">41%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
+
 </html>
 <script>
-    const statusDosCanteiros = [
-        { id: 1, status: "bom" },
-        { id: 2, status: "ruim" },
-        { id: 3, status: "bom" },
-        { id: 4, status: "bom" },
-        { id: 5, status: "ruim" },
-        { id: 6, status: "bom" },
-        { id: 7, status: "ruim" },
-        { id: 8, status: "bom" },
-    ];
-
-    function atualizarCanteiros(statusArray) {
-        statusArray.forEach(canteiro => {
-            const divCanteiro = document.getElementById(`canteiro-${canteiro.id}`);
-            if (divCanteiro) {
-                if (canteiro.status === "bom") {
-                    divCanteiro.classList.add("bom");
-                } else {
-                    divCanteiro.classList.remove("bom");
-                }
-            }
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        atualizarCanteiros(statusDosCanteiros);
+    document.querySelector('.botao-vertical').addEventListener('click', () => {
+        const menu = document.querySelector('.elements-menu');
+        const botao = document.querySelector('.botao-vertical');
+        menu.classList.toggle('open-menu');
+        botao.classList.toggle('x');
+    });
+    document.querySelector('.menu-shadow').addEventListener('click', () => {
+        const menu = document.querySelector('.elements-menu');
+        const botao = document.querySelector('.botao-vertical');
+        menu.classList.remove('open-menu');
+        botao.classList.remove('x');
+    })
+    // Config para colorir Tirar depois
+    // 1,2,3,5,6,10,11,12,13,14,15,16,17,18
+    // 4,19,20
+    // 21,22,23,24
+    document.getElementById('sensor1').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor2').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor3').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor4').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor5').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor6').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor7').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor8').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor9').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor10').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor11').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor12').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor13').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor14').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor15').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor16').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor17').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor18').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor19').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor20').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor21').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor22').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor23').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
+    });
+    document.getElementById('sensor24').addEventListener('click', () => {
+        //Colocar posterior para api funcionar na outra página
+        window.location.href = 'dashboardSensor.html';
     });
 
 </script>
