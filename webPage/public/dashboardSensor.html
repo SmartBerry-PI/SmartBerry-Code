@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/dashSensores.css">
+    <title>SmartBerry</title>
+</head>
+
+<body>
+    <section id="indexTop">
+        <header>
+            <div class="header-content">
+                <nav class="topNav">
+                    <div class="left">
+                        <div class="botao-vertical">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                        <h2 id="logoTexto">SmartBerry</h2>
+                    </div>
+                    <div class="mid">
+                        <button class="acont">Voltar na Visão Geral</button>
+                    </div>
+            </div>
+            </nav>
+            </div>
+        </header>
+    </section>
+    <section class="dashboard-screen">
+        <div class="content-dashboard">
+            <h2 class="title-info-sensor">Canteiro 3 - Sensor 9</h2>
+            <div class="kpis-box">
+                <div class="kpi-content">
+                    <span class="title-kpi">Status sensor</span>
+                    <div class="kpi-box ativo">Ativo</div>
+                </div>
+                <div class="kpi-content">
+                    <span class="title-kpi">Variação nas últimas 24h</span>
+                    <div class="kpi-box">12%</div>
+                </div>
+                <div class="kpi-content">
+                    <span class="title-kpi">Quantidade de alertas gerados p/Semana </span>
+                    <div class="kpi-box">5</div>
+                </div>
+                <div class="kpi-content">
+                    <span class="title-kpi">Dia com mais Alertas</span>
+                    <div class="kpi-box">Segunda</div>
+                </div>
+            </div>
+            <div class="grafico-box">
+                <div class="legenda">
+                    <span class="title-legenda">Legenda - Parâmetros para alerta</span>
+                    <div class="level-alertas">
+                        <div class="red">
+                            <span class="subtitle-legenda"><=60% </span>
+                            <span class="subtitle-legenda">Perigo</span>
+                        </div>
+                        <div class="yellow">
+                            <span class="subtitle-legenda"><70% </span>
+                            <span class="subtitle-legenda">Alerta</span>
+                        </div>
+                        <div class="green">
+                            <span class="subtitle-legenda">70% </span>
+                            <span class="subtitle-legenda">Ideal</span>    
+                        </div>
+                        <div class="yellow">
+                            <span class="subtitle-legenda">>=80% </span>
+                            <span class="subtitle-legenda">Alerta</span>
+                        </div>
+                        <div class="red">
+                            <span class="subtitle-legenda">>=90% </span>
+                            <span class="subtitle-legenda">Perigo</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grafico">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</html>
+<script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+            }]
+        }
+    });
+</script>

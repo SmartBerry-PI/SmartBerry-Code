@@ -1,0 +1,289 @@
+:root {
+    --vementa: #6FCF97;
+    --vmorango: #EB5757;
+    --apetroleo: #2F80ED;
+    --cinza: #4F4F4F;
+    --cneutro: #BDBDBD;
+    --bgcolor: #f7f3f0;
+}
+
+/* overral config */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+    max-width: 100%;
+}
+
+body {
+    background: var(--bgcolor);
+    position: relative;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+/* header */
+.topNav  {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--vmorango);
+    height: 10vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    padding: 0 2em;
+    position: fixed;
+    transition: 0.4s;
+}
+
+nav .mid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    width: 40%;
+}
+
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 0;
+}
+
+.nav-list li {
+    letter-spacing: 2px;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+.acont {
+    background-color: #2F80ED;
+    color: #000;
+    font-size: 1vw;
+    font-weight: 800;
+    border: none;
+    border-radius: 25px;
+    width: 14vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+.acont:hover
+{
+    color: #fff;
+}
+
+.logo {
+    width: 190px;
+    height: auto;
+    align-self: center;
+}
+
+#logoTexto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-size: 2.5em;
+}
+
+
+.topNav.scroll {
+    background-color: var(--vmorango);
+    color: black;
+    padding: 0 3em;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.topNav.scroll #logoTexto{
+    color: var(--bgcolor);
+}
+.botao-vertical
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8vh;
+}
+.bar
+{
+    border: 0.5vh solid #fff;
+    width: 2.5vw;
+}
+.left
+{
+    display: flex;
+    gap: 2vw;
+}
+/* Fim da Nav Bar */
+.dashboard-screen
+{
+    width: 100%;
+    height: 100vh;
+}
+.content-dashboard
+{
+    width: 100%;
+    height: 100%;
+    padding-top: 12vh;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.title-info-sensor
+{
+    font-size: 3vw;
+    font-weight: 900;
+    margin-bottom: 7vh;
+}
+.kpis-box
+{
+    height: 30%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7vw;
+    margin-bottom: 7vh;
+}
+.ativo
+{
+    color: #13B813;
+}
+.inativo
+{
+    color: #FF5555;
+}
+.kpi-content
+{
+    height: 100%;
+    width: 15%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1vh;
+}
+.kpi-box
+{
+    height: 60%;
+    width: 100%;
+    background-color: #fff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5vw;
+    font-weight: bolder;
+}
+.title-kpi
+{
+    font-size: 1.5vw;
+    text-align: center;
+    font-weight: bold;
+}
+.grafico-box
+{
+    width: 100%;
+    height: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+}
+.legenda
+{
+    width: 30%;
+    height: 100%;
+    display: flex;    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2vh;
+}
+.grafico
+{
+    height: 100%;
+    width: 50%;
+}
+.level-alertas
+{
+    height: 30%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.red
+{
+    width: 25%;
+    height: 100%;
+    background-color: #FF5555;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.yellow
+{
+    width: 25%;
+    height: 100%;
+    background-color: #FFF155;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.green
+{
+    width: 25%;
+    height: 100%;
+    background-color: #5DFF55;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.subtitle-legenda
+{
+    font-size: 1.3vw;
+    font-weight: bold;
+}
+.title-legenda
+{
+    font-size: 1.5vw;
+    font-weight: bold;
+}
