@@ -138,13 +138,13 @@ a:hover {
     transition: all 0.4s ease;
 }
 .botao-vertical.x .bar:nth-child(1){
-    transform: rotate(45deg) translate(1.5vh,1vh);
+    transform: rotate(45deg) translate(1.5vh,1.35vh);
 }
 .botao-vertical.x .bar:nth-child(2){
     opacity: 0;
 }
 .botao-vertical.x .bar:nth-child(3){
-    transform: rotate(-45deg) translate(1vh,-1vh);
+    transform: rotate(-45deg) translate(0.8vh,-1vh);
 }
 .left
 {
