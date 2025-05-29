@@ -31,6 +31,19 @@
         </header>
     </section>
     <section class="dashboard-screen">
+        <div class="elements-menu">
+            <div class="menu-vertical">
+                <img src="./assets/perfil-icon.png" alt="icon-Perfil" class="icon-Perfil">
+                <span class="title-welcome">Bem-Vindo Usuário</span>
+                <ul class="menu-list">
+                    <li class="option-menu"><u>Visão Geral</u></li>
+                    <li class="option-menu"><u>Histórico de Alertas</u></li>
+                    <li class="option-menu"><u>Alterar Senha</u></li>
+                </ul>
+                <button class="button-sair">Sair da Conta</button>
+            </div>
+            <div class="menu-shadow"></div>
+        </div>
         <div class="content-dashboard">
             <h2 class="title-info-sensor">Canteiro 3 - Sensor 9</h2>
             <div class="kpis-box">
@@ -56,16 +69,18 @@
                     <span class="title-legenda">Legenda - Parâmetros para alerta</span>
                     <div class="level-alertas">
                         <div class="red">
-                            <span class="subtitle-legenda"><=60% </span>
-                            <span class="subtitle-legenda">Perigo</span>
+                            <span class="subtitle-legenda">
+                                <=60% </span>
+                                    <span class="subtitle-legenda">Perigo</span>
                         </div>
                         <div class="yellow">
-                            <span class="subtitle-legenda"><70% </span>
-                            <span class="subtitle-legenda">Alerta</span>
+                            <span class="subtitle-legenda">
+                                <70% </span>
+                                    <span class="subtitle-legenda">Alerta</span>
                         </div>
                         <div class="green">
                             <span class="subtitle-legenda">70% </span>
-                            <span class="subtitle-legenda">Ideal</span>    
+                            <span class="subtitle-legenda">Ideal</span>
                         </div>
                         <div class="yellow">
                             <span class="subtitle-legenda">>=80% </span>
@@ -88,17 +103,108 @@
 
 </html>
 <script>
-    const ctx = document.getElementById('myChart');
 
-    new Chart(ctx, {
+    document.querySelector('.botao-vertical').addEventListener('click', () => {
+        const menu = document.querySelector('.elements-menu');
+        const botao = document.querySelector('.botao-vertical');
+        menu.classList.toggle('open-menu');
+        botao.classList.toggle('x');
+    });
+    document.querySelector('.menu-shadow').addEventListener('click', () => {
+        const menu = document.querySelector('.elements-menu');
+        const botao = document.querySelector('.botao-vertical');
+        menu.classList.remove('open-menu');
+        botao.classList.remove('x');
+    })
+    const horarios = ['10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00'];
+    const umidade = [73, 72, 75, 78, 79, 81, 81, 79, 77, 70];
+    const ctx = document.getElementById('myChart');
+    const dia = new Date();
+    const formatDia = dia.toLocaleDateString('pt-BR');
+
+    function trocarcores(umidade) {
+        const cor = [];
+
+        for (let i = 0; i < umidade.length; i++) {
+            if (umidade[i] <= 60) {
+                cor.push('red');
+            }
+            else if (umidade[i] < 70) {
+                cor.push('yellow');
+            }
+            else if (umidade[i] >= 70 && umidade[i] <= 80) {
+                cor.push('green');
+            }
+            else if (umidade[i] > 80) {
+                cor.push('yellow');
+            }
+            else {
+                cor.push('red');
+            }
+
+        }
+    }
+    const cor_linha = trocarcores(umidade);
+    const grafico_umidade = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: horarios,
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
+                label: 'Umidade do solo',
+                borderColor: 'green',
+                data: umidade,
+                tension: 0.1,
+                pointRadius: 0,
+                segment: {
+                    borderColor: ctx => {
+                        const comeco = ctx.p0.parsed.y;
+                        const final = ctx.p1.parsed.y;
+                        if (comeco <= 60 || final <= 60) {
+                            return 'red';
+                        }
+                        else if (comeco < 70 || final < 70) {
+                            return 'yellow';
+                        }
+                        else if ((comeco > 70 || final > 70) && (comeco < 70 || final < 70)) {
+                            return 'green';
+                        }
+                        else if (comeco >= 80 || final >= 80) {
+                            return 'yellow';
+                        }
+                        else if (comeco >= 90 || final >= 90) {
+                            return 'red';
+                        }
+                    }
+                },
             }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Historico de umidade do sensor no dia ' + formatDia,
+                    font: {
+                        size: 15,
+                    },
+                    padding: {
+                        top: 20,
+                        bottom: 30
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    ticks: {
+                        callback: function (value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            }
         }
-    });
+    })
 </script>
