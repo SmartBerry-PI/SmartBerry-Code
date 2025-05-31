@@ -50,14 +50,13 @@ CREATE TABLE log_acesso (
 
 
 CREATE TABLE canteiro (
-idCanteiro INT,
+idCanteiro INT AUTO_INCREMENT,
 fkEmpresa INT,
-dtCriacao DATE NOT NULL,
+dtCriacao DATETIME DEFAULT CURRENT_TIMESTAMP,
 descricao VARCHAR (80),
 PRIMARY KEY (idCanteiro,fkEmpresa),
 
 CONSTRAINT fkCanteiroEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa));
-
 
 CREATE TABLE sensor (
     idSensor INT AUTO_INCREMENT,
@@ -93,9 +92,9 @@ dtAlerta DATETIME NOT NULL
 );
 
 CREATE TABLE contato (
-  idContato INT NOT NULL,
+  idContato INT NOT NULL AUTO_INCREMENT,
   fkEmpresa INT NOT NULL,
-nome VARCHAR(45) NULL,
+  nome VARCHAR(45) NULL,
   numero VARCHAR(45) NULL,
   email VARCHAR(45) NULL,
   
