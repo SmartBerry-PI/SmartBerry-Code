@@ -36,7 +36,7 @@
                 <img src="./assets/perfil-icon.png" alt="icon-Perfil" class="icon-Perfil">
                 <span class="title-welcome">Bem-Vindo Usuário</span>
                 <ul class="menu-list">
-                    <li class="option-menu"><u>Visão Geral</u></li>
+                    <li class="option-menu backto-alto"><u>Visão Geral</u></li>
                     <li class="option-menu"><u>Histórico de Alertas</u></li>
                     <li class="option-menu"><u>Alterar Senha</u></li>
                 </ul>
@@ -83,7 +83,7 @@
                             <span class="subtitle-legenda">Ideal</span>
                         </div>
                         <div class="yellow">
-                            <span class="subtitle-legenda">>=80% </span>
+                            <span class="subtitle-legenda">>80% </span>
                             <span class="subtitle-legenda">Alerta</span>
                         </div>
                         <div class="red">
@@ -115,7 +115,24 @@
         const botao = document.querySelector('.botao-vertical');
         menu.classList.remove('open-menu');
         botao.classList.remove('x');
-    })
+    });
+    document.querySelector('.acont').addEventListener('click', () => {
+        window.location.href = 'dashAlto.html';
+    });
+    document.querySelector('.backto-alto').addEventListener('click', () => {
+        window.location.href = 'dashAlto.html';
+    });
+    document.querySelector('.button-sair').addEventListener('click', () => {
+        window.location.href = 'index.html';
+    });
+    const texto_bem_vindo = document.querySelector('.title-welcome');
+
+    var plotar_textos = setInterval(() => {
+        texto_bem_vindo.innerHTML = `Bem-Vindo, ${sessionStorage.NOME_USUARIO}`;
+        setTimeout(() => {
+            clearInterval(plotar_textos);
+        },1000)
+    }, 500)
     const horarios = ['10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00'];
     const umidade = [73, 72, 75, 78, 79, 81, 81, 79, 77, 70];
     const ctx = document.getElementById('myChart');

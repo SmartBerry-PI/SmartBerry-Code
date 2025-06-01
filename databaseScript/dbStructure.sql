@@ -10,9 +10,18 @@ CREATE TABLE usuario (
     telefoneCelular VARCHAR(45) NOT NULL,
     cpf CHAR (11) NOT NULL,
     email VARCHAR (45) NOT NULL,
-    senha VARCHAR(20) NOT NULL
+    senha VARCHAR(500) NOT NULL,
+    contaSup tinyint default 0
 );
-
+SELECT u.idUsuario, u.nome, u.email, u.username, u.senha, u.cpf, u.telefoneCelular, u.sobrenome 
+FROM usuario as u JOIN log_acesso
+on u.idUsuario = log_acesso.FkUsuario
+join empresa
+on log_acesso.FkEmpresa = empresa.idEmpresa
+WHERE (u.username = 'jo_silva' OR u.email = 'joao.silva@email.com') AND u.senha = 'senha@segura123' AND empresa.codigoAcesso = 'abc123def4';
+select * from usuario;
+select * from empresa;
+select * from log_acesso;
 CREATE TABLE empresa (
     idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
     razaoSocial VARCHAR (45) NOT NULL,
@@ -41,7 +50,7 @@ CREATE TABLE log_acesso (
 	idLog_Acesso INT,
     FkEmpresa INT,
     FkUsuario INT,
-    dtLog_Acesso DATETIME,
+    dtLog_Acesso DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT pkCompostaLog PRIMARY KEY (FkEmpresa, FkUsuario, idLog_Acesso),
     CONSTRAINT fkEmpresaLog FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
@@ -101,7 +110,7 @@ CREATE TABLE contato (
   CONSTRAINT pkCompostaContato PRIMARY KEY (idContato, fkEmpresa),
   CONSTRAINT fkContatoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa));
   
-
+INSERT INTO usuario VALUE (1, 'Suporte', 'smartberry', 'smartberry-Suporte', '12345678910', '11999998888', 'smartberry@smartberry.com', 'senha@seguraSUPORTE123');
 
 
 

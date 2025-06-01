@@ -4,14 +4,17 @@ var aquarioModel = require("../models/aquarioModel");
 function autenticar(req, res) {
     var usuario = req.body.usuarioServer;
     var senha = req.body.senhaServer;
+    var codigo = req.body.codigoServer;
 
     if (usuario == undefined) {
         res.status(400).send("Seu usuario está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
+    } else if (codigo == undefined) {
+        res.status(400).send("Seu código está undefined")
     } else {
 
-        usuarioModel.autenticar(usuario, senha)
+        usuarioModel.autenticar(usuario, senha, codigo)
             .then(
                 function (resultadoAutenticar) {
                     console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
@@ -25,10 +28,10 @@ function autenticar(req, res) {
                             nome: resultadoAutenticar[0].nome,
                             sobrenome: resultadoAutenticar[0].sobrenome,
                             username: resultadoAutenticar[0].username,
-                            senha: resultadoAutenticar[0].senha,
                             telefonecelular: resultadoAutenticar[0].telefoneCelular,
                             cpf: resultadoAutenticar[0].cpf,
                             email: resultadoAutenticar[0].email,
+                            empresa: resultadoAutenticar[0].empresa
 
                         });
 
@@ -38,7 +41,7 @@ function autenticar(req, res) {
                         res.status(403).send("Mais de um usuário com o mesmo login e senha!");
                     }
                 }
-                
+
             ).catch(
                 function (erro) {
                     console.log(erro);
@@ -95,8 +98,79 @@ function cadastrar(req, res) {
             );
     }
 }
+function buscarcanteiros(req, res) {
+    var fk_empresa = req.params.fk_empresa;
+    if (fk_empresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    }
+    else {
+        usuarioModel.buscarcanteiros(fk_empresa)
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+
+}
+function buscarqtdsensores(req, res) {
+    var fk_empresa = req.params.fk_empresa;
+    if (fk_empresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else {
+        usuarioModel.buscarqtdsensores(fk_empresa)
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+
+}
+function buscarumidade(req, res) {
+    var fk_empresa = req.params.fk_empresa;
+    var fk_canteiro = req.params.fk_canteiro;
+    var fk_sensor = req.params.fk_sensor;
+
+    if (fk_empresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else if (fk_sensor == undefined) {
+        res.status(400).send("Seu fkSensor está undefined!");
+    } else if (fk_canteiro == undefined) {
+        res.status(400).send("Seu fk_canteiro está undefined!");
+    } else {
+        usuarioModel.buscarumidade(fk_empresa, fk_canteiro, fk_sensor)
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+
+}
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    buscarcanteiros,
+    buscarqtdsensores,
+    buscarumidade
 }

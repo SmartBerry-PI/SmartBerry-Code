@@ -49,6 +49,11 @@
             <input type="password" id="ipt_senha" name="senha" required>
           </div>
           <div id="error_password" class="error-text"></div>
+          <div class="container-input-flex">
+            <label for="senha">Código de Acesso:</label>
+            <input type="text" id="ipt_codigo" name="codigo" required>
+          </div>
+          <div id="error_password" class="error-text"></div>
         </div>
         <div class="box-url">
           <a href="" class="link">Esqueci minha senha</a>
@@ -77,6 +82,7 @@
 
     var usuarioVar = ipt_usuario.value;
     var senhaVar = ipt_senha.value;
+    var codigoVar = ipt_codigo.value;
 
     // if (usuarioVar == "" || senhaVar == "") {
     //   cardErro.style.display = "block"
@@ -99,7 +105,8 @@
       },
       body: JSON.stringify({
         usuarioServer: usuarioVar,
-        senhaServer: senhaVar
+        senhaServer: senhaVar,
+        codigoServer: codigoVar
       })
     }).then(function (resposta) {
       console.log("ESTOU NO THEN DO entrar()!")
@@ -114,15 +121,15 @@
           sessionStorage.NOME_USUARIO = json.nome;
           sessionStorage.SOBRENOME_USUARIO = json.sobrenome;
           sessionStorage.USERNAME_USUARIO = json.username;
-          sessionStorage.SENHA_USUARIO = json.senha;
           sessionStorage.TELEFONECELULAR_USUARIO = json.telefonecelular;
           sessionStorage.CPF_USUARIO = json.cpf;
           sessionStorage.EMAIL_USUARIO = json.email;
+          sessionStorage.FK_EMPRESA = json.empresa;
 
           alert("Login realizado com sucesso!")
 
           setTimeout(function () {
-            window.location = "./perfil.html";
+            window.location.href = "dashAlto.html";
           }, 1000); // apenas para exibir o loading
 
         });

@@ -9,7 +9,7 @@
     <title>SmartBerry</title>
 </head>
 
-<body>
+<body onload="plotar_info1()">
     <section id="indexTop">
         <header>
             <div class="header-content">
@@ -60,15 +60,15 @@
                 <div class="canteiro-box">
                     <div class="title-canteiro">Canteiro 1</div>
                     <div class="sensores-box">
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor1">
                             <div class="name-sensor">Sensor 1</div>
                             <div class="data-sensor" id="sensor1">72%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor2">
                             <div class="name-sensor">Sensor 2</div>
                             <div class="data-sensor" id="sensor2">73%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor3">
                             <div class="name-sensor">Sensor 3</div>
                             <div class="data-sensor" id="sensor3">72%</div>
                         </div>
@@ -77,15 +77,15 @@
                 <div class="canteiro-box">
                     <div class="title-canteiro">Canteiro 2</div>
                     <div class="sensores-box">
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor4">
                             <div class="name-sensor">Sensor 4</div>
                             <div class="data-sensor" id="sensor4">65%</div>
                         </div>
-                        <div class="sensor-box" id="sensor5">
+                        <div class="sensor-box" id="boxsensor5">
                             <div class="name-sensor">Sensor 5</div>
                             <div class="data-sensor" id="sensor5">75%</div>
                         </div>
-                        <div class="sensor-box" id="sensor6">
+                        <div class="sensor-box" id="boxsensor6">
                             <div class="name-sensor">Sensor 6</div>
                             <div class="data-sensor" id="sensor6">76%</div>
                         </div>
@@ -94,15 +94,15 @@
                 <div class="canteiro-box">
                     <div class="title-canteiro">Canteiro 3</div>
                     <div class="sensores-box">
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor7">
                             <div class="name-sensor">Sensor 7</div>
                             <div class="data-sensor" id="sensor7">50%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor8">
                             <div class="name-sensor">Sensor 8</div>
                             <div class="data-sensor" id="sensor8">54%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor9">
                             <div class="name-sensor">Sensor 9</div>
                             <div class="data-sensor" id="sensor9">52%</div>
                         </div>
@@ -111,15 +111,15 @@
                 <div class="canteiro-box">
                     <div class="title-canteiro">Canteiro 4</div>
                     <div class="sensores-box">
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor10">
                             <div class="name-sensor">Sensor 10</div>
                             <div class="data-sensor" id="sensor10">78%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor11">
                             <div class="name-sensor">Sensor 11</div>
                             <div class="data-sensor" id="sensor11">77%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor12">
                             <div class="name-sensor">Sensor 12</div>
                             <div class="data-sensor" id="sensor12">76%</div>
                         </div>
@@ -128,15 +128,15 @@
                 <div class="canteiro-box">
                     <div class="title-canteiro">Canteiro 5</div>
                     <div class="sensores-box">
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor13">
                             <div class="name-sensor">Sensor 13</div>
                             <div class="data-sensor" id="sensor13">74%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor14">
                             <div class="name-sensor">Sensor 14</div>
                             <div class="data-sensor" id="sensor14">76%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor15">
                             <div class="name-sensor">Sensor 15</div>
                             <div class="data-sensor" id="sensor15">76%</div>
                         </div>
@@ -145,15 +145,15 @@
                 <div class="canteiro-box">
                     <div class="title-canteiro">Canteiro 6</div>
                     <div class="sensores-box">
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor16">
                             <div class="name-sensor">Sensor 16</div>
                             <div class="data-sensor" id="sensor16">72%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor17">
                             <div class="name-sensor">Sensor 17</div>
                             <div class="data-sensor" id="sensor17">73%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor18">
                             <div class="name-sensor">Sensor 18</div>
                             <div class="data-sensor" id="sensor18">72%</div>
                         </div>
@@ -162,15 +162,15 @@
                 <div class="canteiro-box">
                     <div class="title-canteiro">Canteiro 7</div>
                     <div class="sensores-box">
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor19">
                             <div class="name-sensor">Sensor 19</div>
                             <div class="data-sensor" id="sensor19">85%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor20">
                             <div class="name-sensor">Sensor 20</div>
                             <div class="data-sensor" id="sensor20">88%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor21">
                             <div class="name-sensor">Sensor 21</div>
                             <div class="data-sensor" id="sensor21">92%</div>
                         </div>
@@ -179,15 +179,15 @@
                 <div class="canteiro-box">
                     <div class="title-canteiro">Canteiro 8</div>
                     <div class="sensores-box">
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor22">
                             <div class="name-sensor">Sensor 22</div>
                             <div class="data-sensor" id="sensor22">30%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor23">
                             <div class="name-sensor">Sensor 23</div>
                             <div class="data-sensor" id="sensor23">35%</div>
                         </div>
-                        <div class="sensor-box">
+                        <div class="sensor-box" id="boxsensor24">
                             <div class="name-sensor">Sensor 24</div>
                             <div class="data-sensor" id="sensor24">41%</div>
                         </div>
@@ -211,106 +211,205 @@
         const botao = document.querySelector('.botao-vertical');
         menu.classList.remove('open-menu');
         botao.classList.remove('x');
-    })
+    });
+    document.querySelector('.button-sair').addEventListener('click', () => {
+        window.location.href = 'index.html';
+    });
+    const texto_bem_vindo = document.querySelector('.title-welcome');
+
+    var plotar_textos = setInterval(() => {
+        texto_bem_vindo.innerHTML = `Bem-Vindo, ${sessionStorage.NOME_USUARIO}`;
+        setTimeout(() => {
+            clearInterval(plotar_textos);
+        }, 1000)
+    }, 500)
     // Config para colorir Tirar depois
     // 1,2,3,5,6,10,11,12,13,14,15,16,17,18
     // 4,19,20
     // 21,22,23,24
-    document.getElementById('sensor1').addEventListener('click', () => {
+    document.getElementById('boxsensor1').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor2').addEventListener('click', () => {
+    document.getElementById('boxsensor2').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor3').addEventListener('click', () => {
+    document.getElementById('boxsensor3').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor4').addEventListener('click', () => {
+    document.getElementById('boxsensor4').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor5').addEventListener('click', () => {
+    document.getElementById('boxsensor5').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor6').addEventListener('click', () => {
+    document.getElementById('boxsensor6').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor7').addEventListener('click', () => {
+    document.getElementById('boxsensor7').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor8').addEventListener('click', () => {
+    document.getElementById('boxsensor8').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor9').addEventListener('click', () => {
+    document.getElementById('boxsensor9').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor10').addEventListener('click', () => {
+    document.getElementById('boxsensor10').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor11').addEventListener('click', () => {
+    document.getElementById('boxsensor11').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor12').addEventListener('click', () => {
+    document.getElementById('boxsensor12').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor13').addEventListener('click', () => {
+    document.getElementById('boxsensor13').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor14').addEventListener('click', () => {
+    document.getElementById('boxsensor14').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor15').addEventListener('click', () => {
+    document.getElementById('boxsensor15').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor16').addEventListener('click', () => {
+    document.getElementById('boxsensor16').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor17').addEventListener('click', () => {
+    document.getElementById('boxsensor17').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor18').addEventListener('click', () => {
+    document.getElementById('boxsensor18').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor19').addEventListener('click', () => {
+    document.getElementById('boxsensor19').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor20').addEventListener('click', () => {
+    document.getElementById('boxsensor20').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor21').addEventListener('click', () => {
+    document.getElementById('boxsensor21').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor22').addEventListener('click', () => {
+    document.getElementById('boxsensor22').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor23').addEventListener('click', () => {
+    document.getElementById('boxsensor23').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
-    document.getElementById('sensor24').addEventListener('click', () => {
+    document.getElementById('boxsensor24').addEventListener('click', () => {
         //Colocar posterior para api funcionar na outra página
         window.location.href = 'dashboardSensor.html';
     });
+    var fk_empresa = sessionStorage.FK_EMPRESA;
+    //Plotagem de dados na dashboard
+    function plotar_info1() {
+        var qtd_canteiros = [];
+        var id_sensores = 0;
+        fetch(`/usuarios/buscarcanteiros/${fk_empresa}`, {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+            .then(data => {
+                return data.json();
+            })
+            .then(data => {
+                console.log("Canteiros Puxado com sucesso")
+                qtd_canteiros = data;
+                console.log(qtd_canteiros);
+            })
+            .catch(error => {
+                console.log("Erro no catch:", error);
+            })
+            var sensores_id = [];
+            fetch(`/usuarios/buscarqtdsensores/${fk_empresa}`, {
+                method: 'GET',
+                headers: {
+                    "Content-type": "application/json"
+                }
+            })
+                .then(data => {
+                    return data.json();
+                })
+                .then(data => {
+                    console.log("Sensores Ids Puxado com sucesso")
+                    idsensores = data;
+                    console.log(idsensores)
+                    plotar_info2();
+                })
+                .catch(error => {
+                    console.log("Erro no catch:", error);
+                })
+    }
+    function plotar_info2() {
+        for(let i = 0; i < idsensores.length; i++)
+            {
+                const elemento = document.getElementById(`sensor${i+1}`);
+                const elemento2 = document.getElementById(`boxsensor${i+1}`);
+                var fk_canteiro = idsensores[i].fkCanteiro;
+                var fk_sensor = idsensores[i].idSensor;
+                fetch(`/usuarios/buscarumidade/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
+                    method: 'GET',
+                    headers: {
+                    "Content-type": "application/json"
+                    }
+                })
+                .then(data => {
+                    return data.json();
+                })
+                .then(data => {
+                    console.log("Umidade Puxado com sucesso")
+                    console.log(data);
+                    var umidade = Number(data[0].umidadeSolo);
+                    elemento.innerHTML = `${umidade}%`;
+                    if (umidade >= 70 && umidade <= 80 ) {
+                        elemento2.classList.add('alert-ok');
+                    } else if (umidade > 80 && umidade < 90 )
+                    {
+                        elemento2.classList.add('alert-atencao');
+                    }
+                    else if (umidade > 90)
+                    {
+                        elemento2.classList.add('alert-alerta');
+                    }
+                    else if(umidade < 70 && umidade > 60)
+                    {
+                        elemento2.classList.add('alert-atencao');
+                    }
+                    else
+                    {
+                        elemento2.classList.add('alert-alerta');
+                    }
+
+                })
+                .catch(error => {
+                    console.log("Erro no catch:", error);
+                })
+            }
+    }
 
 </script>

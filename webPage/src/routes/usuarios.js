@@ -11,5 +11,13 @@ router.post("/cadastrar", function (req, res) {
 router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
-
+router.get(`/buscarcanteiros/:fk_empresa`, function (req,res) {
+    usuarioController.buscarcanteiros(req,res);
+});
+router.get(`/buscarqtdsensores/:fk_empresa`, function (req,res) {
+    usuarioController.buscarqtdsensores(req,res);
+});
+router.get(`/buscarumidade/:fk_empresa/:fk_canteiro/:fk_sensor`, function (req,res) {
+    usuarioController.buscarumidade(req,res);
+});
 module.exports = router;
