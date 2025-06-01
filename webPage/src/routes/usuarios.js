@@ -20,4 +20,16 @@ router.get(`/buscarqtdsensores/:fk_empresa`, function (req,res) {
 router.get(`/buscarumidade/:fk_empresa/:fk_canteiro/:fk_sensor`, function (req,res) {
     usuarioController.buscarumidade(req,res);
 });
+router.get(`/statussensor/:fk_empresa/:fk_canteiro/:fk_sensor`, function (req,res) {
+    usuarioController.statussensor(req,res);
+});
+router.get(`/variacao24/:fk_empresa/:fk_canteiro/:fk_sensor`, function (req,res) {
+    usuarioController.variacao24(req,res);
+});
+router.post("/inserirlog", function (req, res) {
+    usuarioController.inserirlog(req, res);
+});
+router.get(`/buscarultimolog`, function (req,res) {
+    usuarioController.buscarultimolog(req,res);
+});
 module.exports = router;

@@ -13,7 +13,7 @@ CREATE TABLE usuario (
     senha VARCHAR(500) NOT NULL,
     contaSup tinyint default 0
 );
-SELECT u.idUsuario, u.nome, u.email, u.username, u.senha, u.cpf, u.telefoneCelular, u.sobrenome 
+SELECT idUsuario, nome, email, username, senha, cpf, telefoneCelular, sobrenome, FkEmpresa 
 FROM usuario as u JOIN log_acesso
 on u.idUsuario = log_acesso.FkUsuario
 join empresa
@@ -57,6 +57,11 @@ CREATE TABLE log_acesso (
     CONSTRAINT fkUsuarioLog FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
 );
 
+select count(s.idSensor) as 'qtd_sensor' from sensor as s join canteiro as c 
+on c.idCanteiro = s.fkCanteiro
+join empresa as e
+on e.idEmpresa = c.fkEmpresa
+where s.fkEmpresa = 1 and s.fkCanteiro = 1;
 
 CREATE TABLE canteiro (
 idCanteiro INT AUTO_INCREMENT,
@@ -66,7 +71,7 @@ descricao VARCHAR (80),
 PRIMARY KEY (idCanteiro,fkEmpresa),
 
 CONSTRAINT fkCanteiroEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa));
-
+SELECT idSensor ,statusAtivacao from sensor where statusAtivacao = 0;
 CREATE TABLE sensor (
     idSensor INT AUTO_INCREMENT,
     fkEmpresa INT,
@@ -79,7 +84,19 @@ CREATE TABLE sensor (
     CONSTRAINT pkCompostaSensor PRIMARY KEY (idSensor, fkEmpresa),
     CONSTRAINT ckStatus CHECK (statusAtivacao in (0,1))
 );
+select s.statusAtivacao from sensor as s join canteiro as c 
+on c.idCanteiro = s.fkCanteiro
+join empresa as e
+on e.idEmpresa = c.fkEmpresa
+where s.fkEmpresa = 1 and s.idSensor = 1 and s.fkCanteiro = 1;
 
+select l.* from leitura as l join sensor as s
+on l.fkSensor = s.idSensor
+join canteiro as c
+on c.idCanteiro = s.fkCanteiro
+join empresa as e
+on e.idEmpresa = c.fkEmpresa
+where s.idSensor = 1 and l.FkCanteiro = 1 and l.FkEmpresa = 1 ORDER BY l.idLeitura desc LIMIT 1;
 CREATE TABLE leitura (
     idLeitura INT AUTO_INCREMENT,
     fkSensor INT,
@@ -93,19 +110,29 @@ CREATE TABLE leitura (
     CONSTRAINT fkLeituraSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
     CONSTRAINT fkLeituraEmpresa FOREIGN KEY (fkEmpresa) REFERENCES sensor(fkEmpresa)
 ) AUTO_INCREMENT = 100;
-
+select max(idLog_Acesso) as 'ultimo_log' from log_acesso;
+SELECT * from log_acesso;
   
 CREATE TABLE alerta (
-idAlerta INT PRIMARY KEY AUTO_INCREMENT,
-dtAlerta DATETIME NOT NULL
+idAlerta INT AUTO_INCREMENT,
+fkSensor INT,
+fkEmpresa INT,
+fkCanteiro INT,
+fkLeitura int,
+CONSTRAINT pkCompostaAlerta PRIMARY KEY(idAlerta, fkLeitura, fkSensor, fkEmpresa, fkCanteiro),
+CONSTRAINT fkAlertaCanteiro FOREIGN KEY (fkCanteiro) REFERENCES sensor(fkCanteiro),
+CONSTRAINT fkAlertaSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
+CONSTRAINT fkAlertaEmpresa FOREIGN KEY (fkEmpresa) REFERENCES sensor(fkEmpresa),
+CONSTRAINT fkAlertaLeitura FOREIGN KEY (fkLeitura) REFERENCES leitura(idLeitura),
+dtAlerta DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE contato (
-  idContato INT NOT NULL AUTO_INCREMENT,
-  fkEmpresa INT NOT NULL,
-  nome VARCHAR(45) NULL,
-  numero VARCHAR(45) NULL,
-  email VARCHAR(45) NULL,
+  idContato INT AUTO_INCREMENT,
+  fkEmpresa INT,
+  nome VARCHAR(45),
+  numero VARCHAR(45),
+  email VARCHAR(45),
   
   CONSTRAINT pkCompostaContato PRIMARY KEY (idContato, fkEmpresa),
   CONSTRAINT fkContatoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa));
@@ -114,8 +141,21 @@ INSERT INTO usuario VALUE (1, 'Suporte', 'smartberry', 'smartberry-Suporte', '12
 
 
 
-
-
-
-
+select truncate((max(umidadeSolo) - min(umidadeSolo)),1) as 'variacao' from leitura as l join sensor as s
+on l.fkSensor = s.idSensor
+join canteiro as c
+on c.idCanteiro = s.fkCanteiro
+join empresa as e
+on e.idEmpresa = c.fkEmpresa
+where s.idSensor = 1 and l.FkCanteiro = 1 and l.FkEmpresa = 1 and dtColeta >= NOW() - INTERVAL 1 DAY;
+select count(a.idAlerta) as 'Qtd_alerta' from alerta as a join leitura as l
+on a.fkLeitura = l.idLeitura
+join sensor as s 
+on l.fkSensor = s.idSensor
+join canteiro as c
+on c.idCanteiro = s.fkCanteiro
+join empresa as e
+on c.fkEmpresa = e.idEmpresa
+where s.idSensor = 1 and l.FkCanteiro = 1 and l.FkEmpresa = 1 and dtAlerta >= NOW() - INTERVAL 7 DAY;
+SELECT * FROM leitura;
 

@@ -9,7 +9,7 @@
     <title>SmartBerry</title>
 </head>
 
-<body>
+<body onload="obter_dados_kpis()">
     <section id="indexTop">
         <header>
             <div class="header-content">
@@ -45,15 +45,15 @@
             <div class="menu-shadow"></div>
         </div>
         <div class="content-dashboard">
-            <h2 class="title-info-sensor">Canteiro 3 - Sensor 9</h2>
+            <h2 class="title-info-sensor" id="titulo_dash">Canteiro 3 - Sensor 9</h2>
             <div class="kpis-box">
                 <div class="kpi-content">
                     <span class="title-kpi">Status sensor</span>
-                    <div class="kpi-box ativo">Ativo</div>
+                    <div class="kpi-box" id="status_sensor">Ativo</div>
                 </div>
                 <div class="kpi-content">
                     <span class="title-kpi">Variação nas últimas 24h</span>
-                    <div class="kpi-box">12%</div>
+                    <div class="kpi-box" id="variacao_24h">12%</div>
                 </div>
                 <div class="kpi-content">
                     <span class="title-kpi">Quantidade de alertas gerados p/Semana </span>
@@ -103,7 +103,10 @@
 
 </html>
 <script>
-
+    var fk_canteiro = sessionStorage.Fk_Canteiro;
+    var fk_sensor = sessionStorage.Fk_sensor;
+    var fk_empresa = sessionStorage.FK_EMPRESA;
+    titulo_dash.innerHTML = `Canteiro ${fk_canteiro} - Sensor ${fk_sensor}`;
     document.querySelector('.botao-vertical').addEventListener('click', () => {
         const menu = document.querySelector('.elements-menu');
         const botao = document.querySelector('.botao-vertical');
@@ -224,4 +227,53 @@
             }
         }
     })
+    function obter_dados_kpis() 
+    {
+        fetch(`/usuarios/statussensor/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json"
+            }
+        })  
+        .then(data => {
+                return data.json();
+            })
+        .then(data => {
+                console.log("Status do sensor puxado")
+                console.log(data);
+                if (data[0].statusAtivacao == 1) {
+                    status_sensor.innerHTML = `Ativo`
+                    status_sensor.classList.remove('inativo');
+                    status_sensor.classList.add('ativo');
+                }
+                else
+                {
+                    status_sensor.innerHTML = `Inativo`
+                    status_sensor.classList.remove('ativo');
+                    status_sensor.classList.add('inativo');
+                }
+            })  
+        .catch(error => {
+            console.log("Erro no catch:", error);
+        })
+        fetch(`/usuarios/variacao24/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json"
+            }
+        })  
+        .then(data => {
+                return data.json();
+            })
+        .then(data => {
+                console.log("Variação do sensor puxada")
+                console.log(data);
+                variacao_24h.innerHTML = `${Number(data[0].variacao)}%`
+
+            })  
+        .catch(error => {
+            console.log("Erro no catch:", error);
+        })
+        
+    }
 </script>

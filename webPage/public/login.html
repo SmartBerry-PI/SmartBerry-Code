@@ -39,7 +39,7 @@
         <div class="container-input">
           <div class="container-input-flex">
             <label for="usuario">Usuário:</label>
-          <input type="usuario" id="ipt_usuario" name="usuario" required>
+            <input type="usuario" id="ipt_usuario" name="usuario" required>
           </div>
           <div id="error_user" class="error-text"></div>
         </div>
@@ -75,9 +75,25 @@
 </body>
 
 </html>
-<script src="../app/verify.js"></script>
 <script>
+  var log_acesso_id = 0;
   function login() {
+    fetch(`/usuarios/buscarultimolog`, {
+      method: 'GET',
+      headers: {
+        "Content-type": "application/json"
+      }
+    })
+      .then(data => {
+        return data.json();
+      })
+      .then(data => {
+        console.log("Status do sensor puxado")
+        log_acesso_id = Number(data[0].ultimo_log)+1;
+      })
+      .catch(error => {
+        console.log("Erro no catch:", error);
+      })
     // aguardar();
 
     var usuarioVar = ipt_usuario.value;
@@ -125,13 +141,36 @@
           sessionStorage.CPF_USUARIO = json.cpf;
           sessionStorage.EMAIL_USUARIO = json.email;
           sessionStorage.FK_EMPRESA = json.empresa;
+          var Fk_empresa = sessionStorage.FK_EMPRESA;
+          var Fk_usuario = sessionStorage.ID_USUARIO
 
-          alert("Login realizado com sucesso!")
+          fetch("/usuarios/inserirlog", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: Fk_usuario,
+              idE: Fk_empresa,
+              log_acesso_id: log_acesso_id
+            }),
+          })
+            .then(function (resposta) {
+              console.log("resposta: ", resposta);
 
-          setTimeout(function () {
-            window.location.href = "dashAlto.html";
-          }, 1000); // apenas para exibir o loading
-
+              if (resposta.ok) {
+                alert("Login realizado com sucesso!");
+                setTimeout(function () {
+                  window.location.href = "dashAlto.html";
+                }, 1000); // apenas para exibir o loading
+              } else {
+                throw "Não foi possível mandar os dados para o banco";
+              }
+            })
+            .catch(function (resposta) {
+              console.log(`#ERRO: ${resposta}`);
+              alert("Erro no catch");
+            });
         });
 
       } else {

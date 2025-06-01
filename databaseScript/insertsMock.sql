@@ -1,7 +1,8 @@
 -- Inserts fictícios para testes
 -- Alguns dados foram mockados por IA
 
-INSERT INTO usuario VALUE (1000, 'João', 'Silva', 'jo_silva', '12345678910', '11999998888', 'joao.silva@email.com', 'senha@segura123');
+INSERT INTO usuario VALUE (1000, 'João', 'Silva', 'jo_silva', '12345678910', '11999998888', 'joao.silva@email.com', 'senha@segura123',DEFAULT);
+insert into log_acesso values (1,1,1000,DEFAULT);
 
 INSERT INTO empresa (razaoSocial, nomeFantasia, inscEstadual, CNPJ, codigoAcesso) VALUES ('JoSil.agrofarm', 'Recanto do Morango', '123456789012', '12345678001', 'abc123def4');
 
@@ -291,4 +292,22 @@ INSERT INTO leitura (fkSensor, fkEmpresa, fkCanteiro, umidadeSolo) VALUES
 (24, 1, 8, 92.3),
 (24, 1, 8, 79.0),
 (24, 1, 8, 72.4);
+
+INSERT INTO alerta (fkSensor, fkEmpresa, fkCanteiro, fkLeitura) VALUES
+(1, 1, 1, 1),
+(1, 1, 1, 2),
+(1, 1, 1, 3),
+(1, 1, 1, 4),
+(1, 1, 1, 5),
+(1, 1, 1, 6),
+(1, 1, 1, 7),
+(1, 1, 1, 8),
+(1, 1, 1, 9),
+(2, 1, 1, 11),
+(2, 1, 1, 12),
+(2, 1, 1, 13),
+(2, 1, 1, 14),
+(2, 1, 1, 15);
+
+
 

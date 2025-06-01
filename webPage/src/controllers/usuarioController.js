@@ -166,11 +166,125 @@ function buscarumidade(req, res) {
     }
 
 }
+function statussensor(req, res) {
+    var fk_empresa = req.params.fk_empresa;
+    var fk_canteiro = req.params.fk_canteiro;
+    var fk_sensor = req.params.fk_sensor;
+
+    if (fk_empresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else if (fk_sensor == undefined) {
+        res.status(400).send("Seu fkSensor está undefined!");
+    } else if (fk_canteiro == undefined) {
+        res.status(400).send("Seu fk_canteiro está undefined!");
+    } else {
+        usuarioModel.statussensor(fk_empresa, fk_canteiro, fk_sensor)
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+
+}
+function variacao24(req, res) {
+    var fk_empresa = req.params.fk_empresa;
+    var fk_canteiro = req.params.fk_canteiro;
+    var fk_sensor = req.params.fk_sensor;
+
+    if (fk_empresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else if (fk_sensor == undefined) {
+        res.status(400).send("Seu fkSensor está undefined!");
+    } else if (fk_canteiro == undefined) {
+        res.status(400).send("Seu fk_canteiro está undefined!");
+    } else {
+        usuarioModel.variacao24(fk_empresa, fk_canteiro, fk_sensor)
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+
+}
+function inserirlog(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var id = req.body.id;
+    var idE = req.body.idE;
+    var log_acesso_id = req.body.log_acesso_id;
+
+    // Faça as validações dos valores
+    if (id == undefined) {
+        res.status(400).send("Seu id está undefined!");
+    } else if (idE == undefined) {
+        res.status(400).send("Seu idE está undefined!");
+    } else if (log_acesso_id == undefined) {
+        res.status(400).send("Seu log_acesso_id está undefined!");
+    }
+    else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.inserirlog(id, idE, log_acesso_id)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+function buscarultimolog(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.buscarultimolog()
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    
+}
 
 module.exports = {
     autenticar,
     cadastrar,
     buscarcanteiros,
     buscarqtdsensores,
-    buscarumidade
+    buscarumidade,
+    statussensor,
+    variacao24,
+    inserirlog,
+    buscarultimolog
 }
