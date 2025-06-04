@@ -2,6 +2,7 @@
 const serialport = require('serialport');
 const express = require('express');
 const mysql = require('mysql2');
+require("dotenv").config();
 
 // constantes para configurações
 const SERIAL_BAUD_RATE = 9600;
@@ -15,14 +16,23 @@ const serial = async (
     valoresSensorCapacitivo
 ) => {
 
+    // Criar arquivo ".env" declarando:
+    // DB_HOST = 'host aqui'
+    // DB_USER = 'user aqui'
+    // DB_SENHA = 'senha aqui'
+    // DB_DATABASE = 'db aqui'
+    // DB_PORT = 0000
+    // DB_QTD_CANTEIROS = XX
+    // DB_QTD_SENSORES = XX
+
     // conexão com o banco de dados MySQL
     let poolBancoDados = mysql.createPool(
         {
-            host: 'localhost',
-            user: 'datacquino',
-            password: 'Datacquino#123.',
-            database: 'SmartBerry',
-            port: 3307
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_SENHA,
+            database: process.env.DB_DATABASE,
+            port: process.env.DB_PORT
         }
     ).promise();
 
@@ -52,49 +62,36 @@ const serial = async (
         console.log(`Valor captado: ${data}\n`);
         const valores = data.split(';');
         const sensorCapacitivo = parseInt(valores[0]);
-        let valorSensor1;
-        let valorSensor2;
-        let valorSensor3;
+        const quantidadeDeCanteiros = process.env.DB_QTD_CANTEIROS;
+        const quantidadeDeSensoresPorCanteiros = process.env.DB_QTD_SENSORES;
 
-        valorSensor1 = sensorCapacitivo;
+        for (fkCanteiro = 1; fkCanteiro <= quantidadeDeCanteiros; fkCanteiro++) {
+            valoresSensorCapacitivo[`canteiro${fkCanteiro}`] = {};
+            for (fkSensor = 1; fkSensor <= quantidadeDeSensoresPorCanteiros; fkSensor++){
+                const modificador = Math.random();
+                let valorCapturaVirtual;
+                
+                modificador > 2/3 ?
+                valorCapturaVirtual = (sensorCapacitivo + (parseInt(Math.random().toFixed()) + 1)) :
+                modificador > 1/3?
+                valorCapturaVirtual = (sensorCapacitivo - (parseInt(Math.random().toFixed()) + 1)) :
+                valorCapturaVirtual = sensorCapacitivo
+                ;
+                
+                valoresSensorCapacitivo[`canteiro${fkCanteiro}`][`sensor${fkSensor}`] = valorCapturaVirtual;
 
-        // aleatoriza a atribuição de valor nos sensores mockados
-        let modifier1 = Math.random();
-        modifier1 > 2/3 ?
-            valorSensor2 = (sensorCapacitivo + (parseInt(Math.random().toFixed()) + 1)) :
-        modifier1 > 1/3?
-            valorSensor2 = (sensorCapacitivo - (parseInt(Math.random().toFixed()) + 1)) :
-            valorSensor2 = sensorCapacitivo
-        ;
-
-        let modifier2 = Math.random();
-        modifier2 > 2/3 ?
-            valorSensor3 = (sensorCapacitivo + (parseInt(Math.random().toFixed()) + 1)) :
-        modifier2 > 1/3?
-            valorSensor3 = (sensorCapacitivo - (parseInt(Math.random().toFixed()) + 1)) :
-            valorSensor3 = sensorCapacitivo
-        ;
-
-
-        // armazena os valores dos sensores nos arrays correspondentes
-        valoresSensorCapacitivo.push({
-            sensor1: valorSensor1,
-            sensor2: valorSensor2,
-            sensor3: valorSensor3
-        });
-
-        // insere os dados no banco de dados (se habilitado)
-        if (HABILITAR_OPERACAO_INSERIR) {
-
-            // este insert irá inserir os dados na tabela
-            await poolBancoDados.execute(
-                'INSERT INTO registro (fkSensor, fkEmpresa, umidadeSolo) VALUES (1000, 1000, ?), (1001, 1000, ?), (1002,1000, ?);',
-                [valorSensor1, valorSensor2, valorSensor3]
-            );
-            console.log("Valores inseridos no banco com sucesso!\n", valoresSensorCapacitivo[valoresSensorCapacitivo.length - 1]);
-            // console.log(sensorCapacitivo);
-        }
-        console.log('-----------------------------------------------------');
+                if (HABILITAR_OPERACAO_INSERIR) {
+                    await poolBancoDados.execute(
+                        'INSERT INTO Leitura (fkEmpresa, fkCanteiro, fkSensor, umidadeSolo) VALUES (1000, ?, ?, ?);',
+                        [fkCanteiro, fkSensor, valorCapturaVirtual]
+                    );
+                }
+            }
+        };
+        // if (HABILITAR_OPERACAO_INSERIR) {
+            console.log("Valores inseridos no banco com sucesso!\n", valoresSensorCapacitivo);
+            console.log('-----------------------------------------------------');
+        // };
     });
 
     // evento para lidar com erros na comunicação serial
