@@ -309,5 +309,6 @@ INSERT INTO alerta (fkSensor, fkEmpresa, fkCanteiro, fkLeitura) VALUES
 (2, 1, 1, 14),
 (2, 1, 1, 15);
 
-
+  
+INSERT INTO usuario VALUE (1, 'Suporte', 'smartberry', 'smartberry-Suporte', '12345678910', '11999998888', 'smartberry@smartberry.com', 'senha@seguraSUPORTE123');
 
