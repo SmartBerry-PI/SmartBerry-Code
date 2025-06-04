@@ -1,45 +1,124 @@
+@import url(./style.css);
+
 main{
     flex: 1;
     padding-top: 12vh;
     padding: 2em;
 }
-  
-.simulador{
-    max-width: 800px;
-    margin: 0 auto;
-}
-  
-.simulador h1{
-    margin-bottom: 1em;
-}
-  
-.simulador p{
-    margin-bottom: 2em;
-}
-  
-.form-group{
-    margin-bottom: 1em;
-}
-
-canvas#grafico {
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    display: block;
-    max-width: 100%;
-    border: 2px solid transparent;
-    transition: transform 0.3s ease;
-}
-
-canvas#grafico:hover {
-    transform: scale(1.02);
-}
 
 .topNav{
+    position: absolute;
     background: var(--vmorango);
 }
 
-.topNav #logoTexto{
-    color: var(--bgcolor);
+#logoTexto{
+    color: #fff;
+}
+.simulador {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.simulador h1 {
+    margin-bottom: 1em;
+    color: var(--vmorango);
+    text-align: center;
+    font-size: 2.2rem;
+}
+
+.simulador p {
+    margin-bottom: 2em;
+    color: #555;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.5em;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    text-align: center;
+}
+
+.form-group input:focus {
+    border-color: var(--vmorango);
+    outline: none;
+}
+
+
+.btn-calc {
+    display: flex;
+    justify-content: center;
+    margin: 2em 0;
+}
+
+.bntRecCalc {
+    padding: 1rem 3rem;
+    background: var(--vmorango);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(214, 41, 100, 0.3);
+}
+
+.bntRecCalc:hover {
+    background: var(--apetroleo);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+#texto_tela {
+    margin-top: 2em;
+    padding: 1.5em;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    border-left: 4px solid var(--vmorango);
+}
+
+#texto_tela h3 {
+    color: var(--vmorango);
+    margin-bottom: 1em;
+}
+
+#texto_tela p {
+    margin-bottom: 0.8em;
+    color: #444;
+    text-align: left;
+}
+
+#texto_tela hr {
+    border: 1px solid #eee;
+    margin: 1em 0;
+}
+
+#grafico {
+    margin-top: 2em;
+    background-color: #fff;
+    padding: 1.5em;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #f0f0f0;
 }

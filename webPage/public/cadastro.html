@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +8,6 @@
     <link rel="shortcut icon" href="./assets/icon.png" type="image/x-icon">
     <title>SmartBerry - Cadastro</title>
 </head>
-
 <body>
     <header>
         <div class="header-content">
@@ -27,7 +25,6 @@
             </nav>
         </div>
     </header>
-
     <main class="cadastro-container">
         <div class="container">
             <div class="container-title">
@@ -37,8 +34,6 @@
                     <button id="btn-empresa" aria-pressed="false">Empresa</button>
                 </div>
             </div>
-
-            <!-- Formulário de Usuário -->
             <form id="form-usuario" class="form-cadastro active" aria-hidden="false">
                 <div class="box-cardlog">
                     <div class="cardlog">
@@ -93,11 +88,8 @@
                     <button type="submit" class="login-button">Cadastrar</button>
                 </div>
             </form>
-
-            <!-- Formulário de Empresa -->
             <form id="form-empresa" class="form-cadastro" aria-hidden="true">
                 <div class="etapas-empresa">
-                    <!-- Etapa 1 -->
                     <div class="etapa etapa1 active">
                         <div class="inputBox">
                             <label for="ipt_razaosocial">Razão Social</label>
@@ -119,15 +111,13 @@
                             <button type="button" class="btn-proximo">Próximo</button>
                         </div>
                     </div>
-
-                    <!-- Etapa 2 -->
                     <div class="etapa etapa2">
                         <div class="inputBox">
                             <label for="ipt_cep">CEP</label>
                             <input type="text" id="ipt_cep" name="ipt_cep" required>
                         </div>
                         <div class="inputBox">
-                            <label for="ipt_uf">Unidade Federal</label>
+                            <label for="ipt_uf">Unidade Federativa</label>
                             <input type="text" id="ipt_uf" name="ipt_uf" required>
                         </div>
                         <div class="inputBox">
