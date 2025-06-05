@@ -22,8 +22,9 @@ const serial = async (
     // DB_SENHA = 'senha aqui'
     // DB_DATABASE = 'db aqui'
     // DB_PORT = 0000
-    // DB_QTD_CANTEIROS = XX
-    // DB_QTD_SENSORES = XX
+    // ID_EMPRESA = XX
+    // QTD_CANTEIROS = XX
+    // QTD_SENSORES = XX
 
     // conexão com o banco de dados MySQL
     let poolBancoDados = mysql.createPool(
@@ -62,8 +63,9 @@ const serial = async (
         console.log(`Valor captado: ${data}\n`);
         const valores = data.split(';');
         const sensorCapacitivo = parseInt(valores[0]);
-        const quantidadeDeCanteiros = process.env.DB_QTD_CANTEIROS;
-        const quantidadeDeSensoresPorCanteiros = process.env.DB_QTD_SENSORES;
+        const idEmpresa = process.env.ID_EMPRESA;
+        const quantidadeDeCanteiros = process.env.QTD_CANTEIROS;
+        const quantidadeDeSensoresPorCanteiros = process.env.QTD_SENSORES;
 
         for (fkCanteiro = 1; fkCanteiro <= quantidadeDeCanteiros; fkCanteiro++) {
             valoresSensorCapacitivo[`canteiro${fkCanteiro}`] = {};
@@ -82,8 +84,8 @@ const serial = async (
 
                 if (HABILITAR_OPERACAO_INSERIR) {
                     await poolBancoDados.execute(
-                        'INSERT INTO Leitura (fkEmpresa, fkCanteiro, fkSensor, umidadeSolo) VALUES (1000, ?, ?, ?);',
-                        [fkCanteiro, fkSensor, valorCapturaVirtual]
+                        'INSERT INTO Leitura (fkEmpresa, fkCanteiro, fkSensor, umidadeSolo) VALUES (?, ?, ?, ?);',
+                        [idEmpresa, fkCanteiro, fkSensor, valorCapturaVirtual]
                     );
                 }
             }
