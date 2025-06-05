@@ -1,14 +1,18 @@
 {
-  "name": "web-data-viz",
-  "version": "1.0.0",
+  "name": "web-data-viz & @bobia",
+  "version": "1.0.0 & 1.0.2",
   "description": "",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon --exec node app.js"
   },
-  "author": "Feito pelos desenvolvedores @ São Paulo Tech School / Bandtec Digital School",
-  "license": "MIT",
+  "author": "Feito pelos desenvolvedores @ São Paulo Tech School / Bandtec Digital School & @MatheusFerreiraMatos @gfalexander @miranda500",
+  "license": "MIT & ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BandTec"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
