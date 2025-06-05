@@ -92,13 +92,13 @@ CREATE TABLE alerta (
     fkEmpresa   INT,
     fkCanteiro  INT,
     fkLeitura   INT,
-    dtAlerta    DATETIME  DEFAULT CURRENT_TIMESTAMP
+    dtAlerta    DATETIME  DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT pkCompostaAlerta PRIMARY KEY(idAlerta, fkLeitura, fkSensor, fkEmpresa, fkCanteiro),
     CONSTRAINT fkAlertaCanteiro FOREIGN KEY (fkCanteiro) REFERENCES sensor(fkCanteiro),
     CONSTRAINT fkAlertaSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
     CONSTRAINT fkAlertaEmpresa FOREIGN KEY (fkEmpresa) REFERENCES sensor(fkEmpresa),
-    CONSTRAINT fkAlertaLeitura FOREIGN KEY (fkLeitura) REFERENCES leitura(idLeitura),
+    CONSTRAINT fkAlertaLeitura FOREIGN KEY (fkLeitura) REFERENCES leitura(idLeitura)
 );
 
 CREATE TABLE contato (

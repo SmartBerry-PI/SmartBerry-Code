@@ -2,9 +2,10 @@
 -- Alguns dados foram mockados por IA
 
 INSERT INTO usuario VALUE (1000, 'João', 'Silva', 'jo_silva', '12345678910', '11999998888', 'joao.silva@email.com', 'senha@segura123',DEFAULT);
-insert into log_acesso values (1,1,1000,DEFAULT);
 
 INSERT INTO empresa (razaoSocial, nomeFantasia, inscEstadual, CNPJ, codigoAcesso) VALUES ('JoSil.agrofarm', 'Recanto do Morango', '123456789012', '12345678001', 'abc123def4');
+
+insert into log_acesso values (1,1,1000,DEFAULT);
 
 INSERT INTO endereco VALUE (default, 1, '12345678', 'SP', 'São Roque', 'Centro', 'Av. Brasil', '106',null);
 
@@ -293,22 +294,66 @@ INSERT INTO leitura (fkSensor, fkEmpresa, fkCanteiro, umidadeSolo) VALUES
 (24, 1, 8, 79.0),
 (24, 1, 8, 72.4);
 
+
 INSERT INTO alerta (fkSensor, fkEmpresa, fkCanteiro, fkLeitura) VALUES
-(1, 1, 1, 1),
-(1, 1, 1, 2),
-(1, 1, 1, 3),
-(1, 1, 1, 4),
-(1, 1, 1, 5),
-(1, 1, 1, 6),
-(1, 1, 1, 7),
-(1, 1, 1, 8),
-(1, 1, 1, 9),
-(2, 1, 1, 11),
-(2, 1, 1, 12),
-(2, 1, 1, 13),
-(2, 1, 1, 14),
-(2, 1, 1, 15);
+(1, 1, 1, 100),
+(1, 1, 1, 101),
+(1, 1, 1, 102),
+(2, 1, 2, 103),
+(2, 1, 2, 104),
+(2, 1, 2, 105),
+(3, 1, 3, 106),
+(3, 1, 3, 107),
+(3, 1, 3, 108),
+(4, 1, 4, 109),
+(4, 1, 4, 110),
+(4, 1, 4, 111),
+(5, 1, 5, 112),
+(5, 1, 5, 113),
+(5, 1, 5, 114),
+(6, 1, 6, 115),
+(6, 1, 6, 116),
+(6, 1, 6, 117),
+(7, 1, 7, 118),
+(7, 1, 7, 119),
+(7, 1, 7, 120),
+(8, 1, 8, 121),
+(8, 1, 8, 122),
+(8, 1, 8, 123),
+(1, 1, 1, 124),
+(1, 1, 1, 125),
+(1, 1, 1, 126),
+(2, 1, 2, 127),
+(2, 1, 2, 128),
+(2, 1, 2, 129),
+(3, 1, 3, 130),
+(3, 1, 3, 131),
+(3, 1, 3, 132),
+(4, 1, 4, 133),
+(4, 1, 4, 134),
+(4, 1, 4, 135),
+(5, 1, 5, 136),
+(5, 1, 5, 137),
+(5, 1, 5, 138),
+(6, 1, 6, 139),
+(6, 1, 6, 140),
+(6, 1, 6, 141),
+(6, 1, 6, 142),
+(7, 1, 7, 143),
+(7, 1, 7, 144),
+(7, 1, 7, 145),
+(8, 1, 8, 146),
+(8, 1, 8, 147),
+(8, 1, 8, 148);
+
+
+
+SELECT idLeitura FROM leitura;
+
+
+
 
   
-INSERT INTO usuario VALUE (1, 'Suporte', 'smartberry', 'smartberry-Suporte', '12345678910', '11999998888', 'smartberry@smartberry.com', 'senha@seguraSUPORTE123');
+INSERT INTO usuario (nome, sobrenome, username, telefoneCelular, cpf, email, senha, contaSup) VALUES
+    ('João', 'Silva', 'joaosilva', '11999998888', '12345678901', 'joao.silva@email.com', 'senhaSegura123', 0);
 

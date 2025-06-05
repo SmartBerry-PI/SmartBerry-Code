@@ -4,7 +4,7 @@ SELECT * FROM usuario AS u
     JOIN empresa AS e 
 		ON p.fkempresa=e.idEmpresa
     LEFT JOIN endereco AS ende ON ende.idEmpresa 
-		ON s.fkCliente=c.idCliente; -- Select Completo
+		= s.fkCliente=c.idCliente; -- Select Completo
         
 SELECT 
     u.login AS 'Login',
