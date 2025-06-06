@@ -11,6 +11,9 @@ router.post("/cadastrar", function (req, res) {
 router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
+router.post("/autenticarCodigo", function (req, res) {
+    usuarioController.autenticarCodigo(req, res);
+});
 router.get(`/buscarcanteiros/:fk_empresa`, function (req,res) {
     usuarioController.buscarcanteiros(req,res);
 });

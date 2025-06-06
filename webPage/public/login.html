@@ -77,43 +77,20 @@
 </html>
 <script>
   var log_acesso_id = 0;
+  //Variavéis booleanas para o fetch
+  var login_user_ok = false;
+  var login_empresa_ok = false
+  var obterLog_ok = false;
   function login() {
-    fetch(`/usuarios/buscarultimolog`, {
-      method: 'GET',
-      headers: {
-        "Content-type": "application/json"
-      }
-    })
-      .then(data => {
-        return data.json();
-      })
-      .then(data => {
-        console.log("Status do sensor puxado")
-        log_acesso_id = Number(data[0].ultimo_log)+1;
-      })
-      .catch(error => {
-        console.log("Erro no catch:", error);
-      })
-    // aguardar();
-
+    // Variavéis das Inputs
     var usuarioVar = ipt_usuario.value;
     var senhaVar = ipt_senha.value;
     var codigoVar = ipt_codigo.value;
 
-    // if (usuarioVar == "" || senhaVar == "") {
-    //   cardErro.style.display = "block"
-    //   mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-
-    //   // finalizarAguardar();
-    //   return false;
-    // }
-    // else {
-    //   setInterval(sumirMensagem, 5000)
-    // }
 
     console.log("FORM LOGIN: ", usuarioVar);
     console.log("FORM SENHA: ", senhaVar);
-
+    //Fetch Login para usuário
     fetch("/usuarios/autenticar", {
       method: "POST",
       headers: {
@@ -121,8 +98,7 @@
       },
       body: JSON.stringify({
         usuarioServer: usuarioVar,
-        senhaServer: senhaVar,
-        codigoServer: codigoVar
+        senhaServer: senhaVar
       })
     }).then(function (resposta) {
       console.log("ESTOU NO THEN DO entrar()!")
@@ -140,42 +116,13 @@
           sessionStorage.TELEFONECELULAR_USUARIO = json.telefonecelular;
           sessionStorage.CPF_USUARIO = json.cpf;
           sessionStorage.EMAIL_USUARIO = json.email;
-          sessionStorage.FK_EMPRESA = json.empresa;
-          var Fk_empresa = sessionStorage.FK_EMPRESA;
-          var Fk_usuario = sessionStorage.ID_USUARIO
-
-          fetch("/usuarios/inserirlog", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              id: Fk_usuario,
-              idE: Fk_empresa,
-              log_acesso_id: log_acesso_id
-            }),
-          })
-            .then(function (resposta) {
-              console.log("resposta: ", resposta);
-
-              if (resposta.ok) {
-                alert("Login realizado com sucesso!");
-                setTimeout(function () {
-                  window.location.href = "dashAlto.html";
-                }, 1000); // apenas para exibir o loading
-              } else {
-                throw "Não foi possível mandar os dados para o banco";
-              }
-            })
-            .catch(function (resposta) {
-              console.log(`#ERRO: ${resposta}`);
-              alert("Erro no catch");
-            });
+          login_user_ok = true;
+          loginCodigo();
         });
 
       } else {
 
-        console.log("Houve um erro ao tentar realizar o login!");
+        alert("Email e Senha Incorretos");
 
         resposta.text().then(texto => {
           console.error(texto);
@@ -187,11 +134,104 @@
       console.log(erro);
     })
 
-    return false;
   }
+  function loginCodigo() {
+    var codigoVar = ipt_codigo.value;
+    console.log(codigoVar);
+    if (login_user_ok) {
+      fetch("/usuarios/autenticarCodigo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          codigoServer: codigoVar
+        })
+      }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
 
+        if (resposta.ok) {
+          console.log(resposta);
+
+          resposta.json().then(json => {
+            console.log(json);
+            console.log(JSON.stringify(json));
+            sessionStorage.ID_EMPRESA = json.idEmpresa;
+            login_empresa_ok = true;
+            buscarlog();
+          });
+
+        } else {
+
+          alert("Código de Acesso Invalído");
+
+          resposta.text().then(texto => {
+            console.error(texto);
+            // finalizarAguardar(texto);
+          });
+        }
+
+      }).catch(function (erro) {
+        console.log(erro);
+      })
+    }
+  }
   // function sumirMensagem() {
   //   cardErro.style.display = "none"
   // }
+  function buscarlog() {
+    if (login_empresa_ok) {
+      fetch(`/usuarios/buscarultimolog`, {
+        method: 'GET',
+        headers: {
+          "Content-type": "application/json"
+        }
+      })
+        .then(data => {
+          return data.json();
+        })
+        .then(data => {
+          log_acesso_id = Number(data[0].ultimo_log) + 1;
+          console.log("Log de acesso:", log_acesso_id);
+          obterLog_ok = true;
+          inserirlogdeacesso();
+        })
+        .catch(error => {
+          console.log("Erro no catch:", error);
+        })
+    }
+  }
+  function inserirlogdeacesso() {
+    var Fk_usuario = sessionStorage.ID_USUARIO;
+    var Fk_empresa = sessionStorage.ID_EMPRESA;
+    if (obterLog_ok) {
+      fetch("/usuarios/inserirlog", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: Fk_usuario,
+          idE: Fk_empresa,
+          log_acesso_id: log_acesso_id
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
 
+          if (resposta.ok) {
+            alert("Login realizado com sucesso!");
+            setTimeout(function () {
+              window.location.href = "dashAlto.html";
+            }, 1000); // apenas para exibir o loading
+          } else {
+            throw "Não foi possível mandar os dados para o banco";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+          alert("Erro no catch");
+        });
+    }
+  }
 </script>

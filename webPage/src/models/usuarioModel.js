@@ -1,14 +1,21 @@
 var database = require("../database/config")
 
-function autenticar(usuario, senha, codigo) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", usuario, senha, codigo)
+function autenticar(usuario, senha) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", usuario, senha)
     var instrucaoSql = `
-        SELECT idUsuario, nome, email, username, senha, cpf, telefoneCelular, sobrenome, FkEmpresa as 'empresa'
-        FROM usuario as u JOIN log_acesso
-        on u.idUsuario = log_acesso.FkUsuario
-        join empresa
-        on log_acesso.FkEmpresa = empresa.idEmpresa
-        WHERE (u.username = '${usuario}' OR u.email = '${usuario}') AND u.senha = '${senha}' AND empresa.codigoAcesso = '${codigo}';
+        SELECT idUsuario, nome, email, username, senha, cpf, telefoneCelular, sobrenome
+        FROM usuario 
+        WHERE (username = '${usuario}' OR email = '${usuario}') AND senha = '${senha}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function autenticarCodigo(codigo) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ",codigo)
+    var instrucaoSql = `
+        SELECT idEmpresa as 'IdEmpresa'
+        FROM empresa
+        WHERE codigoAcesso = '${codigo}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -117,5 +124,6 @@ module.exports = {
     statussensor,
     variacao24,
     inserirlog,
-    buscarultimolog
+    buscarultimolog,
+    autenticarCodigo
 };

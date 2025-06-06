@@ -4,17 +4,14 @@ var aquarioModel = require("../models/aquarioModel");
 function autenticar(req, res) {
     var usuario = req.body.usuarioServer;
     var senha = req.body.senhaServer;
-    var codigo = req.body.codigoServer;
 
     if (usuario == undefined) {
         res.status(400).send("Seu usuario está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
-    } else if (codigo == undefined) {
-        res.status(400).send("Seu código está undefined")
     } else {
 
-        usuarioModel.autenticar(usuario, senha, codigo)
+        usuarioModel.autenticar(usuario, senha)
             .then(
                 function (resultadoAutenticar) {
                     console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
@@ -30,13 +27,50 @@ function autenticar(req, res) {
                             username: resultadoAutenticar[0].username,
                             telefonecelular: resultadoAutenticar[0].telefoneCelular,
                             cpf: resultadoAutenticar[0].cpf,
-                            email: resultadoAutenticar[0].email,
-                            empresa: resultadoAutenticar[0].empresa
+                            email: resultadoAutenticar[0].email
 
                         });
 
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
+                    } else {
+                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                    }
+                }
+
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+function autenticarCodigo(req, res) {
+    var codigo = req.body.codigoServer;
+
+    if (codigo == undefined) {
+        res.status(400).send("Seu codigo está undefined!");
+    } else {
+
+        usuarioModel.autenticarCodigo(codigo)
+            .then(
+                function (resultadoAutenticarcodigo) {
+                    console.log(`\nResultados encontrados: ${resultadoAutenticarcodigo.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticarcodigo)}`); // transforma JSON em String
+
+                    if (resultadoAutenticarcodigo.length == 1) {
+                        console.log(resultadoAutenticarcodigo);
+
+                        res.json({
+                            idEmpresa: resultadoAutenticarcodigo[0].IdEmpresa
+
+                        });
+
+                    } else if (resultadoAutenticarcodigo.length == 0) {
+                        res.status(403).send("Código de acesso inválido(s)");
                     } else {
                         res.status(403).send("Mais de um usuário com o mesmo login e senha!");
                     }
@@ -286,5 +320,6 @@ module.exports = {
     statussensor,
     variacao24,
     inserirlog,
-    buscarultimolog
+    buscarultimolog,
+    autenticarCodigo
 }
