@@ -57,7 +57,7 @@
                 </div>
                 <div class="kpi-content">
                     <span class="title-kpi">Quantidade de alertas gerados p/Semana </span>
-                    <div class="kpi-box">5</div>
+                    <div class="kpi-box" id="qtd_alertas">5</div>
                 </div>
                 <div class="kpi-content">
                     <span class="title-kpi">Dia com mais Alertas</span>
@@ -105,7 +105,7 @@
 <script>
     var fk_canteiro = sessionStorage.Fk_Canteiro;
     var fk_sensor = sessionStorage.Fk_sensor;
-    var fk_empresa = sessionStorage.FK_EMPRESA;
+    var fk_empresa = sessionStorage.ID_EMPRESA;
     titulo_dash.innerHTML = `Canteiro ${fk_canteiro} - Sensor ${fk_sensor}`;
     document.querySelector('.botao-vertical').addEventListener('click', () => {
         const menu = document.querySelector('.elements-menu');
@@ -269,6 +269,24 @@
                 console.log("Variação do sensor puxada")
                 console.log(data);
                 variacao_24h.innerHTML = `${Number(data[0].variacao)}%`
+
+            })  
+        .catch(error => {
+            console.log("Erro no catch:", error);
+        })
+        fetch(`/usuarios/buscaralertasdasemana/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json"
+            }
+        })  
+        .then(data => {
+                return data.json();
+            })
+        .then(data => {
+                console.log("Quantidade de alertas puxada")
+                console.log(data);
+                qtd_alertas.innerHTML = `${Number(data[0].qtdAlerta)}`
 
             })  
         .catch(error => {

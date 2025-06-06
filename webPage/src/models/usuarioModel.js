@@ -114,6 +114,23 @@ function buscarultimolog() {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function buscaralertasdasemana(fk_empresa, fk_canteiro, fk_sensor) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fk_empresa, fk_sensor, fk_canteiro);
+
+    var instrucaoSql = `
+       select count(idAlerta) as 'qtdAlerta' from alerta as a join leitura as l
+        on a.fkLeitura = l.idLeitura
+        join sensor as s
+        on s.idSensor = l.fkSensor
+        join canteiro as c
+        on c.idCanteiro = s.fkCanteiro
+        join empresa as e
+        on e.idEmpresa = c.fkEmpresa
+        where s.idSensor = '${fk_sensor}' and c.idCanteiro = '${fk_canteiro}' and e.idEmpresa = '${fk_empresa}' and dtAlerta >= NOW() - INTERVAL 7 DAY;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     autenticar,
@@ -125,5 +142,6 @@ module.exports = {
     variacao24,
     inserirlog,
     buscarultimolog,
-    autenticarCodigo
+    autenticarCodigo,
+    buscaralertasdasemana
 };

@@ -29,6 +29,9 @@ router.get(`/statussensor/:fk_empresa/:fk_canteiro/:fk_sensor`, function (req,re
 router.get(`/variacao24/:fk_empresa/:fk_canteiro/:fk_sensor`, function (req,res) {
     usuarioController.variacao24(req,res);
 });
+router.get(`/buscaralertasdasemana/:fk_empresa/:fk_canteiro/:fk_sensor`, function (req,res) {
+    usuarioController.buscaralertasdasemana(req,res);
+});
 router.post("/inserirlog", function (req, res) {
     usuarioController.inserirlog(req, res);
 });
