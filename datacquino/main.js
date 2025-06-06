@@ -9,7 +9,7 @@ const SERIAL_BAUD_RATE = 9600;
 const SERVIDOR_PORTA = 3300;
 
 // habilita ou desabilita a inserção de dados no banco de dados
-const HABILITAR_OPERACAO_INSERIR = true;
+const HABILITAR_OPERACAO_INSERIR = false;
 
 // função para comunicação serial
 const serial = async (
@@ -67,6 +67,7 @@ const serial = async (
         const quantidadeDeCanteiros = process.env.QTD_CANTEIROS;
         const quantidadeDeSensoresPorCanteiros = process.env.QTD_SENSORES;
 
+        let valuesInsercao = '';
         for (fkCanteiro = 1; fkCanteiro <= quantidadeDeCanteiros; fkCanteiro++) {
             valoresSensorCapacitivo[`canteiro${fkCanteiro}`] = {};
             for (fkSensor = 1; fkSensor <= quantidadeDeSensoresPorCanteiros; fkSensor++){
@@ -82,18 +83,23 @@ const serial = async (
                 
                 valoresSensorCapacitivo[`canteiro${fkCanteiro}`][`sensor${fkSensor}`] = valorCapturaVirtual;
 
-                if (HABILITAR_OPERACAO_INSERIR) {
-                    await poolBancoDados.execute(
-                        'INSERT INTO leitura (fkEmpresa, fkCanteiro, fkSensor, umidadeSolo) VALUES (?, ?, ?, ?);',
-                        [idEmpresa, fkCanteiro, fkSensor, valorCapturaVirtual]
-                    );
+                let conjuntoValores = `(${idEmpresa}, ${fkCanteiro}, ${fkSensor}, ${valorCapturaVirtual})`
+
+                if (fkCanteiro == quantidadeDeCanteiros && fkSensor == quantidadeDeSensoresPorCanteiros) {
+                    valuesInsercao += `${conjuntoValores}`;
+                } else {
+                    valuesInsercao += `${conjuntoValores}, `;
                 }
             }
         };
-        // if (HABILITAR_OPERACAO_INSERIR) {
+        if (HABILITAR_OPERACAO_INSERIR) {
+            await poolBancoDados.execute(
+                'INSERT INTO leitura (fkEmpresa, fkCanteiro, fkSensor, umidadeSolo) VALUES ?;',
+                [valuesInsercao]
+            );
             console.log("Valores inseridos no banco com sucesso!\n", valoresSensorCapacitivo);
             console.log('-----------------------------------------------------');
-        // };
+        }
     });
 
     // evento para lidar com erros na comunicação serial
@@ -129,7 +135,7 @@ const servidor = (
 // função principal assíncrona para iniciar a comunicação serial e o servidor web
 (async () => {
     // arrays para armazenar os valores dos sensores
-    const valoresSensorCapacitivo = [];
+    const valoresSensorCapacitivo = {};
 
     // inicia a comunicação serial
     await serial(

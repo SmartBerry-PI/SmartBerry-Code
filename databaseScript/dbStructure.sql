@@ -111,3 +111,14 @@ CREATE TABLE contato (
   CONSTRAINT pkCompostaContato PRIMARY KEY (idContato, fkEmpresa),
   CONSTRAINT fkContatoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
+
+DELIMITER $$
+DROP TRIGGER IF EXISTS TG_after_data_insert_alert;
+CREATE TRIGGER TG_after_data_insert_alert 
+    AFTER INSERT ON leitura FOR EACH ROW 
+	BEGIN 
+		IF (NEW.umidadeSolo>80 OR NEW.umidadeSolo<70) THEN
+			INSERT INTO alerta (fkSensor, fkEmpresa, fkCanteiro, fkLeitura) VALUES (NEW.fkSensor, NEW.fkEmpresa, NEW.fkCanteiro, NEW.idLeitura);
+		END IF;
+    END;$$
+DELIMITER ;
