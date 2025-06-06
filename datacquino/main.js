@@ -9,7 +9,8 @@ const SERIAL_BAUD_RATE = 9600;
 const SERVIDOR_PORTA = 3300;
 
 // habilita ou desabilita a inserção de dados no banco de dados
-const HABILITAR_OPERACAO_INSERIR = false;
+let HABILITAR_OPERACAO_INSERIR;
+process.env.OP_INSERIR == 'true'? HABILITAR_OPERACAO_INSERIR = true : HABILITAR_OPERACAO_INSERIR = false;
 
 // função para comunicação serial
 const serial = async (
@@ -94,8 +95,7 @@ const serial = async (
         };
         if (HABILITAR_OPERACAO_INSERIR) {
             await poolBancoDados.execute(
-                'INSERT INTO leitura (fkEmpresa, fkCanteiro, fkSensor, umidadeSolo) VALUES ?;',
-                [valuesInsercao]
+                `INSERT INTO leitura (fkEmpresa, fkCanteiro, fkSensor, umidadeSolo) VALUES ${valuesInsercao};`
             );
             console.log("Valores inseridos no banco com sucesso!\n", valoresSensorCapacitivo);
             console.log('-----------------------------------------------------');
