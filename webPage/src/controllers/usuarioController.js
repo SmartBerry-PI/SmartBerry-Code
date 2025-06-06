@@ -175,17 +175,11 @@ function buscarqtdsensores(req, res) {
 }
 function buscarumidade(req, res) {
     var fk_empresa = req.params.fk_empresa;
-    var fk_canteiro = req.params.fk_canteiro;
-    var fk_sensor = req.params.fk_sensor;
 
     if (fk_empresa == undefined) {
         res.status(400).send("Seu fkEmpresa está undefined!");
-    } else if (fk_sensor == undefined) {
-        res.status(400).send("Seu fkSensor está undefined!");
-    } else if (fk_canteiro == undefined) {
-        res.status(400).send("Seu fk_canteiro está undefined!");
     } else {
-        usuarioModel.buscarumidade(fk_empresa, fk_canteiro, fk_sensor)
+        usuarioModel.buscarumidade(fk_empresa)
             .then(
                 function (resultado) {
                     res.json(resultado)
@@ -364,6 +358,60 @@ function buscardiaalerta(req, res) {
     }
 
 }
+function obterdadosdeumidade(req, res) {
+    var fk_empresa = req.params.fk_empresa;
+    var fk_canteiro = req.params.fk_canteiro;
+    var fk_sensor = req.params.fk_sensor;
+
+    if (fk_empresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else if (fk_sensor == undefined) {
+        res.status(400).send("Seu fkSensor está undefined!");
+    } else if (fk_canteiro == undefined) {
+        res.status(400).send("Seu fk_canteiro está undefined!");
+    } else {
+        usuarioModel.obterdadosdeumidade(fk_empresa, fk_canteiro, fk_sensor)
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+
+}
+function atualizardadosdeumidade(req, res) {
+    var fk_empresa = req.params.fk_empresa;
+    var fk_canteiro = req.params.fk_canteiro;
+    var fk_sensor = req.params.fk_sensor;
+
+    if (fk_empresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else if (fk_sensor == undefined) {
+        res.status(400).send("Seu fkSensor está undefined!");
+    } else if (fk_canteiro == undefined) {
+        res.status(400).send("Seu fk_canteiro está undefined!");
+    } else {
+        usuarioModel.atualizardadosdeumidade(fk_empresa, fk_canteiro, fk_sensor)
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+
+}
 
 module.exports = {
     autenticar,
@@ -377,5 +425,7 @@ module.exports = {
     buscarultimolog,
     autenticarCodigo,
     buscaralertasdasemana,
-    buscardiaalerta
+    buscardiaalerta,
+    obterdadosdeumidade,
+    atualizardadosdeumidade
 }

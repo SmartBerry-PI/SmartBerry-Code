@@ -134,45 +134,186 @@
         texto_bem_vindo.innerHTML = `Bem-Vindo, ${sessionStorage.NOME_USUARIO}`;
         setTimeout(() => {
             clearInterval(plotar_textos);
-        },1000)
+        }, 1000)
     }, 500)
-    const horarios = ['10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00'];
-    const umidade = [73, 72, 75, 78, 79, 81, 81, 79, 77, 70];
-    const ctx = document.getElementById('myChart');
-    const dia = new Date();
-    const formatDia = dia.toLocaleDateString('pt-BR');
-
-    function trocarcores(umidade) {
-        const cor = [];
-
-        for (let i = 0; i < umidade.length; i++) {
-            if (umidade[i] <= 60) {
-                cor.push('red');
-            }
-            else if (umidade[i] < 70) {
-                cor.push('yellow');
-            }
-            else if (umidade[i] >= 70 && umidade[i] <= 80) {
-                cor.push('green');
-            }
-            else if (umidade[i] > 80) {
-                cor.push('yellow');
-            }
-            else {
-                cor.push('red');
-            }
-
-        }
-    }
-    const cor_linha = trocarcores(umidade);
-    const grafico_umidade = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: horarios,
+    
+    var dados_grafico_umidade = [];
+    var dados_grafico_label = [];
+    var dados_dash = {
+            labels: dados_grafico_label,
             datasets: [{
                 label: 'Umidade do solo',
                 borderColor: 'green',
-                data: umidade,
+                data: dados_grafico_umidade,
+                tension: 0.1,
+                pointRadius: 0,
+                segment: {
+                    borderColor: ctx => {
+                        const comeco = ctx.p0.parsed.y;
+                        const final = ctx.p1.parsed.y;
+                        if (comeco <= 60 || final <= 60) {
+                            return 'red';
+                        }
+                        else if (comeco < 70 || final < 70) {
+                            return 'yellow';
+                        }
+                        else if ((comeco > 70 || final > 70) && (comeco < 70 || final < 70)) {
+                            return 'green';
+                        }
+                        else if (comeco >= 80 || final >= 80) {
+                            return 'yellow';
+                        }
+                        else if (comeco >= 90 || final >= 90) {
+                            return 'red';
+                        }
+                    }
+                },
+            }]
+        }
+
+    function obter_dados_kpis() {
+        fetch(`/usuarios/statussensor/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+            .then(data => {
+                return data.json();
+            })
+            .then(data => {
+                console.log("Status do sensor puxado")
+                console.log(data);
+                if (data[0].statusAtivacao == 1) {
+                    status_sensor.innerHTML = `Ativo`
+                    status_sensor.classList.remove('inativo');
+                    status_sensor.classList.add('ativo');
+                }
+                else {
+                    status_sensor.innerHTML = `Inativo`
+                    status_sensor.classList.remove('ativo');
+                    status_sensor.classList.add('inativo');
+                }
+            })
+            .catch(error => {
+                console.log("Erro no catch:", error);
+            })
+        fetch(`/usuarios/variacao24/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+            .then(data => {
+                return data.json();
+            })
+            .then(data => {
+                console.log("Variação do sensor puxada")
+                console.log(data);
+                variacao_24h.innerHTML = `${Number(data[0].variacao)}%`
+
+            })
+            .catch(error => {
+                console.log("Erro no catch:", error);
+            })
+        fetch(`/usuarios/buscaralertasdasemana/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+            .then(data => {
+                return data.json();
+            })
+            .then(data => {
+                console.log("Quantidade de alertas puxada")
+                console.log(data);
+                qtd_alertas.innerHTML = `${Number(data[0].qtdAlerta)}`
+
+            })
+            .catch(error => {
+                console.log("Erro no catch:", error);
+            })
+        fetch(`/usuarios/buscardiaalerta/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+            .then(data => {
+                return data.json();
+            })
+            .then(data => {
+                if (data.length == 0) {
+                }
+                else {
+                    console.log("Dia da semana com mais alertas puxada")
+                    var dia_da_semana = data[0].dia;
+                    if (dia_da_semana == 'Monday') {
+                        //Segunda
+                        dia_mais_alertas.innerHTML = `Segunda`
+                    } else if (dia_da_semana == 'Tuesday') {
+                        //terça
+                        dia_mais_alertas.innerHTML = `Terça`
+                    } else if (dia_da_semana == 'Wednesday') {
+                        //Quarta
+                        dia_mais_alertas.innerHTML = `Quarta`
+                    } else if (dia_da_semana == 'Thursday') {
+                        //Quinta
+                        dia_mais_alertas.innerHTML = `Quinta`
+                    } else if (dia_da_semana == 'Friday') {
+                        //Sexta
+                        dia_mais_alertas.innerHTML = `Sexta`
+                    } else if (dia_da_semana == 'Saturday') {
+                        //Sabádo
+                        dia_mais_alertas.innerHTML = `Sabado`
+                    } else {
+                        //Domingo
+                        dia_mais_alertas.innerHTML = `Domingo`
+                    }
+                }
+            })
+            .catch(error => {
+                console.log("Erro no catch:", error);
+            })
+        
+        fetch(`/usuarios/obterdadosdeumidade/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+            .then(data => {
+                return data.json();
+            })
+            .then(data => {
+                console.log("dados da umidade do sensor puxada")
+                console.log(data);
+                for (let i = data.length - 1 ; i >= 0; i--) {
+                    dados_grafico_umidade.push(data[i].umidadeSolo)
+                    dados_grafico_label.push(data[i].dtColeta.substr(11, 5));
+                }
+                console.log(dados_grafico_label);
+                console.log(dados_grafico_umidade);
+                plotargraficos();
+            })
+            .catch(error => {
+                console.log("Erro no catch:", error);
+            })
+    }
+    var grafico_umidade = null;
+    function plotargraficos() {
+        const ctx = document.getElementById('myChart');
+        const dia = new Date();
+        const formatDia = dia.toLocaleDateString('pt-BR');
+        grafico_umidade = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dados_grafico_label,
+            datasets: [{
+                label: 'Umidade do solo',
+                borderColor: 'green',
+                data: dados_grafico_umidade,
                 tension: 0.1,
                 pointRadius: 0,
                 segment: {
@@ -227,117 +368,32 @@
             }
         }
     })
-    function obter_dados_kpis() 
-    {
-        fetch(`/usuarios/statussensor/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
+    setTimeout(() => {
+        atualizargrafico();
+    },1000)
+    }
+    function atualizargrafico() {
+        fetch(`/usuarios/atualizardadosdeumidade/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
             method: 'GET',
             headers: {
                 "Content-type": "application/json"
             }
-        })  
-        .then(data => {
+        })
+            .then(data => {
                 return data.json();
             })
-        .then(data => {
-                console.log("Status do sensor puxado")
-                console.log(data);
-                if (data[0].statusAtivacao == 1) {
-                    status_sensor.innerHTML = `Ativo`
-                    status_sensor.classList.remove('inativo');
-                    status_sensor.classList.add('ativo');
-                }
-                else
-                {
-                    status_sensor.innerHTML = `Inativo`
-                    status_sensor.classList.remove('ativo');
-                    status_sensor.classList.add('inativo');
-                }
-            })  
-        .catch(error => {
-            console.log("Erro no catch:", error);
-        })
-        fetch(`/usuarios/variacao24/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
-            method: 'GET',
-            headers: {
-                "Content-type": "application/json"
-            }
-        })  
-        .then(data => {
-                return data.json();
+            .then(data => {
+                console.log("dados da umidade do sensor Atualizada")
+                dados_grafico_label.shift();
+                dados_grafico_umidade.shift();
+                dados_grafico_umidade.push(data[0].umidadeSolo)
+                dados_grafico_label.push(data[0].dtColeta.substr(11, 5));
+                console.log(dados_grafico_umidade);
+                grafico_umidade.destroy();
+                plotargraficos();
             })
-        .then(data => {
-                console.log("Variação do sensor puxada")
-                console.log(data);
-                variacao_24h.innerHTML = `${Number(data[0].variacao)}%`
-
-            })  
-        .catch(error => {
-            console.log("Erro no catch:", error);
-        })
-        fetch(`/usuarios/buscaralertasdasemana/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
-            method: 'GET',
-            headers: {
-                "Content-type": "application/json"
-            }
-        })  
-        .then(data => {
-                return data.json();
+            .catch(error => {
+                console.log("Erro no catch:", error);
             })
-        .then(data => {
-                console.log("Quantidade de alertas puxada")
-                console.log(data);
-                qtd_alertas.innerHTML = `${Number(data[0].qtdAlerta)}`
-
-            })  
-        .catch(error => {
-            console.log("Erro no catch:", error);
-        })
-        fetch(`/usuarios/buscardiaalerta/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
-            method: 'GET',
-            headers: {
-                "Content-type": "application/json"
-            }
-        })  
-        .then(data => {
-                return data.json();
-            })
-        .then(data => {
-                console.log("Dia da semana com mais alertas puxada")
-                var dia_da_semana = data[0].dia;
-                if (dia_da_semana == 'Monday') {
-                    //Segunda
-                    dia_mais_alertas.innerHTML = `Segunda`
-                } else if (dia_da_semana == 'Tuesday')
-                {
-                    //terça
-                    dia_mais_alertas.innerHTML = `Terça`
-                } else if(dia_da_semana == 'Wednesday')
-                {
-                    //Quarta
-                    dia_mais_alertas.innerHTML = `Quarta`
-                } else if(dia_da_semana == 'Thursday')
-                {
-                    //Quinta
-                    dia_mais_alertas.innerHTML = `Quinta`
-                } else if (dia_da_semana == 'Friday')
-                {
-                    //Sexta
-                    dia_mais_alertas.innerHTML = `Sexta`
-                } else if(dia_da_semana == 'Saturday')
-                {
-                    //Sabádo
-                    dia_mais_alertas.innerHTML = `Sabado`
-                } else
-                {
-                    //Domingo
-                    dia_mais_alertas.innerHTML = `Domingo`
-                }
-
-
-            })  
-        .catch(error => {
-            console.log("Erro no catch:", error);
-        })
-        
     }
 </script>

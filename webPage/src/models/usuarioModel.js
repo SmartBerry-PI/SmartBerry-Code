@@ -53,17 +53,12 @@ function buscarqtdsensores(fk_empresa) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function buscarumidade(fk_empresa, fk_canteiro, fk_sensor) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fk_empresa, fk_sensor, fk_canteiro);
+function buscarumidade(fk_empresa) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fk_empresa);
 
     var instrucaoSql = `
-       select umidadeSolo,statusAtivacao from leitura as l join sensor as s
-        on l.fkSensor = s.idSensor
-        join canteiro as c
-        on c.idCanteiro = s.fkCanteiro
-        join empresa as e
-        on e.idEmpresa = c.fkEmpresa
-        where s.idSensor = ${fk_sensor} and l.FkCanteiro = ${fk_canteiro} and l.FkEmpresa = ${fk_empresa} ORDER BY l.idLeitura desc LIMIT 1;
+       select idLeitura,umidadeSolo,statusAtivacao from leitura as l  join sensor as s on (l.fkSensor, l.fkCanteiro, l.fkEmpresa) = (s.idSensor, s.fkCanteiro, s.fkEmpresa)
+        where l.fkEmpresa = '${fk_empresa}'ORDER BY l.idLeitura desc limit 24;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -135,17 +130,28 @@ function buscardiaalerta(fk_empresa, fk_canteiro, fk_sensor) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fk_empresa, fk_sensor, fk_canteiro);
 
     var instrucaoSql = `
-       select count(idAlerta) as 'maioralertas',dayname(dtAlerta) as 'dia' from alerta as a join leitura as l
-        on a.fkLeitura = l.idLeitura
-        join sensor as s
-        on s.idSensor = l.fkSensor
-        join canteiro as c
-        on c.idCanteiro = s.fkCanteiro
-        join empresa as e
-        on e.idEmpresa = c.fkEmpresa
-        where s.idSensor = '${fk_sensor}' and c.idCanteiro = '${fk_canteiro}' and e.idEmpresa = '${fk_empresa}' and dtAlerta between NOW() - INTERVAL 7 DAY and NOW()
+        select count(idAlerta) as 'maioralertas',dayname(dtAlerta) as 'dia' from alerta
+        where fkSensor = '${fk_sensor}' and fkCanteiro = '${fk_canteiro}' and fkEmpresa = '${fk_empresa}' and dtAlerta between NOW() - INTERVAL 7 DAY and NOW()
         group by dayname(dtAlerta)
         order by maioralertas desc limit 1;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function obterdadosdeumidade(fk_empresa, fk_canteiro, fk_sensor) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fk_empresa, fk_sensor, fk_canteiro);
+
+    var instrucaoSql = `
+       select umidadeSolo, dtColeta from leitura where fkSensor = '${fk_sensor}' and fkEmpresa = '${fk_empresa}' and fkCanteiro = '${fk_canteiro}' order by idLeitura desc LIMIT 25;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function atualizardadosdeumidade(fk_empresa, fk_canteiro, fk_sensor) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fk_empresa, fk_sensor, fk_canteiro);
+
+    var instrucaoSql = `
+       select umidadeSolo, dtColeta from leitura where fkSensor = '${fk_sensor}' and fkEmpresa = '${fk_empresa}' and fkCanteiro = '${fk_canteiro}' order by idLeitura desc LIMIT 1;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -163,5 +169,7 @@ module.exports = {
     buscarultimolog,
     autenticarCodigo,
     buscaralertasdasemana,
-    buscardiaalerta
+    buscardiaalerta,
+    obterdadosdeumidade,
+    atualizardadosdeumidade
 };
