@@ -8,7 +8,7 @@ CREATE TABLE usuario (
     sobrenome        VARCHAR(45)   NOT NULL,
     username         VARCHAR(45)   NOT NULL UNIQUE,
     telefoneCelular  VARCHAR(45)   NOT NULL,
-    cpf              CHAR (11)     NOT NULL,
+    cpf              VARCHAR (20)  NOT NULL,
     email            VARCHAR (45)  NOT NULL,
     senha            VARCHAR(500)  NOT NULL,
     contaSup         TINYINT       DEFAULT 0
