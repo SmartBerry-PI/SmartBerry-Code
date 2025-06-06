@@ -84,7 +84,7 @@ const serial = async (
 
                 if (HABILITAR_OPERACAO_INSERIR) {
                     await poolBancoDados.execute(
-                        'INSERT INTO Leitura (fkEmpresa, fkCanteiro, fkSensor, umidadeSolo) VALUES (?, ?, ?, ?);',
+                        'INSERT INTO leitura (fkEmpresa, fkCanteiro, fkSensor, umidadeSolo) VALUES (?, ?, ?, ?);',
                         [idEmpresa, fkCanteiro, fkSensor, valorCapturaVirtual]
                     );
                 }

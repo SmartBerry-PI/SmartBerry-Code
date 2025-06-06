@@ -1,5 +1,7 @@
 #!/bin/bash
+echo ''
 echo "Criando configurações de inicialização da WEBDATAVIZ e BOBIA..."
+echo ''
 echo "Configure arquivo de configuração abaixo"
 echo ''
 read -p "Escolha o ambiente 1(producao) ou 2(desenvolvimento): " AMBIENTE
@@ -12,6 +14,7 @@ echo 'Configurações de conexão com o banco de dados'
 read -p "Insira o database server host: " HOST
 read -p "Insira o database server user: " USER
 read -s -p "Insira a senha do user $USER: " SENHA
+echo ''
 read -p "Insira o database: " DATABASE
 read -p "Insira a porta do database server: " PORTA_BD
 echo ''
@@ -27,7 +30,7 @@ AMBIENTE_PROCESSO=$AMBIENTE
 
 DB_HOST='$HOST'
 DB_USER='$USER'
-DB_SENHA='$SENHA'
+DB_PASSWORD='$SENHA'
 DB_DATABASE='$DATABASE'
 DB_PORT=$PORTA_BD
 

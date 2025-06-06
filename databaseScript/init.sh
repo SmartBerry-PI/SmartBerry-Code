@@ -8,6 +8,7 @@ echo 'Informe as credenciais para criação do ambiente'
 read -p "Informe o usuario: " USER
 read -s -p "Senha: " PASSWD
 echo ''
+echo ''
 
 echo ''
 read -p 'Criar estrutura do script dbStrucure.sql? (S/N)' RESPOSTA 
