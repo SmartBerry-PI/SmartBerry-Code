@@ -61,7 +61,7 @@
                 </div>
                 <div class="kpi-content">
                     <span class="title-kpi">Dia com mais Alertas</span>
-                    <div class="kpi-box">Segunda</div>
+                    <div class="kpi-box" id="dia_mais_alertas">Sem Alertas</div>
                 </div>
             </div>
             <div class="grafico-box">
@@ -287,6 +287,52 @@
                 console.log("Quantidade de alertas puxada")
                 console.log(data);
                 qtd_alertas.innerHTML = `${Number(data[0].qtdAlerta)}`
+
+            })  
+        .catch(error => {
+            console.log("Erro no catch:", error);
+        })
+        fetch(`/usuarios/buscardiaalerta/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json"
+            }
+        })  
+        .then(data => {
+                return data.json();
+            })
+        .then(data => {
+                console.log("Dia da semana com mais alertas puxada")
+                var dia_da_semana = data[0].dia;
+                if (dia_da_semana == 'Monday') {
+                    //Segunda
+                    dia_mais_alertas.innerHTML = `Segunda`
+                } else if (dia_da_semana == 'Tuesday')
+                {
+                    //terça
+                    dia_mais_alertas.innerHTML = `Terça`
+                } else if(dia_da_semana == 'Wednesday')
+                {
+                    //Quarta
+                    dia_mais_alertas.innerHTML = `Quarta`
+                } else if(dia_da_semana == 'Thursday')
+                {
+                    //Quinta
+                    dia_mais_alertas.innerHTML = `Quinta`
+                } else if (dia_da_semana == 'Friday')
+                {
+                    //Sexta
+                    dia_mais_alertas.innerHTML = `Sexta`
+                } else if(dia_da_semana == 'Saturday')
+                {
+                    //Sabádo
+                    dia_mais_alertas.innerHTML = `Sabado`
+                } else
+                {
+                    //Domingo
+                    dia_mais_alertas.innerHTML = `Domingo`
+                }
+
 
             })  
         .catch(error => {

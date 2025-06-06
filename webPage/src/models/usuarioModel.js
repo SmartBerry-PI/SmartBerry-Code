@@ -57,7 +57,7 @@ function buscarumidade(fk_empresa, fk_canteiro, fk_sensor) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fk_empresa, fk_sensor, fk_canteiro);
 
     var instrucaoSql = `
-       select umidadeSolo from leitura as l join sensor as s
+       select umidadeSolo,statusAtivacao from leitura as l join sensor as s
         on l.fkSensor = s.idSensor
         join canteiro as c
         on c.idCanteiro = s.fkCanteiro
@@ -131,6 +131,25 @@ function buscaralertasdasemana(fk_empresa, fk_canteiro, fk_sensor) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function buscardiaalerta(fk_empresa, fk_canteiro, fk_sensor) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fk_empresa, fk_sensor, fk_canteiro);
+
+    var instrucaoSql = `
+       select count(idAlerta) as 'maioralertas',dayname(dtAlerta) as 'dia' from alerta as a join leitura as l
+        on a.fkLeitura = l.idLeitura
+        join sensor as s
+        on s.idSensor = l.fkSensor
+        join canteiro as c
+        on c.idCanteiro = s.fkCanteiro
+        join empresa as e
+        on e.idEmpresa = c.fkEmpresa
+        where s.idSensor = '${fk_sensor}' and c.idCanteiro = '${fk_canteiro}' and e.idEmpresa = '${fk_empresa}' and dtAlerta between NOW() - INTERVAL 7 DAY and NOW()
+        group by dayname(dtAlerta)
+        order by maioralertas desc limit 1;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     autenticar,
@@ -143,5 +162,6 @@ module.exports = {
     inserirlog,
     buscarultimolog,
     autenticarCodigo,
-    buscaralertasdasemana
+    buscaralertasdasemana,
+    buscardiaalerta
 };

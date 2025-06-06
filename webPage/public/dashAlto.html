@@ -433,8 +433,13 @@
                     console.log("Umidade Puxado com sucesso")
                     console.log(data);
                     var umidade = Number(data[0].umidadeSolo);
+                    var status = Number(data[0].statusAtivacao);
                     elemento.innerHTML = `${umidade}%`;
-                    if (umidade >= 70 && umidade <= 80 ) {
+                    if (status == 0) {
+                        elemento.innerHTML = `Inativo`;
+                        elemento2.classList.add('alert-alerta');
+                    }
+                    else if (umidade >= 70 && umidade <= 80 ) {
                         elemento2.classList.add('alert-ok');
                     } else if (umidade > 80 && umidade < 90 )
                     {

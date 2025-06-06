@@ -337,6 +337,33 @@ function buscarultimolog(req, res) {
             );
     
 }
+function buscardiaalerta(req, res) {
+    var fk_empresa = req.params.fk_empresa;
+    var fk_canteiro = req.params.fk_canteiro;
+    var fk_sensor = req.params.fk_sensor;
+
+    if (fk_empresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else if (fk_sensor == undefined) {
+        res.status(400).send("Seu fkSensor está undefined!");
+    } else if (fk_canteiro == undefined) {
+        res.status(400).send("Seu fk_canteiro está undefined!");
+    } else {
+        usuarioModel.buscardiaalerta(fk_empresa, fk_canteiro, fk_sensor)
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+
+}
 
 module.exports = {
     autenticar,
@@ -349,5 +376,6 @@ module.exports = {
     inserirlog,
     buscarultimolog,
     autenticarCodigo,
-    buscaralertasdasemana
+    buscaralertasdasemana,
+    buscardiaalerta
 }
