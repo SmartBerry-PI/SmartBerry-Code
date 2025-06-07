@@ -24,7 +24,6 @@ body {
 
 #logoTexto {
     color: var(--bgcolor);
-    font-size: 1.8rem;
     margin: 0;
 }
 
@@ -43,9 +42,6 @@ body {
     transition: color 0.3s;
 }
 
-.nav-list a:hover {
-    color: var(--apetroleo);
-}
 
 .cadastro-container {
     width: 100%;

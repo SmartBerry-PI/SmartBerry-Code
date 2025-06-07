@@ -6,14 +6,42 @@ main{
     padding: 2em;
 }
 
-.topNav{
-    position: absolute;
-    background: var(--vmorango);
+.header-content {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 }
 
-#logoTexto{
-    color: #fff;
+.topNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--vmorango);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+#logoTexto {
+    color: var(--bgcolor);
+    margin: 0;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list a {
+    color: var(--bgcolor);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
 .simulador {
     max-width: 800px;
     margin: 0 auto;

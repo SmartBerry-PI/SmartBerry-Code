@@ -1,14 +1,54 @@
-body{
+@import url(./style.css);
+
+body {
+    background-color: var(--bgcolor);
+    margin: 0;
+    padding: 0;
+    color: #333;
     overflow: hidden;
 }
+
+.header-content {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.topNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--vmorango);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list a {
+    color: var(--bgcolor);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
 
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.login-container
-{
+
+.login-container {
     width: 100%;
     height: 90vh;
     margin-top: 10vh;
@@ -18,19 +58,19 @@ body{
     justify-content: center;
     align-items: center;
 }
-.container-box
-{
+
+.container-box {
     height: 80%;
     width: 90%;
-    
+
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 10%;
 }
-.box-login
-{
+
+.box-login {
     height: 100%;
     width: 40%;
     border-radius: 20px;
@@ -41,8 +81,8 @@ body{
     justify-content: flex-start;
     align-items: center;
 }
-.box-img
-{
+
+.box-img {
     height: 100%;
     width: 40%;
     border-radius: 20px;
@@ -50,8 +90,8 @@ body{
 
 
 }
-.container-title
-{
+
+.container-title {
     width: 100%;
     height: 20%;
 
@@ -59,8 +99,8 @@ body{
     justify-content: center;
     align-items: center;
 }
-.container-input
-{
+
+.container-input {
     width: 100%;
     height: 25%;
 
@@ -69,8 +109,8 @@ body{
     justify-content: center;
     align-items: center;
 }
-.container-input-flex
-{
+
+.container-input-flex {
     width: auto;
     height: auto;
 
@@ -79,8 +119,8 @@ body{
     justify-content: flex-start;
     align-items: flex-start;
 }
-.box-url
-{
+
+.box-url {
     height: 10%;
     width: 100%;
 
@@ -89,8 +129,8 @@ body{
     justify-content: center;
     align-items: center;
 }
-.box-button
-{
+
+.box-button {
     height: 20%;
     width: 100%;
 
@@ -98,8 +138,8 @@ body{
     justify-content: center;
     align-items: center;
 }
-input
-{
+
+input {
     height: 6vh;
     width: 25vw;
     border: 0;
@@ -107,23 +147,23 @@ input
     font-size: 2vh;
     padding-left: 1vw;
 }
-.link
-{
+
+.link {
     text-decoration: none;
     font-size: 2.5vh;
 }
-.title-login
-{
+
+.title-login {
     font-size: 6vh;
     font-weight: bold;
 }
-label
-{
+
+label {
     font-size: 3vh;
     font-weight: bold;
 }
-.login-button
-{
+
+.login-button {
     height: 40%;
     width: 25%;
     border-radius: 20px;
@@ -133,6 +173,7 @@ label
     font-weight: bold;
     font-family: sans-serif;
 }
+
 .container {
     display: flex;
     flex-direction: column;
@@ -152,45 +193,45 @@ label
     font-weight: 900;
 }
 
-.login-button:hover{
+.login-button:hover {
     background-color: var(--apetroleo);
 }
-.error-text
-{
+
+.error-text {
     padding-top: 0.5vh;
     color: red;
     font-size: 2vh;
     font-family: sans-serif;
     font-weight: bold;
 }
-.inputBox
-{
-    height:5rem;
+
+.inputBox {
+    height: 5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 }
-.container input
-{
+
+.container input {
     height: 1rem;
     border-radius: 40px;
     padding: 0.5rem;
 }
 
-.link a{
+.link a {
     color: black;
 }
 
-.link a:hover{
+.link a:hover {
     color: blue;
     font-size: large;
 }
 
-.topNav{
+.topNav {
     background: var(--vmorango);
 }
 
-.topNav #logoTexto{
+.topNav #logoTexto {
     color: var(--bgcolor);
 }
