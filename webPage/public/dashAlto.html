@@ -10,25 +10,23 @@
 </head>
 
 <body onload="plotar_info1()">
-    <section id="indexTop">
-        <header>
-            <div class="header-content">
-                <nav class="topNav">
-                    <div class="left">
-                        <div class="botao-vertical">
-                            <span class="bar"></span>
-                            <span class="bar"></span>
-                            <span class="bar"></span>
-                        </div>
-                        <h2 id="logoTexto">SmartBerry</h2>
-                        <div class="barra-vertical"></div>
-                        <h3 class="subtitle-nav">Visão geral da plantação</h3>
+    <header id="indexTop">
+        <div class="header-content">
+            <nav class="topNav">
+                <div class="left">
+                    <div class="botao-vertical">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
                     </div>
-            </div>
-            </nav>
-            </div>
-        </header>
-    </section>
+                    <h2 id="logoTexto">SmartBerry</h2>
+                    <div class="barra-vertical"></div>
+                    <h3 class="subtitle-nav">Visão geral da plantação</h3>
+                </div>
+        </div>
+        </nav>
+        </div>
+    </header>
     <section class="dashboard-screen">
         <div class="elements-menu">
             <div class="menu-vertical">
@@ -428,10 +426,10 @@
             .then(data => {
                 console.log("Umidade Puxado com sucesso")
                 dados_coletados = data;
-        
+
                 let contador = 1;
                 for (let i = dados_coletados.length - 1; i >= 0; i--) {
-                    
+
                     const elemento = document.getElementById(`sensor${contador}`);
                     const elemento2 = document.getElementById(`boxsensor${contador}`);
                     // var fk_canteiro = idsensores[i].fkCanteiro;

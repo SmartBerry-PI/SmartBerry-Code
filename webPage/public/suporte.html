@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BobIA</title>
-    <link rel="stylesheet" href="./css/BobIA.css">
+    <title>SmartBerry - Suporte</title>
+    <link rel="shortcut icon" href="./assets/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/suporte.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
 
+<body>
+    <header id="indexTop">
+        <div class="header-content">
+            <nav class="topNav">
+                <div class="left">
+                    <h2 id="logoTexto">SmartBerry</h2>
+                </div>
+            </nav>
+        </div>
+    </header>
     <div id="container">
         <h1>BobIA</h1>
         <textarea id="pergunta" type="text" placeholder="Digite a pergunta..."></textarea>
@@ -18,7 +30,7 @@
     </div>
 
     <script>
-        
+
         async function gerarResposta() {
             const pergunta = document.getElementById('pergunta').value;
 
@@ -37,6 +49,7 @@
         }
 
     </script>
-    
+
 </body>
+
 </html>
