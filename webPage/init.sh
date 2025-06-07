@@ -11,12 +11,12 @@ else echo 'Erro na escolha do ambiente'; exit
 fi
 echo ''
 echo 'Configurações de conexão com o banco de dados'
-read -p "Insira o database server host: " HOST
+read -p "Insira o database server host: " HOST_BD
+read -p "Insira a porta do database server: " PORTA_BD
 read -p "Insira o database server user: " USER
 read -s -p "Insira a senha do user $USER: " SENHA
 echo ''
 read -p "Insira o database: " DATABASE
-read -p "Insira a porta do database server: " PORTA_BD
 echo ''
 echo 'Configurações do servidor de aplicação'
 read -p "Insira a porta a ser tomada pela api: " PORTA_API
@@ -28,7 +28,7 @@ read -p "Insira a chave de acesso do gemini: " CHAVE
 cat > "$ENV" <<EOF
 AMBIENTE_PROCESSO=$AMBIENTE
 
-DB_HOST='$HOST'
+DB_HOST='$HOST_BD'
 DB_USER='$USER'
 DB_PASSWORD='$SENHA'
 DB_DATABASE='$DATABASE'
@@ -40,6 +40,7 @@ APP_HOST=$HOST_API
 MINHA_CHAVE='$CHAVE'
 EOF
 
+echo ''
 read -p "As credenciais 
 '
 $(cat $ENV)
