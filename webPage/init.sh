@@ -39,3 +39,21 @@ APP_HOST=$HOST_API
 
 MINHA_CHAVE='$CHAVE'
 EOF
+
+read -p "As credenciais 
+'
+$(cat $ENV)
+'
+estão corretas? (S/N)" INICIAR_API
+
+echo ''
+if [ $INICIAR_API = 'S' ]; then 
+echo 'INSTALANDO DEPENDÊNCIAS...'
+npm i
+echo ''
+echo 'INICIALIZANDO WEBDATAVIZ...'
+npm start
+else 
+echo 'RECONFIGURE AS CREDENCIAIS...'
+./init.sh
+fi
