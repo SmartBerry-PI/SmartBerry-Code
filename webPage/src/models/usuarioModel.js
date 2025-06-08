@@ -156,6 +156,15 @@ function atualizardadosdeumidade(fk_empresa, fk_canteiro, fk_sensor) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function buscarAlertas(fk_empresa) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fk_empresa);
+
+    var instrucaoSql = `
+       select * from alerta where fkEmpresa = '${fk_empresa}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     autenticar,
@@ -171,5 +180,6 @@ module.exports = {
     buscaralertasdasemana,
     buscardiaalerta,
     obterdadosdeumidade,
-    atualizardadosdeumidade
+    atualizardadosdeumidade,
+    buscarAlertas
 };

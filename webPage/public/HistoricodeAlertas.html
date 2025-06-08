@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/dashSensores.css">
+    <title>SmartBerry - Histórico de Alertas</title>
+</head>
+
+<body>
+    <header id="indexTop">
+        <div class="header-content">
+            <nav class="topNav">
+                <div class="left">
+                    <div class="botao-vertical">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                    <h2 id="logoTexto">SmartBerry</h2>
+                    <div class="barra-vertical"></div>
+                    <h3 class="subtitle-nav">Historico de Alertas</h3>
+                </div>
+        </div>
+        </nav>
+        </div>
+    </header>
+    <section class="historico-screen">
+        <!-- Menu Hamburguer Começo -->
+        <div class="elements-menu">
+            <div class="menu-vertical">
+                <img src="./assets/perfil-icon.png" alt="icon-Perfil" class="icon-Perfil">
+                <span class="title-welcome">Bem-Vindo Usuário</span>
+                <ul class="menu-list">
+                    <li class="option-menu backto-alto"><u>Visão geral</u></li>
+                    <li class="option-menu"><u>Alterar Senha</u></li>
+                </ul>
+                <button class="button-sair">Sair da Conta</button>
+            </div>
+            <div class="menu-shadow"></div>
+        </div>
+        <!-- Fim Menu Hambuguer -->
+        <!-- Começo do Filtro -->
+        <section class="filtro-main">
+            <div class="title-filtro">Filtros:</div>
+            <div class="filtros-box-main">
+                <div class="filtro-content">
+                    <span class="subtitle-filter">Data do alerta</span>
+                    <input type="date" class="input-date" id="ipt_data_fixa">
+                </div>
+                <div class="filtro-content">
+                    <span class="subtitle-filter">Intervalo data do alerta de:</span>
+                    <input type="date" class="input-date" id="ipt_data_de">
+                </div>
+                <div class="filtro-content">
+                    <span class="subtitle-filter">Intervalo data do alerta até:</span>
+                    <input type="date" class="input-date" id="ipt_data_ate">
+                </div>
+                <div class="filtro-content">
+                    <span class="subtitle-filter">Canteiro</span>
+                    <select id="select_canteiro" class="select-filtro" onchange="aparecersensor()">
+                        <option value="error">Selecione um Canteiro</option>
+                        <option value="1">Canteiro 1</option>
+                        <option value="2">Canteiro 2</option>
+                        <option value="3">Canteiro 3</option>
+                        <option value="4">Canteiro 4</option>
+                        <option value="5">Canteiro 5</option>
+                        <option value="6">Canteiro 6</option>
+                        <option value="7">Canteiro 7</option>
+                        <option value="8">Canteiro 8</option>
+                    </select>
+                </div>
+                <div class="filtro-content" id="box_sensor" style="display: none;">
+                    <span class="subtitle-filter">Sensor</span>
+                    <select id="select_sensor" class="select-filtro">
+                        <option value="error">Selecione um canteiro</option>
+                        <option value="1">Sensor 1</option>
+                        <option value="2">Sensor 2</option>
+                        <option value="3">Sensor 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="action-box-filter">
+                <button onclick="chamarfiltro()" class="button-filter">Aplicar Filtros</button>
+                <div class="ajuste-subtitle">
+                    <span class="subtitle-filter ">Filtros Ativos:</span>
+                    <div class="card-master-filtro">
+                        <div class="card-filtro" id="div_data_fixa" style="display: none;">
+                            <span class="subtitle-span">Data: 18/08/2019</span>
+                            <button onclick="closecard1()" class="close-card">X</button>
+                        </div>
+                        <div class="card-filtro" id="div_data_intervalo" style="display: none;">
+                            <span class="subtitle-span">Intervalo de: <br> 18/08/2019 - 19/09/2019</span>
+                            <button onclick="closecard2()" class="close-card">X</button>
+                        </div>
+                        <div class="card-filtro" id="div_canteiro" style="display: none;">
+                            <span class="subtitle-span">Canteiro: 8</span>
+                            <button onclick="closecard3()" class="close-card">X</button>
+                        </div>
+                        <div class="card-filtro" id="div_sensor" style="display: none;">
+                            <span class="subtitle-span">Sensor 24</span>
+                            <button onclick="closecard4()" class="close-card">X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Fim do Filtro -->
+    </section>
+    <div class="barra-horizontal"></div>
+</body>
+<html>
+<script>
+    //Menu Hamburguer Config Inicio
+    document.querySelector('.botao-vertical').addEventListener('click', () => {
+        const menu = document.querySelector('.elements-menu');
+        const botao = document.querySelector('.botao-vertical');
+        menu.classList.toggle('open-menu');
+        botao.classList.toggle('x');
+    });
+    document.querySelector('.menu-shadow').addEventListener('click', () => {
+        const menu = document.querySelector('.elements-menu');
+        const botao = document.querySelector('.botao-vertical');
+        menu.classList.remove('open-menu');
+        botao.classList.remove('x');
+    });
+    document.querySelector('.button-sair').addEventListener('click', () => {
+        window.location.href = 'index.html';
+    });
+    document.querySelector('.backto-alto').addEventListener('click', () => {
+        window.location.href = 'DashAlto.html';
+    });
+    // Fim Menu Hamburguer Config
+    // Varíaveis Globais
+    var vt_filtro_data_fixa = [''];
+    var vt_filtro_data_intervalo = [];
+    var vt_filtro_canteiro = [''];
+    var vt_filtro_sensor = [''];
+    var ax_filtro_data_fixa = false;
+    var ax_filtro_data_intervalo = false;
+    var ax_filtro_canteiro = false;
+    var ax_filtro_sensor = false;
+    var id_empresa = sessionStorage.ID_EMPRESA;
+    // Requisição para puxar todos os dados
+    fetch(`/usuarios/buscarAlertas/${id_empresa}`, {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+            .then(data => {
+                return data.json();
+            })
+            .then(data => {
+                console.log("Alertas Puxados")
+                console.log(data);
+            })
+            .catch(error => {
+                console.log("Erro no catch:", error);
+            })
+    //Aprece e Desparece sensorbox
+    function aparecersensor() {
+        var select = select_canteiro.value;
+        if (select == "error") {
+            box_sensor.style.display = 'none';
+        } else if (select == "1") {
+            box_sensor.style.display = 'flex';
+            box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
+                    <select id="select_sensor" class="select-filtro">
+                        <option value="error">Selecione um canteiro</option>
+                        <option value="1">Sensor 1</option>
+                        <option value="2">Sensor 2</option>
+                        <option value="3">Sensor 3</option>
+                    </select>`
+        } else if (select == "2") {
+            box_sensor.style.display = 'flex';
+            box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
+                    <select id="select_sensor" class="select-filtro">
+                        <option value="error">Selecione um canteiro</option>
+                        <option value="4">Sensor 4</option>
+                        <option value="5">Sensor 5</option>
+                        <option value="6">Sensor 6</option>
+                    </select>`
+        } else if (select == "3") {
+            box_sensor.style.display = 'flex';
+            box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
+                    <select id="select_sensor" class="select-filtro">
+                        <option value="error">Selecione um canteiro</option>
+                        <option value="7">Sensor 7</option>
+                        <option value="8">Sensor 8</option>
+                        <option value="9">Sensor 9</option>
+                    </select>`
+        } else if (select == "4") {
+            box_sensor.style.display = 'flex';
+            box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
+                    <select id="select_sensor" class="select-filtro">
+                        <option value="error">Selecione um canteiro</option>
+                        <option value="10">Sensor 10</option>
+                        <option value="11">Sensor 11</option>
+                        <option value="12">Sensor 12</option>
+                    </select>`
+        } else if (select == "5") {
+            box_sensor.style.display = 'flex';
+            box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
+                    <select id="select_sensor" class="select-filtro">
+                        <option value="error">Selecione um canteiro</option>
+                        <option value="13">Sensor 13</option>
+                        <option value="14">Sensor 14</option>
+                        <option value="15">Sensor 15</option>
+                    </select>`
+        } else if (select == "6") {
+            box_sensor.style.display = 'flex';
+            box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
+                    <select id="select_sensor" class="select-filtro">
+                        <option value="error">Selecione um canteiro</option>
+                        <option value="16">Sensor 16</option>
+                        <option value="17">Sensor 17</option>
+                        <option value="18">Sensor 18</option>
+                    </select>`
+        } else if (select == "7") {
+            box_sensor.style.display = 'flex';
+            box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
+                    <select id="select_sensor" class="select-filtro">
+                        <option value="error">Selecione um canteiro</option>
+                        <option value="19">Sensor 19</option>
+                        <option value="20">Sensor 20</option>
+                        <option value="21">Sensor 21</option>
+                    </select>`
+        } else if (select == "8") {
+            box_sensor.style.display = 'flex';
+            box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
+                    <select id="select_sensor" class="select-filtro">
+                        <option value="error">Selecione um canteiro</option>
+                        <option value="22">Sensor 22</option>
+                        <option value="23">Sensor 23</option>
+                        <option value="24">Sensor 24</option>
+                    </select>`
+        }
+    }
+
+    //Aplicar Filtro
+    function chamarfiltro() {
+        var data_fixa = ipt_data_fixa.value;
+        var data_intervalo_de = ipt_data_de.value;
+        var data_intervalo_ate = ipt_data_ate.value;
+        var canteiro = select_canteiro.value;
+        var sensor = select_sensor.value;
+
+        if ((data_fixa == '') && (data_intervalo_de == '' || data_intervalo_ate == '') && (canteiro == 'error') && (sensor == 'error')) {
+            alert("Selecione um filtro para filtrar seus alertas");
+            return;
+        }
+        if ((data_fixa != '') && (data_intervalo_de != '' && data_intervalo_ate != '')) {
+            alert("Filtro Invalído. Adicione apenas um filtro de data");
+            return;
+        } else {
+            if (data_fixa != '') {
+                if (ax_filtro_data_intervalo) {
+                    alert("Não foi possível adicionar o filtro. Pois Existe um filtro ativo de Intervalo de data. Desative para adicionar o filtro");
+                    return;
+                }
+                vt_filtro_data_fixa[0] = data_fixa;
+                const data = new Date(data_fixa + 'T00:00:00');
+                const data_formatada = data.toLocaleDateString('pt-BR');
+                div_data_fixa.style.display = 'flex';
+                div_data_fixa.innerHTML =
+                    `<span class="subtitle-span">Data:${data_formatada}</span>
+                 <button onclick="closecard1()" class="close-card">X</button>`;
+
+                ipt_data_fixa.value = '';
+                ax_filtro_data_fixa = true;
+            }
+            if (data_intervalo_de != '' && data_intervalo_ate != '') {
+                if (ax_filtro_data_fixa) {
+                    alert("Não foi possível adicionar o filtro. Pois Existe um filtro ativo de data. Desative para adicionar o filtro");
+                    return;
+                }
+                var data_de_f = new Date(data_intervalo_de + 'T00:00:00');
+                var data_ate_f = new Date(data_intervalo_ate + 'T00:00:00');
+                vt_filtro_data_intervalo = [];
+                if (data_de_f > data_ate_f) {
+                    data_intervalo_de = data_intervalo_ate;
+                    data_intervalo_ate = ipt_data_de.value;
+                    data_de_f = new Date(data_intervalo_de + 'T00:00:00');
+                    data_ate_f = new Date(data_intervalo_ate + 'T00:00:00');
+                }
+
+                vt_filtro_data_intervalo.push(data_intervalo_de);
+                vt_filtro_data_intervalo.push(data_intervalo_ate);
+                const data_de_formatada = data_de_f.toLocaleDateString('pt-BR');
+                const data_ate_formatada = data_ate_f.toLocaleDateString('pt-BR');
+                div_data_intervalo.style.display = 'flex';
+                div_data_intervalo.innerHTML = `
+                <span class="subtitle-span">Intervalo de: <br>${data_de_formatada} - ${data_ate_formatada}</span>
+                 <button onclick="closecard2()" class="close-card">X</button>`
+                ipt_data_de.value = '';
+                ipt_data_ate.value = '';
+                ax_filtro_data_intervalo = true;
+            }
+        }
+        if (canteiro != 'error') {
+            for (let i = 1; i <= 8; i++) {
+                if (canteiro == `${i}`) {
+                    vt_filtro_canteiro[0] = i;
+                    div_canteiro.style.display = 'flex';
+                    div_canteiro.innerHTML =
+                    `<span class="subtitle-span">Canteiro:${i}</span>
+                    <button onclick="closecard3()" class="close-card">X</button>`
+                    ax_filtro_canteiro = true;
+                }
+
+            }
+        }
+        if (sensor != 'error') {
+            for (let i = 1; i <= 24; i++) {
+                if (sensor == `${i}`) {
+                    vt_filtro_sensor[0] = i;
+                    div_sensor.style.display = 'flex';
+                    div_sensor.innerHTML =
+                    `<span class="subtitle-span">Sensor:${i}</span>
+                    <button onclick="closecard4()" class="close-card">X</button>`
+                    ax_filtro_sensor = true;
+                }
+            }
+        }
+        if (ax_filtro_canteiro || ax_filtro_data_fixa || ax_filtro_data_intervalo || ax_filtro_sensor) {
+            alert("Filtro Aplicado");
+            plotaralertas();
+        }
+
+    }
+    // Fecha os filtros
+    function closecard1() {
+        vt_filtro_data_fixa.splice(0, 1);
+        div_data_fixa.style.display = 'none';
+        ax_filtro_data_fixa = false;
+    }
+    function closecard2() {
+        vt_filtro_data_intervalo = [];
+        div_data_intervalo.style.display = 'none';
+        ax_filtro_data_intervalo = false;
+    }
+    function closecard3() {
+        vt_filtro_canteiro = [''];
+        div_canteiro.style.display = 'none';
+        ax_filtro_canteiro = false;
+    }
+    function closecard4() {
+        vt_filtro_sensor = [''];
+        div_sensor.style.display = 'none';
+        ax_filtro_sensor = false
+    }
+    function plotaralertas() {
+        
+    }
+
+</script>

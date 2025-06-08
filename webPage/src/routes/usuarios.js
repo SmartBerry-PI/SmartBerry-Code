@@ -47,4 +47,7 @@ router.get(`/buscarultimolog`, function (req,res) {
 router.get(`/obterdadosdeumidade/:fk_empresa/:fk_canteiro/:fk_sensor`, function (req,res) {
     usuarioController.obterdadosdeumidade(req,res);
 });
+router.get(`/buscarAlertas/:id_empresa`, function (req,res) {
+    usuarioController.buscarAlertas(req,res);
+});
 module.exports = router;

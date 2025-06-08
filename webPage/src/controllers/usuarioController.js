@@ -411,6 +411,27 @@ function atualizardadosdeumidade(req, res) {
     }
 
 }
+function buscarAlertas(req, res) {
+    var fk_empresa = req.params.id_empresa;
+
+    if (fk_empresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else {
+        usuarioModel.buscarAlertas(fk_empresa)
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+
+}
 
 module.exports = {
     autenticar,
@@ -426,5 +447,6 @@ module.exports = {
     buscaralertasdasemana,
     buscardiaalerta,
     obterdadosdeumidade,
-    atualizardadosdeumidade
+    atualizardadosdeumidade,
+    buscarAlertas
 }

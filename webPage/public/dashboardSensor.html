@@ -37,7 +37,7 @@
                 <span class="title-welcome">Bem-Vindo Usuário</span>
                 <ul class="menu-list">
                     <li class="option-menu backto-alto"><u>Visão Geral</u></li>
-                    <li class="option-menu"><u>Histórico de Alertas</u></li>
+                    <li class="option-menu backto-his"><u>Histórico de Alertas</u></li>
                     <li class="option-menu"><u>Alterar Senha</u></li>
                 </ul>
                 <button class="button-sair">Sair da Conta</button>
@@ -127,6 +127,9 @@
     });
     document.querySelector('.button-sair').addEventListener('click', () => {
         window.location.href = 'index.html';
+    });
+    document.querySelector('.backto-his').addEventListener('click', () => {
+        window.location.href = 'HistoricodeAlertas.html';
     });
     const texto_bem_vindo = document.querySelector('.title-welcome');
 
