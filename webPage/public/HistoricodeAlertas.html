@@ -32,7 +32,7 @@
         <div class="elements-menu">
             <div class="menu-vertical">
                 <img src="./assets/perfil-icon.png" alt="icon-Perfil" class="icon-Perfil">
-                <span class="title-welcome">Bem-Vindo Usuário</span>
+                <span class="title-welcome" id="texto_bem_vindo">Bem-Vindo Usuário</span>
                 <ul class="menu-list">
                     <li class="option-menu backto-alto"><u>Visão geral</u></li>
                     <li class="option-menu"><u>Alterar Senha</u></li>
@@ -110,6 +110,28 @@
         <!-- Fim do Filtro -->
     </section>
     <div class="barra-horizontal"></div>
+    <section class="alert-box" id="box_alerta">
+        <h3 class="title-alert">Alertas</h3>
+        <div class="pagina-box">
+            <button onclick="menosAlerta()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">1/10</span>
+            <button onclick="maisAlerta()" class="button-pagina">❯</button>
+        </div>
+        <div class="box-alerta">
+            <h3 class="title-card-alert">Alerta Emitidos em: 11/04/2025 01:00</h3>
+            <div class="flex-alert">
+                <div class="info-alert">
+                    <span>Canteiro 3 - Sensor 9</span>
+                    <span>Umidade capturada: 80%</span>
+                </div>
+                <div class="nivel-alert">
+                    <span>Nível de Criticidade:</span>
+                    <span class="alert-text">Perigo</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
 </body>
 <html>
 <script>
@@ -132,6 +154,12 @@
     document.querySelector('.backto-alto').addEventListener('click', () => {
         window.location.href = 'DashAlto.html';
     });
+    var plotar_textos = setInterval(() => {
+        texto_bem_vindo.innerHTML = `Bem-Vindo, ${sessionStorage.NOME_USUARIO}`;
+        setTimeout(() => {
+            clearInterval(plotar_textos);
+        }, 1000)
+    }, 500)
     // Fim Menu Hamburguer Config
     // Varíaveis Globais
     var vt_filtro_data_fixa = [''];
@@ -143,23 +171,114 @@
     var ax_filtro_canteiro = false;
     var ax_filtro_sensor = false;
     var id_empresa = sessionStorage.ID_EMPRESA;
+    var dados_do_banco = [];
+    var pagina_atual = 1;
+    var itens_pagina = 50;
+    var contador_datafixa = 0;
     // Requisição para puxar todos os dados
     fetch(`/usuarios/buscarAlertas/${id_empresa}`, {
-            method: 'GET',
-            headers: {
-                "Content-type": "application/json"
-            }
+        method: 'GET',
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+        .then(data => {
+            return data.json();
         })
-            .then(data => {
-                return data.json();
-            })
-            .then(data => {
-                console.log("Alertas Puxados")
-                console.log(data);
-            })
-            .catch(error => {
-                console.log("Erro no catch:", error);
-            })
+        .then(data => {
+            console.log("Alertas Puxados")
+            console.log(data);
+            dados_do_banco = data;
+            var pagina_totais = Math.ceil(dados_do_banco.length / 50);
+            passador_span.innerHTML = `${pagina_atual}/${pagina_totais}`
+            plotaralertas();
+        })
+        .catch(error => {
+            console.log("Erro no catch:", error);
+        })
+    //Plotar Alertas
+    function plotaralertas() {
+        const data_formatada_dia_hora = {
+            timeZone: 'America/Sao_Paulo',
+            day: '2-digit',
+            month: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        };
+        box_alerta.innerHTML = `
+        <h3 class="title-alert">Alertas</h3>
+        <div class="pagina-box">
+            <button onclick="menosAlerta()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pagina_atual}/${Math.ceil(dados_do_banco.length / 50)}</span>
+            <button onclick="maisAlerta()" class="button-pagina">❯</button>
+        </div>`
+        const inicio = (pagina_atual - 1) * itens_pagina;
+        const fim = Math.min(inicio + itens_pagina, dados_do_banco.length);
+        for (let i = inicio; i < fim; i++) {
+            var data_f = new Date(dados_do_banco[i].dtAlerta);
+            var data_formatada = data_f.toLocaleString('pt-BR', data_formatada_dia_hora);
+            if (dados_do_banco[i].umidadeSolo >= 90 || dados_do_banco[i].umidadeSolo <= 60) {
+                box_alerta.innerHTML += `
+                <div class="box-alerta">
+            <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+            <div class="flex-alert">
+                <div class="info-alert">
+                    <span>Canteiro:${dados_do_banco[i].fkCanteiro} - Sensor ${((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor)}</span>
+                    <span>Umidade capturada:${dados_do_banco[i].umidadeSolo}%</span>
+                </div>
+                <div class="nivel-alert">
+                    <span>Nível de Criticidade:</span>
+                    <span class="alert-text" style="color:#FF5555">Perigo</span>
+                </div>
+            </div>
+        </div>`
+            }
+            else {
+                box_alerta.innerHTML += `
+                <div class="box-alerta">
+                <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+                <div class="flex-alert">
+                <div class="info-alert">
+                    <span>Canteiro:${dados_do_banco[i].fkCanteiro} - Sensor ${((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor)}</span>
+                    <span>Umidade capturada:${dados_do_banco[i].umidadeSolo}%</span>
+                </div>
+                <div class="nivel-alert">
+                    <span>Nível de Criticidade:</span>
+                    <span class="alert-text" style="color:#FFF155">Perigo</span>
+                </div>
+                </div>
+                </div>`
+            }
+        }
+        box_alerta.innerHTML += `
+        <div class="pagina-box">
+            <button onclick="menosAlerta()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pagina_atual}/${Math.ceil(dados_do_banco.length / 50)}</span>
+            <button onclick="maisAlerta()" class="button-pagina">❯</button>
+        </div>`
+    }
+    //Passadores
+    function menosAlerta() {
+        var pagina_totais = Math.ceil(dados_do_banco.length / 50);
+        if (pagina_atual == 1) {
+            pagina_atual = pagina_totais;
+        } else {
+            pagina_atual--;
+        }
+        passador_span.innerHTML = `${pagina_atual}/${pagina_totais}`
+        plotaralertas();
+    }
+    function maisAlerta() {
+        var pagina_totais = Math.ceil(dados_do_banco.length / 50);
+        if (pagina_atual == pagina_totais) {
+            pagina_atual = 1;
+        } else {
+            pagina_atual++;
+        }
+        passador_span.innerHTML = `${pagina_atual}/${pagina_totais}`
+        plotaralertas();
+    }
+
     //Aprece e Desparece sensorbox
     function aparecersensor() {
         var select = select_canteiro.value;
@@ -306,7 +425,7 @@
                     vt_filtro_canteiro[0] = i;
                     div_canteiro.style.display = 'flex';
                     div_canteiro.innerHTML =
-                    `<span class="subtitle-span">Canteiro:${i}</span>
+                        `<span class="subtitle-span">Canteiro:${i}</span>
                     <button onclick="closecard3()" class="close-card">X</button>`
                     ax_filtro_canteiro = true;
                 }
@@ -319,7 +438,7 @@
                     vt_filtro_sensor[0] = i;
                     div_sensor.style.display = 'flex';
                     div_sensor.innerHTML =
-                    `<span class="subtitle-span">Sensor:${i}</span>
+                        `<span class="subtitle-span">Sensor:${i}</span>
                     <button onclick="closecard4()" class="close-card">X</button>`
                     ax_filtro_sensor = true;
                 }
@@ -327,7 +446,7 @@
         }
         if (ax_filtro_canteiro || ax_filtro_data_fixa || ax_filtro_data_intervalo || ax_filtro_sensor) {
             alert("Filtro Aplicado");
-            plotaralertas();
+            plotarfiltro();
         }
 
     }
@@ -336,24 +455,98 @@
         vt_filtro_data_fixa.splice(0, 1);
         div_data_fixa.style.display = 'none';
         ax_filtro_data_fixa = false;
+        plotarfiltro()
     }
     function closecard2() {
         vt_filtro_data_intervalo = [];
         div_data_intervalo.style.display = 'none';
         ax_filtro_data_intervalo = false;
+        plotarfiltro()
     }
     function closecard3() {
         vt_filtro_canteiro = [''];
         div_canteiro.style.display = 'none';
         ax_filtro_canteiro = false;
+        plotarfiltro()
     }
     function closecard4() {
         vt_filtro_sensor = [''];
         div_sensor.style.display = 'none';
         ax_filtro_sensor = false
+        plotarfiltro();
     }
-    function plotaralertas() {
-        
-    }
+    //Plotar textos com filtros
+    function plotarfiltro() {
+        if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] == '') {
+            console.log("Apenas Data fixa");
+            var data = new Date(vt_filtro_data_fixa[0]);
+            var data_fixa_f = data.toISOString().slice(0, 10);
+            console.log(data_fixa_f);
+            box_alerta.innerHTML = ``
+            for (let i = 0; i < dados_do_banco.length; i++) {
+                var data_com = new Date(dados_do_banco[i].dtAlerta).toLocaleDateString('pt-BR');;
+                var data_comparada = data_com.toISOString().slice(0, 10)
+                var data_formatada_1 = data_comparada.toLocaleDateString('pt-BR'); 
+                if (data_fixa_f == data_comparada) {
+                    if (dados_do_banco[i].umidadeSolo >= 90 || dados_do_banco[i].umidadeSolo <= 60) {
+                        console.log("Oi", dados_do_banco.length)
+                        box_alerta.innerHTML += `
+                        <div class="box-alerta">
+                        <h3 class="title-card-alert">Alerta Emitidos em:${data_fixa_f}</h3>
+                        <div class="flex-alert">
+                        <div class="info-alert">
+                        <span>Canteiro:${dados_do_banco[i].fkCanteiro} - Sensor ${((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor)}</span>
+                        <span>Umidade capturada:${dados_do_banco[i].umidadeSolo}%</span>
+                        </div>
+                        <div class="nivel-alert">
+                        <span>Nível de Criticidade:</span>
+                        <span class="alert-text" style="color:#FF5555">Perigo</span>
+                        </div>
+                    </div>
+                    </div>`
+                    }
+                else {
+                        box_alerta.innerHTML += `
+                        <div class="box-alerta">
+                        <h3 class="title-card-alert">Alerta Emitidos em:${data_fixa_f}</h3>
+                        <div class="flex-alert">
+                        <div class="info-alert">
+                        <span>Canteiro:${dados_do_banco[i].fkCanteiro} - Sensor ${((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor)}</span>
+                        <span>Umidade capturada:${dados_do_banco[i].umidadeSolo}%</span>
+                        </div>
+                        <div class="nivel-alert">
+                        <span>Nível de Criticidade:</span>
+                        <span class="alert-text" style="color:#FFF155">Perigo</span>
+                    </div>
+                    </div>
+                    </div>`
+                    }
+                }
+            }
 
+        } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] == '') {
+            console.log("Apenas Data intervalo")
+        } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] == '') {
+            console.log("Apenas Canteiro")
+        } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] != '') {
+            console.log("Apenas Sensor")
+        } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] != '') {
+            console.log("Canteiro + Sensor")
+        } else if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] == '') {
+            console.log("Canteiro + Datafixa")
+        } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] == '') {
+            console.log("Canteiro + DataIntervalo")
+        } else if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] != '') {
+            console.log("Sensor + Datafixa")
+        } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] != '') {
+            console.log("Sensor + DataIntervalo")
+        } else if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] != '') {
+            console.log("Canteiro + Sensor + DataFixa")
+        } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] != '') {
+            console.log("Canteiro + Sensor + DataIntervalo")
+        } else {
+            console.log("Nenhum filtro");
+            plotaralertas();
+        }
+    }
 </script>

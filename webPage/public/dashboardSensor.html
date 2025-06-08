@@ -139,40 +139,40 @@
             clearInterval(plotar_textos);
         }, 1000)
     }, 500)
-    
+
     var dados_grafico_umidade = [];
     var dados_grafico_label = [];
     var dados_dash = {
-            labels: dados_grafico_label,
-            datasets: [{
-                label: 'Umidade do solo',
-                borderColor: 'green',
-                data: dados_grafico_umidade,
-                tension: 0.1,
-                pointRadius: 0,
-                segment: {
-                    borderColor: ctx => {
-                        const comeco = ctx.p0.parsed.y;
-                        const final = ctx.p1.parsed.y;
-                        if (comeco <= 60 || final <= 60) {
-                            return 'red';
-                        }
-                        else if (comeco < 70 || final < 70) {
-                            return 'yellow';
-                        }
-                        else if ((comeco > 70 || final > 70) && (comeco < 70 || final < 70)) {
-                            return 'green';
-                        }
-                        else if (comeco >= 80 || final >= 80) {
-                            return 'yellow';
-                        }
-                        else if (comeco >= 90 || final >= 90) {
-                            return 'red';
-                        }
+        labels: dados_grafico_label,
+        datasets: [{
+            label: 'Umidade do solo',
+            borderColor: 'green',
+            data: dados_grafico_umidade,
+            tension: 0.1,
+            pointRadius: 0,
+            segment: {
+                borderColor: ctx => {
+                    const comeco = ctx.p0.parsed.y;
+                    const final = ctx.p1.parsed.y;
+                    if (comeco <= 60 || final <= 60) {
+                        return 'red';
                     }
-                },
-            }]
-        }
+                    else if (comeco < 70 || final < 70) {
+                        return 'yellow';
+                    }
+                    else if ((comeco > 70 || final > 70) && (comeco < 70 || final < 70)) {
+                        return 'green';
+                    }
+                    else if (comeco >= 80 || final >= 80) {
+                        return 'yellow';
+                    }
+                    else if (comeco >= 90 || final >= 90) {
+                        return 'red';
+                    }
+                }
+            },
+        }]
+    }
 
     function obter_dados_kpis() {
         fetch(`/usuarios/statussensor/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
@@ -279,7 +279,7 @@
             .catch(error => {
                 console.log("Erro no catch:", error);
             })
-        
+
         fetch(`/usuarios/obterdadosdeumidade/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
             method: 'GET',
             headers: {
@@ -291,10 +291,18 @@
             })
             .then(data => {
                 console.log("dados da umidade do sensor puxada")
-                console.log(data);
-                for (let i = data.length - 1 ; i >= 0; i--) {
+                console.log("Dados recebidos", data);
+                const opcoes_data = {
+                    timeZone: 'America/Sao_Paulo',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+
+                for (let i = data.length - 1; i >= 0; i--) {
+                    var data_f = new Date(data[i].dtColeta)
+                    var data_formatada = data_f.toLocaleString('pt-BR', opcoes_data)
                     dados_grafico_umidade.push(data[i].umidadeSolo)
-                    dados_grafico_label.push(data[i].dtColeta.substr(11, 5));
+                    dados_grafico_label.push(data_formatada);
                 }
                 console.log(dados_grafico_label);
                 console.log(dados_grafico_umidade);
@@ -310,70 +318,70 @@
         const dia = new Date();
         const formatDia = dia.toLocaleDateString('pt-BR');
         grafico_umidade = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: dados_grafico_label,
-            datasets: [{
-                label: 'Umidade do solo',
-                borderColor: 'green',
-                data: dados_grafico_umidade,
-                tension: 0.1,
-                pointRadius: 0,
-                segment: {
-                    borderColor: ctx => {
-                        const comeco = ctx.p0.parsed.y;
-                        const final = ctx.p1.parsed.y;
-                        if (comeco <= 60 || final <= 60) {
-                            return 'red';
+            type: 'line',
+            data: {
+                labels: dados_grafico_label,
+                datasets: [{
+                    label: 'Umidade do solo',
+                    borderColor: 'green',
+                    data: dados_grafico_umidade,
+                    tension: 0.1,
+                    pointRadius: 0,
+                    segment: {
+                        borderColor: ctx => {
+                            const comeco = ctx.p0.parsed.y;
+                            const final = ctx.p1.parsed.y;
+                            if (comeco <= 60 || final <= 60) {
+                                return 'red';
+                            }
+                            else if (comeco < 70 || final < 70) {
+                                return 'yellow';
+                            }
+                            else if ((comeco > 70 || final > 70) && (comeco < 70 || final < 70)) {
+                                return 'green';
+                            }
+                            else if (comeco >= 80 || final >= 80) {
+                                return 'yellow';
+                            }
+                            else if (comeco >= 90 || final >= 90) {
+                                return 'red';
+                            }
                         }
-                        else if (comeco < 70 || final < 70) {
-                            return 'yellow';
-                        }
-                        else if ((comeco > 70 || final > 70) && (comeco < 70 || final < 70)) {
-                            return 'green';
-                        }
-                        else if (comeco >= 80 || final >= 80) {
-                            return 'yellow';
-                        }
-                        else if (comeco >= 90 || final >= 90) {
-                            return 'red';
-                        }
-                    }
-                },
-            }]
-        },
-        options: {
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: 'Historico de umidade do sensor no dia ' + formatDia,
-                    font: {
-                        size: 15,
                     },
-                    padding: {
-                        top: 20,
-                        bottom: 30
-                    }
-                }
+                }]
             },
-            scales: {
-                y: {
-                    ticks: {
-                        callback: function (value) {
-                            return value + '%';
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Historico de umidade do sensor no dia ' + formatDia,
+                        font: {
+                            size: 15,
+                        },
+                        padding: {
+                            top: 20,
+                            bottom: 30
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: function (value) {
+                                return value + '%';
+                            }
                         }
                     }
                 }
             }
-        }
-    })
-    setTimeout(() => {
-        atualizargrafico();
-    },1000)
+        })
+        setTimeout(() => {
+            atualizargrafico();
+        }, 1000)
     }
     function atualizargrafico() {
         fetch(`/usuarios/atualizardadosdeumidade/${fk_empresa}/${fk_canteiro}/${fk_sensor}`, {
@@ -386,11 +394,18 @@
                 return data.json();
             })
             .then(data => {
+                const opcoes_data = {
+                    timeZone: 'America/Sao_Paulo',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
                 console.log("dados da umidade do sensor Atualizada")
                 dados_grafico_label.shift();
                 dados_grafico_umidade.shift();
                 dados_grafico_umidade.push(data[0].umidadeSolo)
-                dados_grafico_label.push(data[0].dtColeta.substr(11, 5));
+                var data_f = new Date(data[0].dtColeta)
+                var data_formatada = data_f.toLocaleString('pt-BR', opcoes_data)
+                dados_grafico_label.push(data_formatada);
                 console.log(dados_grafico_umidade);
                 grafico_umidade.destroy();
                 plotargraficos();

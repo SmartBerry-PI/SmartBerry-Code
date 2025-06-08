@@ -66,7 +66,7 @@ CREATE TABLE sensor (
     statusAtivacao  TINYINT   NOT NULL,
     dtInstalacao    DATETIME  NOT NULL,
     
-    CONSTRAINT pkCompostaSensor PRIMARY KEY (idSensor, fkEmpresa),  
+    CONSTRAINT pkCompostaSensor PRIMARY KEY (idSensor, fkEmpresa, fkCanteiro),  
 	CONSTRAINT fkSensorCanteiro FOREIGN KEY sensor(fkCanteiro) REFERENCES canteiro(idCanteiro),
     CONSTRAINT fkSensorEmpresa FOREIGN KEY sensor(fkEmpresa) REFERENCES empresa(idEmpresa),
     CONSTRAINT ckStatus CHECK (statusAtivacao in (0,1))
