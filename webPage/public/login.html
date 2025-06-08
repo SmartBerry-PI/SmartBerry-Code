@@ -87,6 +87,10 @@
     var senhaVar = ipt_senha.value;
     var codigoVar = ipt_codigo.value;
 
+    if (codigoVar == 'SUPORTE-N3') {
+      window.location.href = "suporte.html";
+      return false
+    };
 
     console.log("FORM LOGIN: ", usuarioVar);
     console.log("FORM SENHA: ", senhaVar);
