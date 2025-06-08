@@ -815,3 +815,7 @@ a:hover {
 {
     color: #fff;
 }
+
+.elements-menu.open-menu + .historico-screen .title-filtro {
+    display: none;
+}

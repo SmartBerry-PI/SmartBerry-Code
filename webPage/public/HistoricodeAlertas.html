@@ -23,25 +23,24 @@
                     <div class="barra-vertical"></div>
                     <h3 class="subtitle-nav">Historico de Alertas</h3>
                 </div>
-        </div>
-        </nav>
+            </nav>
         </div>
     </header>
-    <section class="historico-screen">
-        <!-- Menu Hamburguer Começo -->
-        <div class="elements-menu">
-            <div class="menu-vertical">
-                <img src="./assets/perfil-icon.png" alt="icon-Perfil" class="icon-Perfil">
-                <span class="title-welcome" id="texto_bem_vindo">Bem-Vindo Usuário</span>
-                <ul class="menu-list">
-                    <li class="option-menu backto-alto"><u>Visão geral</u></li>
-                    <li class="option-menu"><u>Alterar Senha</u></li>
-                </ul>
-                <button class="button-sair">Sair da Conta</button>
-            </div>
-            <div class="menu-shadow"></div>
+    <!-- Menu Hamburguer Começo -->
+    <div class="elements-menu">
+        <div class="menu-vertical">
+            <img src="./assets/perfil-icon.png" alt="icon-Perfil" class="icon-Perfil">
+            <span class="title-welcome" id="texto_bem_vindo">Bem-Vindo Usuário</span>
+            <ul class="menu-list">
+                <li class="option-menu backto-alto"><u>Visão geral</u></li>
+                <li class="option-menu"><u>Alterar Senha</u></li>
+            </ul>
+            <button class="button-sair">Sair da Conta</button>
         </div>
-        <!-- Fim Menu Hambuguer -->
+        <div class="menu-shadow"></div>
+    </div>
+    <!-- Fim Menu Hambuguer -->
+    <section class="historico-screen">
         <!-- Começo do Filtro -->
         <section class="filtro-main">
             <div class="title-filtro">Filtros:</div>
@@ -136,31 +135,41 @@
 <html>
 <script>
     //Menu Hamburguer Config Inicio
-    document.querySelector('.botao-vertical').addEventListener('click', () => {
+    document.addEventListener('DOMContentLoaded', function () {
+        const botaoMenu = document.querySelector('.botao-vertical');
         const menu = document.querySelector('.elements-menu');
-        const botao = document.querySelector('.botao-vertical');
-        menu.classList.toggle('open-menu');
-        botao.classList.toggle('x');
+        const shadow = document.querySelector('.menu-shadow');
+        const titleFiltro = document.querySelector('.title-filtro');
+
+        botaoMenu.addEventListener('click', function (e) {
+            e.stopPropagation();
+            menu.classList.toggle('open-menu');
+            botaoMenu.classList.toggle('x');
+
+            if (menu.classList.contains('open-menu')) {
+                titleFiltro.style.display = 'none';
+            } else {
+                titleFiltro.style.display = 'flex';
+            }
+        });
+
+        shadow.addEventListener('click', function () {
+            menu.classList.remove('open-menu');
+            botaoMenu.classList.remove('x');
+            titleFiltro.style.display = 'flex';
+        });
+
+        document.querySelector('.button-sair').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+
+        document.querySelector('.backto-alto').addEventListener('click', () => {
+            window.location.href = 'DashAlto.html';
+        });
+
     });
-    document.querySelector('.menu-shadow').addEventListener('click', () => {
-        const menu = document.querySelector('.elements-menu');
-        const botao = document.querySelector('.botao-vertical');
-        menu.classList.remove('open-menu');
-        botao.classList.remove('x');
-    });
-    document.querySelector('.button-sair').addEventListener('click', () => {
-        window.location.href = 'index.html';
-    });
-    document.querySelector('.backto-alto').addEventListener('click', () => {
-        window.location.href = 'DashAlto.html';
-    });
-    var plotar_textos = setInterval(() => {
-        texto_bem_vindo.innerHTML = `Bem-Vindo, ${sessionStorage.NOME_USUARIO}`;
-        setTimeout(() => {
-            clearInterval(plotar_textos);
-        }, 1000)
-    }, 500)
     // Fim Menu Hamburguer Config
+
     // Varíaveis Globais
     var vt_filtro_data_fixa = [''];
     var vt_filtro_data_intervalo = [];
@@ -486,7 +495,7 @@
             for (let i = 0; i < dados_do_banco.length; i++) {
                 var data_com = new Date(dados_do_banco[i].dtAlerta).toLocaleDateString('pt-BR');;
                 var data_comparada = data_com.toISOString().slice(0, 10)
-                var data_formatada_1 = data_comparada.toLocaleDateString('pt-BR'); 
+                var data_formatada_1 = data_comparada.toLocaleDateString('pt-BR');
                 if (data_fixa_f == data_comparada) {
                     if (dados_do_banco[i].umidadeSolo >= 90 || dados_do_banco[i].umidadeSolo <= 60) {
                         console.log("Oi", dados_do_banco.length)
@@ -505,7 +514,7 @@
                     </div>
                     </div>`
                     }
-                else {
+                    else {
                         box_alerta.innerHTML += `
                         <div class="box-alerta">
                         <h3 class="title-card-alert">Alerta Emitidos em:${data_fixa_f}</h3>
@@ -549,4 +558,5 @@
             plotaralertas();
         }
     }
+
 </script>
