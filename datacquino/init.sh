@@ -30,6 +30,21 @@ read -p "Insira a quantidade de canteiros: " CANTEIROS
 read -p "Insira a quantidade de sensores por canteiro: " SENSORES
 echo ''
 
+# Novas configurações de simulação
+echo 'Configurações de simulação'
+read -p "Deseja usar modo de simulação? (S/N) " SIMULAR
+if [ $SIMULAR = 'S' ]; then 
+    USAR_SIMULACAO='true'
+    read -p "Intervalo entre leituras (ms): " INTERVALO
+    read -p "Umidade mínima (%): " UMIDADE_MIN
+    read -p "Umidade máxima (%): " UMIDADE_MAX
+else 
+    USAR_SIMULACAO='false'
+    INTERVALO=5000
+    UMIDADE_MIN=50
+    UMIDADE_MAX=80
+fi
+
 cat > '.env' <<EOF
 DB_HOST = '$HOST'
 DB_USER = '$USER'
@@ -40,22 +55,28 @@ ID_EMPRESA = $EMPRESA
 QTD_CANTEIROS = $CANTEIROS
 QTD_SENSORES = $SENSORES
 OP_INSERIR = $INSERIR
+USAR_SIMULACAO = $USAR_SIMULACAO
+SIMULACAO_INTERVALO = ${INTERVALO:-5000}
+SIMULACAO_UMIDADE_MIN = ${UMIDADE_MIN:-50}
+SIMULACAO_UMIDADE_MAX = ${UMIDADE_MAX:-80}
 EOF
 
-read -p "As credenciais 
-'
-$(cat '.env')
-'
-estão corretas? (S/N)" INICIAR_API
+echo ''
+echo 'As credenciais configuradas são:'
+echo '--------------------------------'
+cat '.env'
+echo '--------------------------------'
+
+read -p "As credenciais estão corretas? (S/N) " INICIAR_API
 
 echo ''
 if [ $INICIAR_API = 'S' ]; then 
-echo 'INSTALANDO DEPENDÊNCIAS...'
-npm i
-echo ''
-echo 'INICIALIZANDO DATACQUINO...'
-npm start
+    echo 'INSTALANDO DEPENDÊNCIAS...'
+    npm i
+    echo ''
+    echo 'INICIALIZANDO DATACQUINO...'
+    npm start
 else 
-echo 'RECONFIGURE AS CREDENCIAIS...'
-./init.sh
+    echo 'RECONFIGURE AS CREDENCIAIS...'
+    ./init.sh
 fi
