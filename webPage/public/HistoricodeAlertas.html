@@ -21,7 +21,7 @@
                     </div>
                     <h2 id="logoTexto">SmartBerry</h2>
                     <div class="barra-vertical"></div>
-                    <h3 class="subtitle-nav">Historico de Alertas</h3>
+                    <h3 class="subtitle-nav">Histórico de Alertas</h3>
                 </div>
             </nav>
         </div>
@@ -306,7 +306,7 @@
             box_sensor.style.display = 'flex';
             box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
                     <select id="select_sensor" class="select-filtro">
-                        <option value="error">Selecione um canteiro</option>
+                        <option value="error">Selecione um sensor</option>
                         <option value="1">Sensor 1</option>
                         <option value="2">Sensor 2</option>
                         <option value="3">Sensor 3</option>
@@ -315,7 +315,7 @@
             box_sensor.style.display = 'flex';
             box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
                     <select id="select_sensor" class="select-filtro">
-                        <option value="error">Selecione um canteiro</option>
+                        <option value="error">Selecione um sensor</option>
                         <option value="4">Sensor 4</option>
                         <option value="5">Sensor 5</option>
                         <option value="6">Sensor 6</option>
@@ -324,7 +324,7 @@
             box_sensor.style.display = 'flex';
             box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
                     <select id="select_sensor" class="select-filtro">
-                        <option value="error">Selecione um canteiro</option>
+                        <option value="error">Selecione um sensor</option>
                         <option value="7">Sensor 7</option>
                         <option value="8">Sensor 8</option>
                         <option value="9">Sensor 9</option>
@@ -333,7 +333,7 @@
             box_sensor.style.display = 'flex';
             box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
                     <select id="select_sensor" class="select-filtro">
-                        <option value="error">Selecione um canteiro</option>
+                        <option value="error">Selecione um sensor</option>
                         <option value="10">Sensor 10</option>
                         <option value="11">Sensor 11</option>
                         <option value="12">Sensor 12</option>
@@ -342,7 +342,7 @@
             box_sensor.style.display = 'flex';
             box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
                     <select id="select_sensor" class="select-filtro">
-                        <option value="error">Selecione um canteiro</option>
+                        <option value="error">Selecione um sensor</option>
                         <option value="13">Sensor 13</option>
                         <option value="14">Sensor 14</option>
                         <option value="15">Sensor 15</option>
@@ -351,7 +351,7 @@
             box_sensor.style.display = 'flex';
             box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
                     <select id="select_sensor" class="select-filtro">
-                        <option value="error">Selecione um canteiro</option>
+                        <option value="error">Selecione um sensor</option>
                         <option value="16">Sensor 16</option>
                         <option value="17">Sensor 17</option>
                         <option value="18">Sensor 18</option>
@@ -360,7 +360,7 @@
             box_sensor.style.display = 'flex';
             box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
                     <select id="select_sensor" class="select-filtro">
-                        <option value="error">Selecione um canteiro</option>
+                        <option value="error">Selecione um sensor</option>
                         <option value="19">Sensor 19</option>
                         <option value="20">Sensor 20</option>
                         <option value="21">Sensor 21</option>
@@ -369,7 +369,7 @@
             box_sensor.style.display = 'flex';
             box_sensor.innerHTML = `<span class="subtitle-filter">Sensor</span>
                     <select id="select_sensor" class="select-filtro">
-                        <option value="error">Selecione um canteiro</option>
+                        <option value="error">Selecione um sensor</option>
                         <option value="22">Sensor 22</option>
                         <option value="23">Sensor 23</option>
                         <option value="24">Sensor 24</option>
@@ -510,6 +510,10 @@
     var pag_atual_sensor_canteiro = 1;
     var total_paginas_canteiro_df = 0;
     var pag_atual_canteiro_df = 1;
+    var total_paginas_canteiro_di = 0;
+    var pag_atual_canteiro_di = 1;
+    var total_paginas_sensor_di = 0;
+    var pag_atual_sensor_di = 1;
     //Atualizar passadores filtros
     function menosAlerta1() {
         if (pag_atual_data_fixa == 1) {
@@ -607,8 +611,41 @@
         }
         plotarfiltro();
     }
+    function menosAlerta7() {
+        if (pag_atual_canteiro_di == 1) {
+            pag_atual_canteiro_di = total_paginas_canteiro_di;
+        } else {
+            pag_atual_canteiro_di--;
+        }
+        plotarfiltro();
+    }
+    function maisAlerta7() {
+        if (pag_atual_canteiro_di == total_paginas_canteiro_di) {
+            pag_atual_canteiro_di = 1;
+        } else {
+            pag_atual_canteiro_di++;
+        }
+        plotarfiltro();
+    }
+    function menosAlerta7() {
+        if (pag_atual_canteiro_di == 1) {
+            pag_atual_canteiro_di = total_paginas_canteiro_di;
+        } else {
+            pag_atual_canteiro_di--;
+        }
+        plotarfiltro();
+    }
+    function maisAlerta7() {
+        if (pag_atual_canteiro_di == total_paginas_canteiro_di) {
+            pag_atual_canteiro_di = 1;
+        } else {
+            pag_atual_canteiro_di++;
+        }
+        plotarfiltro();
+    }
     //Plotar textos com filtros
     function plotarfiltro() {
+        //-----------------------------------------------------------------------------------------------
         if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] == '') {
             if (!ax_volta_data_fixa) {
                 pag_atual_data_fixa = 1;
@@ -697,6 +734,7 @@
                 <button onclick="maisAlerta1()" class="button-pagina">❯</button>
                 </div>`
             }
+            //-----------------------------------------------------------------------------------------------
         } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] == '') {
             if (!ax_volta_data_intervalo) {
                 pag_atual_data_intervalo = 1;
@@ -782,6 +820,7 @@
                 <button onclick="maisAlerta2()" class="button-pagina">❯</button>
                 </div>`
             }
+            //-----------------------------------------------------------------------------------------------
         } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] == '') {
             total_paginas_canteiro = 0;
             let dados_filtrados = []
@@ -847,6 +886,7 @@
                 <button onclick="maisAlerta3()" class="button-pagina">❯</button>
                 </div>`
             }
+            //-----------------------------------------------------------------------------------------------
         } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] != '') {
             console.log("Apenas Sensor");
             let posicao_sensores = []
@@ -909,6 +949,7 @@
                 <button onclick="maisAlerta4()" class="button-pagina">❯</button>
                 </div>`
             }
+            //-----------------------------------------------------------------------------------------------
         } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] != '') {
             console.log("Canteiro + Sensor");
             let dados_filtrados = []
@@ -970,21 +1011,19 @@
                 <button onclick="maisAlerta4()" class="button-pagina">❯</button>
                 </div>`
             }
+            //-----------------------------------------------------------------------------------------------
         } else if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] == '') {
             console.log("Canteiro + Datafixa")
             let dados_filtrados = []
             total_paginas_canteiro_df = 0;
             for (let i = 0; i < dados_do_banco.length; i++) {
                 const data_banco = new Date(dados_do_banco[i].dtAlerta);
-                data_banco.setHours(data_banco.getHours() - 3);
-                const ano = data_banco.getFullYear();
-                const mes = String(data_banco.getMonth() + 1).padStart(2, '0');
-                const dia = String(data_banco.getDate()).padStart(2, '0');
-                const data_comparacao = `${ano}-${mes}-${dia}`;
-                if ((dados_do_banco[i].fkCanteiro == vt_filtro_canteiro[0]) && data_comparacao == vt_filtro_data_fixa[0]) {
-                    total_paginas_canteiro_df++;
-                    dados_filtrados.push(dados_do_banco[i]);
-                    console.log("Entrei")
+                const data_de = new Date(vt_filtro_data_intervalo[0]);
+                const data_ate = new Date(vt_filtro_data_intervalo[1]);
+                data_de.setHours(0, 0, 0, 0)
+                data_ate.setHours(23, 59, 59, 999)
+                if (data_banco >= data_de && data_banco <= data_ate && (dados_do_banco[i].fkCanteiro == vt_filtro_canteiro[0])) {
+                    total_paginas_data_intervalo++;
                 }
             }
             let inicio = (pag_atual_sensor - 1) * itens_pagina;
@@ -1038,17 +1077,151 @@
                 <button onclick="maisAlerta6()" class="button-pagina">❯</button>
                 </div>`
             }
+            //-----------------------------------------------------------------------------------------------
         } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] == '') {
             console.log("Canteiro + DataIntervalo")
+            let dados_filtrados = []
+            total_paginas_canteiro_di = 0;
+            for (let i = 0; i < dados_do_banco.length; i++) {
+                const data_banco = new Date(dados_do_banco[i].dtAlerta);
+                const data_de = new Date(vt_filtro_data_intervalo[0]);
+                const data_ate = new Date(vt_filtro_data_intervalo[1]);
+                data_de.setHours(0, 0, 0, 0)
+                data_ate.setHours(23, 59, 59, 999)
+                if ((dados_do_banco[i].fkCanteiro == vt_filtro_canteiro[0]) && (data_banco >= data_de && data_banco <= data_ate)) {
+                    total_paginas_canteiro_di++;
+                    dados_filtrados.push(dados_do_banco[i]);
+                }
+            }           
+            total_paginas_canteiro_di = Math.ceil(total_paginas_canteiro_di / itens_pagina);
+            let inicio = (pag_atual_canteiro_di - 1) * itens_pagina;
+            let fim = Math.min(inicio + itens_pagina, dados_filtrados.length);
+            if (total_paginas_canteiro_di == 0) {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta7()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">1/1</span>
+            <button onclick="maisAlerta7()" class="button-pagina">❯</button>
+            </div>`
+            } else {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta7()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pag_atual_canteiro_di}/${total_paginas_canteiro_di}</span>
+            <button onclick="maisAlerta7()" class="button-pagina">❯</button>
+            </div>`
+            }
+            for (let i = inicio; i < fim; i++) {
+                let dado = dados_filtrados[i];
+                let data_f = new Date(dado.dtAlerta);
+                let data_formatada = data_f.toLocaleString('pt-BR', data_formatada_dia_hora);
+                let sensor_id = ((Number(dado.fkCanteiro) - 1) * 3) + Number(dado.fkSensor);
+                let cor_alerta = (dado.umidadeSolo >= 90 || dado.umidadeSolo <= 60) ? "#FF5555" : "#FFF155";
+
+
+                box_alerta.innerHTML += `<div class="box-alerta">
+                <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+                <div class="flex-alert">
+                <div class="info-alert">
+                    <span>Canteiro:${dado.fkCanteiro} - Sensor ${sensor_id}</span>
+                    <span>Umidade capturada:${dado.umidadeSolo}%</span>
+                </div>
+                <div class="nivel-alert">
+                    <span>Nível de Criticidade:</span>
+                    <span class="alert-text" style="color:${cor_alerta}">Perigo</span>
+                </div>
+                </div>
+                </div>`;
+
+            }
+            if (total_paginas_canteiro_di > 0) {
+                box_alerta.innerHTML += `
+                <div class="pagina-box">
+                <button onclick="menosAlerta7()" class="button-pagina">❮</button>
+                <span class="title-pagina" id="passador_span">${pag_atual_canteiro_di}/${total_paginas_canteiro_di}</span>
+                <button onclick="maisAlerta7()" class="button-pagina">❯</button>
+                </div>`
+            }
+            //-----------------------------------------------------------------------------------------------
         } else if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] != '') {
             console.log("Sensor + Datafixa")
-        } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] != '') {
+            let dados_filtrados = []
+            total_paginas_canteiro_di = 0;
+            for (let i = 0; i < dados_do_banco.length; i++) {
+                const data_banco = new Date(dados_do_banco[i].dtAlerta);
+                const data_de = new Date(vt_filtro_data_intervalo[0]);
+                const data_ate = new Date(vt_filtro_data_intervalo[1]);
+                data_de.setHours(0, 0, 0, 0)
+                data_ate.setHours(23, 59, 59, 999)
+                if ((dados_do_banco[i].fkCanteiro == vt_filtro_canteiro[0]) && (data_banco >= data_de && data_banco <= data_ate)) {
+                    total_paginas_canteiro_di++;
+                    dados_filtrados.push(dados_do_banco[i]);
+                }
+            }           
+            total_paginas_canteiro_di = Math.ceil(total_paginas_canteiro_di / itens_pagina);
+            let inicio = (pag_atual_canteiro_di - 1) * itens_pagina;
+            let fim = Math.min(inicio + itens_pagina, dados_filtrados.length);
+            if (total_paginas_canteiro_di == 0) {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta7()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">1/1</span>
+            <button onclick="maisAlerta7()" class="button-pagina">❯</button>
+            </div>`
+            } else {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta7()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pag_atual_canteiro_di}/${total_paginas_canteiro_di}</span>
+            <button onclick="maisAlerta7()" class="button-pagina">❯</button>
+            </div>`
+            }
+            for (let i = inicio; i < fim; i++) {
+                let dado = dados_filtrados[i];
+                let data_f = new Date(dado.dtAlerta);
+                let data_formatada = data_f.toLocaleString('pt-BR', data_formatada_dia_hora);
+                let sensor_id = ((Number(dado.fkCanteiro) - 1) * 3) + Number(dado.fkSensor);
+                let cor_alerta = (dado.umidadeSolo >= 90 || dado.umidadeSolo <= 60) ? "#FF5555" : "#FFF155";
+
+
+                box_alerta.innerHTML += `<div class="box-alerta">
+                <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+                <div class="flex-alert">
+                <div class="info-alert">
+                    <span>Canteiro:${dado.fkCanteiro} - Sensor ${sensor_id}</span>
+                    <span>Umidade capturada:${dado.umidadeSolo}%</span>
+                </div>
+                <div class="nivel-alert">
+                    <span>Nível de Criticidade:</span>
+                    <span class="alert-text" style="color:${cor_alerta}">Perigo</span>
+                </div>
+                </div>
+                </div>`;
+
+            }
+            if (total_paginas_canteiro_di > 0) {
+                box_alerta.innerHTML += `
+                <div class="pagina-box">
+                <button onclick="menosAlerta7()" class="button-pagina">❮</button>
+                <span class="title-pagina" id="passador_span">${pag_atual_canteiro_di}/${total_paginas_canteiro_di}</span>
+                <button onclick="maisAlerta7()" class="button-pagina">❯</button>
+                </div>`
+            }
+        }//-----------------------------------------------------------------------------------------------
+         else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] != '') {
             console.log("Sensor + DataIntervalo")
-        } else if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] != '') {
+        } //-----------------------------------------------------------------------------------------------
+        else if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] != '') {
             console.log("Canteiro + Sensor + DataFixa")
-        } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] != '') {
+        }//-----------------------------------------------------------------------------------------------
+         else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] != '') {
             console.log("Canteiro + Sensor + DataIntervalo")
-        } else {
+        } //-----------------------------------------------------------------------------------------------
+         else {
             console.log("Nenhum filtro");
             ax_volta_semfiltro = false;
             ax_volta_data_intervalo = true;
