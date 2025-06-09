@@ -182,8 +182,20 @@
     var id_empresa = sessionStorage.ID_EMPRESA;
     var dados_do_banco = [];
     var pagina_atual = 1;
+    var ax_volta_semfiltro = false;
     var itens_pagina = 50;
     var contador_datafixa = 0;
+    var ax_volta_data_fixa = false;
+    var ax_volta_canteiro = false;
+    var ax_volta_data_intervalo = false;
+    var ax_volta_sensor = false;
+    const data_formatada_dia_hora = {
+        timeZone: 'America/Sao_Paulo',
+        day: '2-digit',
+        month: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    };
     // Requisição para puxar todos os dados
     fetch(`/usuarios/buscarAlertas/${id_empresa}`, {
         method: 'GET',
@@ -207,13 +219,10 @@
         })
     //Plotar Alertas
     function plotaralertas() {
-        const data_formatada_dia_hora = {
-            timeZone: 'America/Sao_Paulo',
-            day: '2-digit',
-            month: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit'
-        };
+        if (!ax_volta_semfiltro) {
+            pagina_atual = 1;
+            ax_volta_semfiltro = true;
+        }
         box_alerta.innerHTML = `
         <h3 class="title-alert">Alertas</h3>
         <div class="pagina-box">
@@ -461,47 +470,196 @@
     }
     // Fecha os filtros
     function closecard1() {
-        vt_filtro_data_fixa.splice(0, 1);
+        vt_filtro_data_fixa[0] = '';
         div_data_fixa.style.display = 'none';
         ax_filtro_data_fixa = false;
+        ax_volta_data_fixa = false;
         plotarfiltro()
     }
     function closecard2() {
         vt_filtro_data_intervalo = [];
         div_data_intervalo.style.display = 'none';
         ax_filtro_data_intervalo = false;
+        ax_volta_data_intervalo = false;
         plotarfiltro()
     }
     function closecard3() {
         vt_filtro_canteiro = [''];
         div_canteiro.style.display = 'none';
         ax_filtro_canteiro = false;
+        ax_volta_canteiro = false;
         plotarfiltro()
     }
     function closecard4() {
         vt_filtro_sensor = [''];
         div_sensor.style.display = 'none';
-        ax_filtro_sensor = false
+        ax_filtro_sensor = false;
+        ax_volta_sensor = false;
+        plotarfiltro();
+    }
+    //Variaveis Global Passadores
+    var total_paginas_data_fixa = 0;
+    var pag_atual_data_fixa = 1;
+    var total_paginas_data_intervalo = 0;
+    var pag_atual_data_intervalo = 1;
+    var total_paginas_canteiro = 0;
+    var pag_atual_canteiro = 1;
+    var total_paginas_sensor = 0;
+    var pag_atual_sensor = 1;
+    var total_paginas_sensor_canteiro = 0;
+    var pag_atual_sensor_canteiro = 1;
+    var total_paginas_canteiro_df = 0;
+    var pag_atual_canteiro_df = 1;
+    //Atualizar passadores filtros
+    function menosAlerta1() {
+        if (pag_atual_data_fixa == 1) {
+            pag_atual_data_fixa = total_paginas_data_fixa;
+        } else {
+            pag_atual_data_fixa--;
+        }
+        plotarfiltro();
+    }
+    function maisAlerta1() {
+        if (pag_atual_data_fixa == total_paginas_data_fixa) {
+            pag_atual_data_fixa = 1;
+        } else {
+            pag_atual_data_fixa++;
+        }
+        plotarfiltro();
+    }
+    function menosAlerta2() {
+        if (pag_atual_data_intervalo == 1) {
+            pag_atual_data_intervalo = total_paginas_data_intervalo;
+        } else {
+            pag_atual_data_intervalo--;
+        }
+        plotarfiltro();
+    }
+    function maisAlerta2() {
+        if (pag_atual_data_intervalo == total_paginas_data_intervalo) {
+            pag_atual_data_intervalo = 1;
+        } else {
+            pag_atual_data_intervalo++;
+        }
+        plotarfiltro();
+    }
+    function menosAlerta3() {
+        if (pag_atual_canteiro == 1) {
+            pag_atual_canteiro = total_paginas_canteiro;
+        } else {
+            pag_atual_canteiro--;
+        }
+        plotarfiltro();
+    }
+    function maisAlerta3() {
+        if (pag_atual_canteiro == total_paginas_canteiro) {
+            pag_atual_canteiro = 1;
+        } else {
+            pag_atual_canteiro++;
+        }
+        plotarfiltro();
+    }
+    function menosAlerta4() {
+        if (pag_atual_sensor == 1) {
+            pag_atual_sensor = total_paginas_sensor;
+        } else {
+            pag_atual_sensor--;
+        }
+        plotarfiltro();
+    }
+    function maisAlerta4() {
+        if (pag_atual_sensor == total_paginas_sensor) {
+            pag_atual_sensor = 1;
+        } else {
+            pag_atual_sensor++;
+        }
+        plotarfiltro();
+    }
+    function menosAlerta5() {
+        if (pag_atual_sensor_canteiro == 1) {
+            pag_atual_sensor_canteiro = total_paginas_sensor_canteiro;
+        } else {
+            pag_atual_sensor_canteiro--;
+        }
+        plotarfiltro();
+    }
+    function maisAlerta5() {
+        if (pag_atual_sensor_canteiro == total_paginas_sensor_canteiro) {
+            pag_atual_sensor_canteiro = 1;
+        } else {
+            pag_atual_sensor_canteiro++;
+        }
+        plotarfiltro();
+    }
+    function menosAlerta6() {
+        if (pag_atual_canteiro_df == 1) {
+            pag_atual_canteiro_df = total_paginas_canteiro_df;
+        } else {
+            pag_atual_canteiro_df--;
+        }
+        plotarfiltro();
+    }
+    function maisAlerta6() {
+        if (pag_atual_canteiro_df == total_paginas_canteiro_df) {
+            pag_atual_canteiro_df = 1;
+        } else {
+            pag_atual_canteiro_df++;
+        }
         plotarfiltro();
     }
     //Plotar textos com filtros
     function plotarfiltro() {
         if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] == '') {
+            if (!ax_volta_data_fixa) {
+                pag_atual_data_fixa = 1;
+                ax_volta_data_fixa = true;
+            }
             console.log("Apenas Data fixa");
-            var data = new Date(vt_filtro_data_fixa[0]);
-            var data_fixa_f = data.toISOString().slice(0, 10);
-            console.log(data_fixa_f);
-            box_alerta.innerHTML = ``
+            total_paginas_data_fixa = 0;
+            let inicio = (pag_atual_data_fixa - 1) * itens_pagina;
+            let fim = Math.min(inicio + itens_pagina, dados_do_banco.length);
             for (let i = 0; i < dados_do_banco.length; i++) {
-                var data_com = new Date(dados_do_banco[i].dtAlerta).toLocaleDateString('pt-BR');;
-                var data_comparada = data_com.toISOString().slice(0, 10)
-                var data_formatada_1 = data_comparada.toLocaleDateString('pt-BR');
-                if (data_fixa_f == data_comparada) {
+                const data_banco = new Date(dados_do_banco[i].dtAlerta);
+                data_banco.setHours(data_banco.getHours() - 3);
+                const ano = data_banco.getFullYear();
+                const mes = String(data_banco.getMonth() + 1).padStart(2, '0');
+                const dia = String(data_banco.getDate()).padStart(2, '0');
+                const data_comparacao = `${ano}-${mes}-${dia}`;
+                if (data_comparacao == vt_filtro_data_fixa[0]) {
+                    total_paginas_data_fixa++;
+                }
+            }
+            total_paginas_data_fixa = Math.ceil(total_paginas_data_fixa / itens_pagina);
+            if (total_paginas_data_fixa == 0) {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta1()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">1/1</span>
+            <button onclick="maisAlerta1()" class="button-pagina">❯</button>
+            </div>`
+            } else {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta1()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pag_atual_data_fixa}/${total_paginas_data_fixa}</span>
+            <button onclick="maisAlerta1()" class="button-pagina">❯</button>
+            </div>`
+            }
+            for (let i = inicio; i < fim; i++) {
+                const data_banco = new Date(dados_do_banco[i].dtAlerta);
+                data_banco.setHours(data_banco.getHours() - 3);
+                const ano = data_banco.getFullYear();
+                const mes = String(data_banco.getMonth() + 1).padStart(2, '0');
+                const dia = String(data_banco.getDate()).padStart(2, '0');
+                const data_comparacao = `${ano}-${mes}-${dia}`;
+                var data_f = new Date(dados_do_banco[i].dtAlerta);
+                var data_formatada = data_f.toLocaleString('pt-BR', data_formatada_dia_hora);
+                if (data_comparacao == vt_filtro_data_fixa[0]) {
                     if (dados_do_banco[i].umidadeSolo >= 90 || dados_do_banco[i].umidadeSolo <= 60) {
-                        console.log("Oi", dados_do_banco.length)
-                        box_alerta.innerHTML += `
-                        <div class="box-alerta">
-                        <h3 class="title-card-alert">Alerta Emitidos em:${data_fixa_f}</h3>
+                        box_alerta.innerHTML += `<div class="box-alerta">
+                        <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
                         <div class="flex-alert">
                         <div class="info-alert">
                         <span>Canteiro:${dados_do_banco[i].fkCanteiro} - Sensor ${((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor)}</span>
@@ -511,13 +669,11 @@
                         <span>Nível de Criticidade:</span>
                         <span class="alert-text" style="color:#FF5555">Perigo</span>
                         </div>
-                    </div>
-                    </div>`
-                    }
-                    else {
-                        box_alerta.innerHTML += `
-                        <div class="box-alerta">
-                        <h3 class="title-card-alert">Alerta Emitidos em:${data_fixa_f}</h3>
+                        </div>
+                        </div>`
+                    } else {
+                        box_alerta.innerHTML += `<div class="box-alerta">
+                        <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
                         <div class="flex-alert">
                         <div class="info-alert">
                         <span>Canteiro:${dados_do_banco[i].fkCanteiro} - Sensor ${((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor)}</span>
@@ -526,23 +682,362 @@
                         <div class="nivel-alert">
                         <span>Nível de Criticidade:</span>
                         <span class="alert-text" style="color:#FFF155">Perigo</span>
-                    </div>
-                    </div>
-                    </div>`
+                        </div>
+                        </div>
+                        </div>`
+                    }
+                }
+
+            }
+            if (total_paginas_data_fixa > 0) {
+                box_alerta.innerHTML += `
+                <div class="pagina-box">
+                <button onclick="menosAlerta1()" class="button-pagina">❮</button>
+                <span class="title-pagina" id="passador_span">${pag_atual_data_fixa}/${total_paginas_data_fixa}</span>
+                <button onclick="maisAlerta1()" class="button-pagina">❯</button>
+                </div>`
+            }
+        } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] == '') {
+            if (!ax_volta_data_intervalo) {
+                pag_atual_data_intervalo = 1;
+                ax_volta_data_intervalo = true;
+            }
+            total_paginas_data_intervalo = 0;
+            let inicio = (pag_atual_data_intervalo - 1) * itens_pagina;
+            let fim = Math.min(inicio + itens_pagina, dados_do_banco.length);
+            for (let i = 0; i < dados_do_banco.length; i++) {
+                const data_banco = new Date(dados_do_banco[i].dtAlerta);
+                const data_de = new Date(vt_filtro_data_intervalo[0]);
+                const data_ate = new Date(vt_filtro_data_intervalo[1]);
+                data_de.setHours(0, 0, 0, 0)
+                data_ate.setHours(23, 59, 59, 999)
+                if (data_banco >= data_de && data_banco <= data_ate) {
+                    total_paginas_data_intervalo++;
+                }
+            }
+            total_paginas_data_intervalo = Math.ceil(total_paginas_data_intervalo / itens_pagina);
+
+            if (total_paginas_data_intervalo == 0) {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta2()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">1/1</span>
+            <button onclick="maisAlerta2()" class="button-pagina">❯</button>
+            </div>`
+            } else {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta2()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pag_atual_data_intervalo}/${total_paginas_data_intervalo}</span>
+            <button onclick="maisAlerta2()" class="button-pagina">❯</button>
+            </div>`
+            } for (let i = inicio; i < fim; i++) {
+                const data_banco = new Date(dados_do_banco[i].dtAlerta);
+                const data_de = new Date(vt_filtro_data_intervalo[0]);
+                const data_ate = new Date(vt_filtro_data_intervalo[1]);
+                console.log(data_ate);
+                data_de.setHours(0, 0, 0, 0);
+                data_ate.setHours(23, 59, 59, 999);
+                var data_f = new Date(dados_do_banco[i].dtAlerta);
+                var data_formatada = data_f.toLocaleString('pt-BR', data_formatada_dia_hora);
+                if (data_banco >= data_de && data_banco <= data_ate) {
+                    if (dados_do_banco[i].umidadeSolo >= 90 || dados_do_banco[i].umidadeSolo <= 60) {
+                        box_alerta.innerHTML += `<div class="box-alerta">
+                        <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+                        <div class="flex-alert">
+                        <div class="info-alert">
+                        <span>Canteiro:${dados_do_banco[i].fkCanteiro} - Sensor ${((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor)}</span>
+                        <span>Umidade capturada:${dados_do_banco[i].umidadeSolo}%</span>
+                        </div>
+                        <div class="nivel-alert">
+                        <span>Nível de Criticidade:</span>
+                        <span class="alert-text" style="color:#FF5555">Perigo</span>
+                        </div>
+                        </div>
+                        </div>`
+                    } else {
+                        box_alerta.innerHTML += `<div class="box-alerta">
+                        <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+                        <div class="flex-alert">
+                        <div class="info-alert">
+                        <span>Canteiro:${dados_do_banco[i].fkCanteiro} - Sensor ${((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor)}</span>
+                        <span>Umidade capturada:${dados_do_banco[i].umidadeSolo}%</span>
+                        </div>
+                        <div class="nivel-alert">
+                        <span>Nível de Criticidade:</span>
+                        <span class="alert-text" style="color:#FFF155">Perigo</span>
+                        </div>
+                        </div>
+                        </div>`
                     }
                 }
             }
-
-        } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] == '') {
-            console.log("Apenas Data intervalo")
+            if (total_paginas_data_intervalo > 0) {
+                box_alerta.innerHTML += `
+                <div class="pagina-box">
+                <button onclick="menosAlerta2()" class="button-pagina">❮</button>
+                <span class="title-pagina" id="passador_span">${pag_atual_data_intervalo}/${total_paginas_data_intervalo}</span>
+                <button onclick="maisAlerta2()" class="button-pagina">❯</button>
+                </div>`
+            }
         } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] == '') {
-            console.log("Apenas Canteiro")
+            total_paginas_canteiro = 0;
+            let dados_filtrados = []
+
+            if (!ax_volta_canteiro) {
+                pag_atual_canteiro = 1;
+                ax_volta_canteiro = true;
+            }
+            for (let i = 0; i < dados_do_banco.length; i++) {
+                if (Number(dados_do_banco[i].fkCanteiro) == Number(vt_filtro_canteiro[0])) {
+                    total_paginas_canteiro++;
+                    console.log("1")
+                    dados_filtrados.push(dados_do_banco[i])
+                }
+            }
+            let inicio = (pag_atual_canteiro - 1) * itens_pagina;
+            let fim = Math.min(inicio + itens_pagina, dados_filtrados.length);
+            total_paginas_canteiro = Math.ceil(total_paginas_canteiro / itens_pagina);
+            if (total_paginas_canteiro == 0) {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta3()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">1/1</span>
+            <button onclick="maisAlerta3()" class="button-pagina">❯</button>
+            </div>`
+            } else {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta3()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pag_atual_canteiro}/${total_paginas_canteiro}</span>
+            <button onclick="maisAlerta3()" class="button-pagina">❯</button>
+            </div>`
+            }
+            for (let i = inicio; i < fim; i++) {
+
+                let dado = dados_filtrados[i];
+                let data_f = new Date(dado.dtAlerta);
+                let data_formatada = data_f.toLocaleString('pt-BR', data_formatada_dia_hora);
+                let sensor_id = ((Number(dado.fkCanteiro) - 1) * 3) + Number(dado.fkSensor);
+                let cor_alerta = (dado.umidadeSolo >= 90 || dado.umidadeSolo <= 60) ? "#FF5555" : "#FFF155";
+                box_alerta.innerHTML += `<div class="box-alerta">
+                    <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+                    <div class="flex-alert">
+                    <div class="info-alert">
+                    <span>Canteiro:${dado.fkCanteiro} - Sensor ${sensor_id}</span>
+                    <span>Umidade capturada:${dado.umidadeSolo}%</span>
+                    </div>
+                    <div class="nivel-alert">
+                    <span>Nível de Criticidade:</span>
+                    <span class="alert-text" style="color:${cor_alerta}">Perigo</span>
+                    </div>
+                    </div>
+                    </div>`;
+            }
+
+            if (total_paginas_canteiro > 0) {
+                box_alerta.innerHTML += `
+                <div class="pagina-box">
+                <button onclick="menosAlerta3()" class="button-pagina">❮</button>
+                <span class="title-pagina" id="passador_span">${pag_atual_canteiro}/${total_paginas_canteiro}</span>
+                <button onclick="maisAlerta3()" class="button-pagina">❯</button>
+                </div>`
+            }
         } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] != '') {
-            console.log("Apenas Sensor")
+            console.log("Apenas Sensor");
+            let posicao_sensores = []
+            if (!ax_volta_sensor) {
+                ax_volta_sensor = true;
+                pag_atual_sensor = 1;
+            }
+            for (let i = 0; i < dados_do_banco.length; i++) {
+                if (Number(vt_filtro_sensor[0]) == Number((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor)) {
+                    total_paginas_sensor++;
+                    posicao_sensores.push(dados_do_banco[i])
+                }
+            }
+            total_paginas_sensor = Math.ceil(total_paginas_sensor / itens_pagina);
+            let inicio = (pag_atual_sensor - 1) * itens_pagina;
+            let fim = Math.min(inicio + itens_pagina, posicao_sensores.length);
+            if (total_paginas_sensor == 0) {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta4()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">1/1</span>
+            <button onclick="maisAlerta4()" class="button-pagina">❯</button>
+            </div>`
+            } else {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta4()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pag_atual_sensor}/${total_paginas_sensor}</span>
+            <button onclick="maisAlerta4()" class="button-pagina">❯</button>
+            </div>`
+            }
+            for (let i = inicio; i < fim; i++) {
+                let dado = posicao_sensores[i];
+                let data_f = new Date(dado.dtAlerta);
+                let data_formatada = data_f.toLocaleString('pt-BR', data_formatada_dia_hora);
+                let sensor_id = ((Number(dado.fkCanteiro) - 1) * 3) + Number(dado.fkSensor);
+                let cor_alerta = (dado.umidadeSolo >= 90 || dado.umidadeSolo <= 60) ? "#FF5555" : "#FFF155";
+
+                box_alerta.innerHTML += `<div class="box-alerta">
+            <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+            <div class="flex-alert">
+                <div class="info-alert">
+                    <span>Canteiro:${dado.fkCanteiro} - Sensor ${sensor_id}</span>
+                    <span>Umidade capturada:${dado.umidadeSolo}%</span>
+                </div>
+                <div class="nivel-alert">
+                    <span>Nível de Criticidade:</span>
+                    <span class="alert-text" style="color:${cor_alerta}">Perigo</span>
+                </div>
+            </div>
+        </div>`;
+            }
+            if (total_paginas_sensor > 0) {
+                box_alerta.innerHTML += `
+                <div class="pagina-box">
+                <button onclick="menosAlerta4()" class="button-pagina">❮</button>
+                <span class="title-pagina" id="passador_span">${pag_atual_sensor}/${total_paginas_sensor}</span>
+                <button onclick="maisAlerta4()" class="button-pagina">❯</button>
+                </div>`
+            }
         } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] != '') {
-            console.log("Canteiro + Sensor")
+            console.log("Canteiro + Sensor");
+            let dados_filtrados = []
+            total_paginas_sensor_canteiro = 0;
+            for (let i = 0; i < dados_do_banco.length; i++) {
+                if ((dados_do_banco[i].fkCanteiro == vt_filtro_canteiro[0]) && (vt_filtro_sensor[0] == ((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor))) {
+                    total_paginas_sensor_canteiro++;
+                    dados_filtrados.push(dados_do_banco[i]);
+                }
+            }
+            let inicio = (pag_atual_sensor - 1) * itens_pagina;
+            let fim = Math.min(inicio + itens_pagina, dados_filtrados.length);
+            total_paginas_sensor_canteiro = Math.ceil(total_paginas_sensor_canteiro / itens_pagina);
+            if (total_paginas_sensor_canteiro == 0) {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta5()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">1/1</span>
+            <button onclick="maisAlerta5()" class="button-pagina">❯</button>
+            </div>`
+            } else {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta5()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pag_atual_sensor_canteiro}/${total_paginas_sensor_canteiro}</span>
+            <button onclick="maisAlerta5()" class="button-pagina">❯</button>
+            </div>`
+            }
+            for (let i = inicio; i < fim; i++) {
+                let dado = dados_filtrados[i];
+                let data_f = new Date(dado.dtAlerta);
+                let data_formatada = data_f.toLocaleString('pt-BR', data_formatada_dia_hora);
+                let sensor_id = ((Number(dado.fkCanteiro) - 1) * 3) + Number(dado.fkSensor);
+                let cor_alerta = (dado.umidadeSolo >= 90 || dado.umidadeSolo <= 60) ? "#FF5555" : "#FFF155";
+
+
+                box_alerta.innerHTML += `<div class="box-alerta">
+                <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+                <div class="flex-alert">
+                <div class="info-alert">
+                    <span>Canteiro:${dado.fkCanteiro} - Sensor ${sensor_id}</span>
+                    <span>Umidade capturada:${dado.umidadeSolo}%</span>
+                </div>
+                <div class="nivel-alert">
+                    <span>Nível de Criticidade:</span>
+                    <span class="alert-text" style="color:${cor_alerta}">Perigo</span>
+                </div>
+                </div>
+                </div>`;
+
+            }
+            if (total_paginas_sensor_canteiro > 0) {
+                box_alerta.innerHTML += `
+                <div class="pagina-box">
+                <button onclick="menosAlerta4()" class="button-pagina">❮</button>
+                <span class="title-pagina" id="passador_span">${pag_atual_sensor_canteiro}/${total_paginas_sensor_canteiro}</span>
+                <button onclick="maisAlerta4()" class="button-pagina">❯</button>
+                </div>`
+            }
         } else if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] == '') {
             console.log("Canteiro + Datafixa")
+            let dados_filtrados = []
+            total_paginas_canteiro_df = 0;
+            for (let i = 0; i < dados_do_banco.length; i++) {
+                const data_banco = new Date(dados_do_banco[i].dtAlerta);
+                data_banco.setHours(data_banco.getHours() - 3);
+                const ano = data_banco.getFullYear();
+                const mes = String(data_banco.getMonth() + 1).padStart(2, '0');
+                const dia = String(data_banco.getDate()).padStart(2, '0');
+                const data_comparacao = `${ano}-${mes}-${dia}`;
+                if ((dados_do_banco[i].fkCanteiro == vt_filtro_canteiro[0]) && data_comparacao == vt_filtro_data_fixa[0]) {
+                    total_paginas_canteiro_df++;
+                    dados_filtrados.push(dados_do_banco[i]);
+                    console.log("Entrei")
+                }
+            }
+            let inicio = (pag_atual_sensor - 1) * itens_pagina;
+            let fim = Math.min(inicio + itens_pagina, dados_filtrados.length);
+            total_paginas_canteiro_df = Math.ceil(total_paginas_canteiro_df / itens_pagina);
+            if (total_paginas_canteiro_df == 0) {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta6()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">1/1</span>
+            <button onclick="maisAlerta6()" class="button-pagina">❯</button>
+            </div>`
+            } else {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta6()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pag_atual_canteiro_df}/${total_paginas_canteiro_df}</span>
+            <button onclick="maisAlerta6()" class="button-pagina">❯</button>
+            </div>`
+            }
+            for (let i = inicio; i < fim; i++) {
+                let dado = dados_filtrados[i];
+                let data_f = new Date(dado.dtAlerta);
+                let data_formatada = data_f.toLocaleString('pt-BR', data_formatada_dia_hora);
+                let sensor_id = ((Number(dado.fkCanteiro) - 1) * 3) + Number(dado.fkSensor);
+                let cor_alerta = (dado.umidadeSolo >= 90 || dado.umidadeSolo <= 60) ? "#FF5555" : "#FFF155";
+
+
+                box_alerta.innerHTML += `<div class="box-alerta">
+                <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+                <div class="flex-alert">
+                <div class="info-alert">
+                    <span>Canteiro:${dado.fkCanteiro} - Sensor ${sensor_id}</span>
+                    <span>Umidade capturada:${dado.umidadeSolo}%</span>
+                </div>
+                <div class="nivel-alert">
+                    <span>Nível de Criticidade:</span>
+                    <span class="alert-text" style="color:${cor_alerta}">Perigo</span>
+                </div>
+                </div>
+                </div>`;
+
+            }
+            if (total_paginas_canteiro_df > 0) {
+                box_alerta.innerHTML += `
+                <div class="pagina-box">
+                <button onclick="menosAlerta6()" class="button-pagina">❮</button>
+                <span class="title-pagina" id="passador_span">${pag_atual_canteiro_df}/${total_paginas_canteiro_df}</span>
+                <button onclick="maisAlerta6()" class="button-pagina">❯</button>
+                </div>`
+            }
         } else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] == '') {
             console.log("Canteiro + DataIntervalo")
         } else if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] != '') {
@@ -555,6 +1050,8 @@
             console.log("Canteiro + Sensor + DataIntervalo")
         } else {
             console.log("Nenhum filtro");
+            ax_volta_semfiltro = false;
+            ax_volta_data_intervalo = true;
             plotaralertas();
         }
     }
