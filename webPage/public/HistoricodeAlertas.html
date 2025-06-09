@@ -514,6 +514,8 @@
     var pag_atual_canteiro_di = 1;
     var total_paginas_sensor_di = 0;
     var pag_atual_sensor_di = 1;
+    var total_paginas_sensor_df = 0;
+    var pag_atual_sensor_df = 1;
     //Atualizar passadores filtros
     function menosAlerta1() {
         if (pag_atual_data_fixa == 1) {
@@ -627,19 +629,19 @@
         }
         plotarfiltro();
     }
-    function menosAlerta7() {
-        if (pag_atual_canteiro_di == 1) {
-            pag_atual_canteiro_di = total_paginas_canteiro_di;
+    function menosAlerta8() {
+        if (pag_atual_sensor_di == 1) {
+            pag_atual_sensor_di = total_paginas_sensor_di;
         } else {
-            pag_atual_canteiro_di--;
+            pag_atual_sensor_di--;
         }
         plotarfiltro();
     }
-    function maisAlerta7() {
-        if (pag_atual_canteiro_di == total_paginas_canteiro_di) {
-            pag_atual_canteiro_di = 1;
+    function maisAlerta8() {
+        if (pag_atual_sensor_di == total_paginas_sensor_di) {
+            pag_atual_sensor_di = 1;
         } else {
-            pag_atual_canteiro_di++;
+            pag_atual_sensor_di++;
         }
         plotarfiltro();
     }
@@ -1018,11 +1020,14 @@
             total_paginas_canteiro_df = 0;
             for (let i = 0; i < dados_do_banco.length; i++) {
                 const data_banco = new Date(dados_do_banco[i].dtAlerta);
-                const data_de = new Date(vt_filtro_data_intervalo[0]);
-                const data_ate = new Date(vt_filtro_data_intervalo[1]);
+                data_banco.setHours(data_banco.getHours() - 3);
+                const ano = data_banco.getFullYear();
+                const mes = String(data_banco.getMonth() + 1).padStart(2, '0');
+                const dia = String(data_banco.getDate()).padStart(2, '0');
+                const data_comparacao = `${ano}-${mes}-${dia}`;
                 data_de.setHours(0, 0, 0, 0)
                 data_ate.setHours(23, 59, 59, 999)
-                if (data_banco >= data_de && data_banco <= data_ate && (dados_do_banco[i].fkCanteiro == vt_filtro_canteiro[0])) {
+                if (data_banco >= data_de && data_banco <= data_ate && data_comparacao == vt_filtro_data_fixa[0]) {
                     total_paginas_data_intervalo++;
                 }
             }
@@ -1148,36 +1153,37 @@
         } else if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] != '') {
             console.log("Sensor + Datafixa")
             let dados_filtrados = []
-            total_paginas_canteiro_di = 0;
+            total_paginas_sensor_di = 0;
             for (let i = 0; i < dados_do_banco.length; i++) {
                 const data_banco = new Date(dados_do_banco[i].dtAlerta);
-                const data_de = new Date(vt_filtro_data_intervalo[0]);
-                const data_ate = new Date(vt_filtro_data_intervalo[1]);
-                data_de.setHours(0, 0, 0, 0)
-                data_ate.setHours(23, 59, 59, 999)
-                if ((dados_do_banco[i].fkCanteiro == vt_filtro_canteiro[0]) && (data_banco >= data_de && data_banco <= data_ate)) {
-                    total_paginas_canteiro_di++;
+                data_banco.setHours(data_banco.getHours() - 3);
+                const ano = data_banco.getFullYear();
+                const mes = String(data_banco.getMonth() + 1).padStart(2, '0');
+                const dia = String(data_banco.getDate()).padStart(2, '0');
+                const data_comparacao = `${ano}-${mes}-${dia}`;
+                if (Number(vt_filtro_sensor[0]) == Number((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor) && data_comparacao == vt_filtro_data_fixa[0]) {
+                    total_paginas_sensor_di++;
                     dados_filtrados.push(dados_do_banco[i]);
                 }
             }           
-            total_paginas_canteiro_di = Math.ceil(total_paginas_canteiro_di / itens_pagina);
+            total_paginas_sensor_di = Math.ceil(total_paginas_sensor_di / itens_pagina);
             let inicio = (pag_atual_canteiro_di - 1) * itens_pagina;
             let fim = Math.min(inicio + itens_pagina, dados_filtrados.length);
-            if (total_paginas_canteiro_di == 0) {
+            if (total_paginas_sensor_di == 0) {
                 box_alerta.innerHTML = `
             <h3 class="title-alert">Alertas</h3>
             <div class="pagina-box">
-            <button onclick="menosAlerta7()" class="button-pagina">❮</button>
+            <button onclick="menosAlerta8()" class="button-pagina">❮</button>
             <span class="title-pagina" id="passador_span">1/1</span>
-            <button onclick="maisAlerta7()" class="button-pagina">❯</button>
+            <button onclick="maisAlerta8()" class="button-pagina">❯</button>
             </div>`
             } else {
                 box_alerta.innerHTML = `
             <h3 class="title-alert">Alertas</h3>
             <div class="pagina-box">
-            <button onclick="menosAlerta7()" class="button-pagina">❮</button>
-            <span class="title-pagina" id="passador_span">${pag_atual_canteiro_di}/${total_paginas_canteiro_di}</span>
-            <button onclick="maisAlerta7()" class="button-pagina">❯</button>
+            <button onclick="menosAlerta8()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pag_atual_sensor_di}/${total_paginas_sensor_di}</span>
+            <button onclick="maisAlerta8()" class="button-pagina">❯</button>
             </div>`
             }
             for (let i = inicio; i < fim; i++) {
@@ -1203,23 +1209,217 @@
                 </div>`;
 
             }
-            if (total_paginas_canteiro_di > 0) {
+            if (total_paginas_sensor_di > 0) {
                 box_alerta.innerHTML += `
                 <div class="pagina-box">
-                <button onclick="menosAlerta7()" class="button-pagina">❮</button>
-                <span class="title-pagina" id="passador_span">${pag_atual_canteiro_di}/${total_paginas_canteiro_di}</span>
-                <button onclick="maisAlerta7()" class="button-pagina">❯</button>
+                <button onclick="menosAlerta8()" class="button-pagina">❮</button>
+                <span class="title-pagina" id="passador_span">${pag_atual_sensor_di}/${total_paginas_sensor_di}</span>
+                <button onclick="maisAlerta8()" class="button-pagina">❯</button>
                 </div>`
             }
         }//-----------------------------------------------------------------------------------------------
          else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] == '' && vt_filtro_sensor[0] != '') {
             console.log("Sensor + DataIntervalo")
+            let dados_filtrados = []
+            total_paginas_sensor_df = 0;
+            for (let i = 0; i < dados_do_banco.length; i++) {
+                const data_banco = new Date(dados_do_banco[i].dtAlerta);
+                const data_de = new Date(vt_filtro_data_intervalo[0]);
+                const data_ate = new Date(vt_filtro_data_intervalo[1]);
+                data_de.setHours(0, 0, 0, 0)
+                data_ate.setHours(23, 59, 59, 999)
+                if (Number(vt_filtro_sensor[0]) == Number((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor) && data_comparacao == vt_filtro_data_fixa[0]) {
+                    total_paginas_sensor_df++;
+                    dados_filtrados.push(dados_do_banco[i]);
+                }
+            }           
+            total_paginas_sensor_df = Math.ceil(total_paginas_sensor_df / itens_pagina);
+            let inicio = (pag_atual_canteiro_di - 1) * itens_pagina;
+            let fim = Math.min(inicio + itens_pagina, dados_filtrados.length);
+            if (total_paginas_sensor_df == 0) {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta9()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">1/1</span>
+            <button onclick="maisAlerta9()" class="button-pagina">❯</button>
+            </div>`
+            } else {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta9()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pag_atual_sensor_df}/${total_paginas_sensor_df}</span>
+            <button onclick="maisAlerta9()" class="button-pagina">❯</button>
+            </div>`
+            }
+            for (let i = inicio; i < fim; i++) {
+                let dado = dados_filtrados[i];
+                let data_f = new Date(dado.dtAlerta);
+                let data_formatada = data_f.toLocaleString('pt-BR', data_formatada_dia_hora);
+                let sensor_id = ((Number(dado.fkCanteiro) - 1) * 3) + Number(dado.fkSensor);
+                let cor_alerta = (dado.umidadeSolo >= 90 || dado.umidadeSolo <= 60) ? "#FF5555" : "#FFF155";
+
+
+                box_alerta.innerHTML += `<div class="box-alerta">
+                <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+                <div class="flex-alert">
+                <div class="info-alert">
+                    <span>Canteiro:${dado.fkCanteiro} - Sensor ${sensor_id}</span>
+                    <span>Umidade capturada:${dado.umidadeSolo}%</span>
+                </div>
+                <div class="nivel-alert">
+                    <span>Nível de Criticidade:</span>
+                    <span class="alert-text" style="color:${cor_alerta}">Perigo</span>
+                </div>
+                </div>
+                </div>`;
+
+            }
+            if (total_paginas_sensor_df > 0) {
+                box_alerta.innerHTML += `
+                <div class="pagina-box">
+                <button onclick="menosAlerta9()" class="button-pagina">❮</button>
+                <span class="title-pagina" id="passador_span">${pag_atual_sensor_df}/${total_paginas_sensor_df}</span>
+                <button onclick="maisAlerta9()" class="button-pagina">❯</button>
+                </div>`
+            }
+
         } //-----------------------------------------------------------------------------------------------
         else if (vt_filtro_data_fixa[0] != '' && vt_filtro_data_intervalo.length == 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] != '') {
             console.log("Canteiro + Sensor + DataFixa")
+            let dados_filtrados = []
+            total_paginas_sensor_di = 0;
+            for (let i = 0; i < dados_do_banco.length; i++) {
+                const data_banco = new Date(dados_do_banco[i].dtAlerta);
+                data_banco.setHours(data_banco.getHours() - 3);
+                const ano = data_banco.getFullYear();
+                const mes = String(data_banco.getMonth() + 1).padStart(2, '0');
+                const dia = String(data_banco.getDate()).padStart(2, '0');
+                const data_comparacao = `${ano}-${mes}-${dia}`;
+                if (Number(vt_filtro_sensor[0]) == Number((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor) && data_comparacao == vt_filtro_data_fixa[0]) {
+                    total_paginas_sensor_di++;
+                    dados_filtrados.push(dados_do_banco[i]);
+                }
+            }           
+            total_paginas_sensor_di = Math.ceil(total_paginas_sensor_di / itens_pagina);
+            let inicio = (pag_atual_canteiro_di - 1) * itens_pagina;
+            let fim = Math.min(inicio + itens_pagina, dados_filtrados.length);
+            if (total_paginas_sensor_di == 0) {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta8()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">1/1</span>
+            <button onclick="maisAlerta8()" class="button-pagina">❯</button>
+            </div>`
+            } else {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta8()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pag_atual_sensor_di}/${total_paginas_sensor_di}</span>
+            <button onclick="maisAlerta8()" class="button-pagina">❯</button>
+            </div>`
+            }
+            for (let i = inicio; i < fim; i++) {
+                let dado = dados_filtrados[i];
+                let data_f = new Date(dado.dtAlerta);
+                let data_formatada = data_f.toLocaleString('pt-BR', data_formatada_dia_hora);
+                let sensor_id = ((Number(dado.fkCanteiro) - 1) * 3) + Number(dado.fkSensor);
+                let cor_alerta = (dado.umidadeSolo >= 90 || dado.umidadeSolo <= 60) ? "#FF5555" : "#FFF155";
+
+
+                box_alerta.innerHTML += `<div class="box-alerta">
+                <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+                <div class="flex-alert">
+                <div class="info-alert">
+                    <span>Canteiro:${dado.fkCanteiro} - Sensor ${sensor_id}</span>
+                    <span>Umidade capturada:${dado.umidadeSolo}%</span>
+                </div>
+                <div class="nivel-alert">
+                    <span>Nível de Criticidade:</span>
+                    <span class="alert-text" style="color:${cor_alerta}">Perigo</span>
+                </div>
+                </div>
+                </div>`;
+
+            }
+            if (total_paginas_sensor_di > 0) {
+                box_alerta.innerHTML += `
+                <div class="pagina-box">
+                <button onclick="menosAlerta8()" class="button-pagina">❮</button>
+                <span class="title-pagina" id="passador_span">${pag_atual_sensor_di}/${total_paginas_sensor_di}</span>
+                <button onclick="maisAlerta8()" class="button-pagina">❯</button>
+                </div>`
+            }
         }//-----------------------------------------------------------------------------------------------
          else if (vt_filtro_data_fixa[0] == '' && vt_filtro_data_intervalo.length > 0 && vt_filtro_canteiro[0] != '' && vt_filtro_sensor[0] != '') {
             console.log("Canteiro + Sensor + DataIntervalo")
+            let dados_filtrados = []
+            total_paginas_sensor_df = 0;
+            for (let i = 0; i < dados_do_banco.length; i++) {
+                const data_banco = new Date(dados_do_banco[i].dtAlerta);
+                const data_de = new Date(vt_filtro_data_intervalo[0]);
+                const data_ate = new Date(vt_filtro_data_intervalo[1]);
+                data_de.setHours(0, 0, 0, 0)
+                data_ate.setHours(23, 59, 59, 999)
+                if (Number(vt_filtro_sensor[0]) == Number((Number(dados_do_banco[i].fkCanteiro) - 1) * 3) + Number(dados_do_banco[i].fkSensor) && data_comparacao == vt_filtro_data_fixa[0]) {
+                    total_paginas_sensor_df++;
+                    dados_filtrados.push(dados_do_banco[i]);
+                }
+            }           
+            total_paginas_sensor_df = Math.ceil(total_paginas_sensor_df / itens_pagina);
+            let inicio = (pag_atual_canteiro_di - 1) * itens_pagina;
+            let fim = Math.min(inicio + itens_pagina, dados_filtrados.length);
+            if (total_paginas_sensor_df == 0) {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta9()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">1/1</span>
+            <button onclick="maisAlerta9()" class="button-pagina">❯</button>
+            </div>`
+            } else {
+                box_alerta.innerHTML = `
+            <h3 class="title-alert">Alertas</h3>
+            <div class="pagina-box">
+            <button onclick="menosAlerta9()" class="button-pagina">❮</button>
+            <span class="title-pagina" id="passador_span">${pag_atual_sensor_df}/${total_paginas_sensor_df}</span>
+            <button onclick="maisAlerta9()" class="button-pagina">❯</button>
+            </div>`
+            }
+            for (let i = inicio; i < fim; i++) {
+                let dado = dados_filtrados[i];
+                let data_f = new Date(dado.dtAlerta);
+                let data_formatada = data_f.toLocaleString('pt-BR', data_formatada_dia_hora);
+                let sensor_id = ((Number(dado.fkCanteiro) - 1) * 3) + Number(dado.fkSensor);
+                let cor_alerta = (dado.umidadeSolo >= 90 || dado.umidadeSolo <= 60) ? "#FF5555" : "#FFF155";
+
+
+                box_alerta.innerHTML += `<div class="box-alerta">
+                <h3 class="title-card-alert">Alerta Emitidos em:${data_formatada}</h3>
+                <div class="flex-alert">
+                <div class="info-alert">
+                    <span>Canteiro:${dado.fkCanteiro} - Sensor ${sensor_id}</span>
+                    <span>Umidade capturada:${dado.umidadeSolo}%</span>
+                </div>
+                <div class="nivel-alert">
+                    <span>Nível de Criticidade:</span>
+                    <span class="alert-text" style="color:${cor_alerta}">Perigo</span>
+                </div>
+                </div>
+                </div>`;
+
+            }
+            if (total_paginas_sensor_df > 0) {
+                box_alerta.innerHTML += `
+                <div class="pagina-box">
+                <button onclick="menosAlerta9()" class="button-pagina">❮</button>
+                <span class="title-pagina" id="passador_span">${pag_atual_sensor_df}/${total_paginas_sensor_df}</span>
+                <button onclick="maisAlerta9()" class="button-pagina">❯</button>
+                </div>`
+            }
         } //-----------------------------------------------------------------------------------------------
          else {
             console.log("Nenhum filtro");
